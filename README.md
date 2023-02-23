@@ -4,6 +4,13 @@
 * Mở terminal nhập npm start -> enter (hoặc sử dụng yarn start - nên dùng yarn)
 * Sau khi tiến trình kết thúc nếu có thư mục node_modules tức là đã cài thành công
 
+# Cấu trúc dự án:
+* Thư mục public: nơi chứa file index.html, các hình ảnh, icon, tài nguyên tĩnh.
+* Thư mục src: nơi chứa các logic của dự án, các tài nguyên động.
+*** Thư mục components: nơi chứa các components
+*** Thư mục pages: chứa tài nguyên của từng page.
+*** Thư mục routes: chứa đường link, các phương thức truy cập vào các page
+
 # Một số framework làm front-end:
 * ReactJs
 * Webpack
