@@ -1,8 +1,8 @@
-@import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap');
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap");
 
 :root {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     --theme-bg-color: rgba(16 18 27 / 40%);
     --border-color: rgba(113 119 144 / 25%);
     --theme-color: #f9fafb;
@@ -15,40 +15,36 @@
     --dropdown-bg: #21242d;
     --dropdown-hover: rgb(42 46 60);
     --popup-bg: rgb(22 25 37);
-    --search-bg:  #14162b;
+    --search-bg: #14162b;
     --overlay-bg: rgba(36, 39, 59, 0.3);
     --scrollbar-bg: rgb(1 2 3 / 40%);
 }
 
 * {
     box-sizing: border-box;
+    outline: none;
 }
 
-body {
+#root {
     margin: 0;
     padding: 2em;
+    font-family: var(--body-font);
+    background-image: url(https://wallpapershome.com/images/wallpapers/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg);
+    background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 2em;
     width: 100%;
     height: 100vh;
-    @media screen and (max-width: 480px) {
-     padding: 0.8em;
-    }
 }
 
 .App {
-    position: fixed;
-    right: 0;
-    top: 0;
     width: 100%;
-    height: 100%;
-    
-    video {
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
