@@ -1,7 +1,8 @@
 import './GlobalStyles.scss';
+import Logo from './Logo';
 
-function GlobalStyles({chill}) {
+function GlobalStyles({ chill }) {
     return chill;
 }
 
-export default GlobalStyles;
+export { GlobalStyles as default, Logo };

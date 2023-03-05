@@ -3,21 +3,29 @@
 
 :root {
     font-family: "Poppins", sans-serif;
-    --theme-bg-color: rgba(16 18 27 / 40%);
-    --border-color: rgba(113 119 144 / 25%);
-    --theme-color: #f9fafb;
-    --inactive-color: rgb(113 119 144 / 78%);
-    --body-font: "Poppins", sans-serif;
-    --hover-menu-bg: rgba(12 15 25 / 30%);
-    --content-title-color: #999ba5;
+    --border-color: rgba(130, 136, 162, 0.25);
     --content-bg: rgb(146 151 179 / 13%);
-    --button-inactive: rgb(249 250 251 / 55%);
-    --dropdown-bg: #21242d;
-    --dropdown-hover: rgb(42 46 60);
-    --popup-bg: rgb(22 25 37);
-    --search-bg: #14162b;
-    --overlay-bg: rgba(36, 39, 59, 0.3);
     --scrollbar-bg: rgb(1 2 3 / 40%);
+    --search-text: #eee;
+    --text-placeholder: #757575;
+    --text-secondary: hsla(0, 0%, 100%, 0.5);
+    --text-color: #d8d8d8;
+    --alpha-bg: hsla(0, 0%, 100%, 0.1);
+    --layout-bg: #170f23;
+    --layout-header-bg: rgba(23, 15, 35, 0.8);
+    --player-bg: #130c1c;
+    --sidebar-popup-bg: #2a213a;
+    --primary-bg: #34224f;
+    --gradient-latest-section-artist: linear-gradient(
+        286.07deg,
+        rgba(23, 15, 35, 0.95) 55.21%,
+        rgba(23, 15, 35, 0.6)
+    );
+    --alpha-layout-bg: rgba(41, 21, 71, 0.8);
+    --queue-player-popup-bg: #120822;
+    --blur-queue-bg: rgba(30, 21, 47, 0.9019607843137255);
+    --purple-primary: #9b4de0;
+    --active-color: #fff;
 }
 
 * {
@@ -26,17 +34,11 @@
 }
 
 #root {
-    margin: 0;
-    padding: 2em;
-    font-family: var(--body-font);
-    background-image: url(https://wallpapershome.com/images/wallpapers/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg);
-    background-size: cover;
-    background-position: center;
+    margin: 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 2em;
     width: 100%;
     height: 100vh;
 }
@@ -47,4 +49,17 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    word-break: normal;
 }

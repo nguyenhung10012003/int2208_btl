@@ -1,9 +1,14 @@
 .wrapper {
     flex-basis: 240px;
+    background-color: var(--sidebar-popup-bg);
     border-right: 1px solid var(--border-color);
     padding: 26px;
     overflow: auto;
     flex-shrink: 0;
+}
+
+.wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .side-menu {
@@ -15,12 +20,12 @@
 
 .side-menu a {
     text-decoration: none;
-    color: var(--theme-color);
     display: flex;
     align-items: center;
-    font-weight: 400;
+    font-weight: 500;
     padding: 10px;
-    font-size: 14px;
+    font-size: 15px;
     border-radius: 6px;
     transition: 0.3s;
+    color: var(--text-secondary);
 }

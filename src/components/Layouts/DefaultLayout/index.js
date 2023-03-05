@@ -10,8 +10,8 @@ function DefaultLayout({ children }) {
             <div className={styles['container']}>
                 <Sidebar />
                 <div className={styles['content']}>{children}</div>
-                <Playbar />
             </div>
+            <Playbar />
         </div>
     );
 }

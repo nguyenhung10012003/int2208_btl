@@ -19,10 +19,11 @@ function App() {
 
           {privateRoutes.map((router, index) => {
             const Page = router.component;
+            let Layout = DefaultLayout;
             return <Route
               key={index}
               path={router.path}
-              element={<Page />}
+              element={<Layout><Page /></Layout>}
             />
           })}
         </Routes>

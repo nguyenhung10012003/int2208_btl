@@ -1,7 +1,5 @@
 import styles from './Sidebar.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icon } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { HomeIcon, SearchIcon, LikeIcon, LibraryIcon, AddIcon } from '../../components/IconBox';
 
 
 function Sidebar() {
@@ -10,27 +8,27 @@ function Sidebar() {
             <div className={styles['side-wrapper']}>
                 <div className={styles['side-menu']}>
                     <a href='#'>
-                        <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
-                        Home
+                        <HomeIcon />
+                        <span>Home</span>
                     </a>
                     <a href='#'>
-                        <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                        <SearchIcon />
                         Search
                     </a>
                 </div>
             </div>
             <div className={styles['side-wrapper']}>
                 <div className={styles['side-menu']}>
-                    <a href='#'>
-                        <FontAwesomeIcon icon={faHome}></FontAwesomeIcon>
+                    <a href='#' >
+                        <LibraryIcon />
                         Library
                     </a>
                     <a href='#'>
-                        <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                        <LikeIcon />
                         Liked Song
                     </a>
                     <a href='#'>
-                        <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+                        <AddIcon />
                         New Playlist
                     </a>
                 </div>
