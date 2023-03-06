@@ -1,7 +1,7 @@
 # Các bước cài đặt project:
 * Clone repo về máy
 * Máy tính cần phải được cài NodeJs trước khi thực hiện các bước tiêp theo
-* Mở terminal nhập npm install
+* Mở terminal nhập npm install(nếu lỗi thiếu thư viện thì lại nhập vô)
 * Nhập npm start -> enter (hoặc sử dụng yarn start - nên dùng yarn)
 * Sau khi tiến trình kết thúc nếu có thư mục node_modules tức là đã cài thành công
 
