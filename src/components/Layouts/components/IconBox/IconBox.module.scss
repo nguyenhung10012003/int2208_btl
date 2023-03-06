@@ -9,3 +9,13 @@
     font-size: 22px;
     text-decoration: none;
 }
+
+.around {
+    border-radius: 50%;
+    background-color: var(--sidebar-popup-bg);
+    color: #fff;
+}
+
+.large {
+    font-size: 30px;
+}

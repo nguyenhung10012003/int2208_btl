@@ -6,6 +6,10 @@ import { MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop } from 'react-i
 import { GiMicrophone } from 'react-icons/gi'
 import { RiPlayListLine } from 'react-icons/ri'
 
+
+const around = `${styles['wrapper']} ${styles['around']}`;
+const large = `${styles['wrapper']} ${styles['large']}`;
+
 function SearchIcon() {
     return (
         <button className={styles['wrapper']}>
@@ -48,7 +52,7 @@ function AddIcon() {
 
 function NextIcon() {
     return (
-        <button className={styles['wrapper']}>
+        <button className={large}>
             <BiSkipNext />
         </button>
     );
@@ -56,7 +60,7 @@ function NextIcon() {
 
 function PreviousIcon() {
     return (
-        <button className={styles['wrapper']}>
+        <button className={large}>
             <BiSkipPrevious />
         </button>
     );
@@ -64,7 +68,7 @@ function PreviousIcon() {
 
 function PlayIcon() {
     return (
-        <button className={styles['wrapper']}>
+        <button className={large}>
             <BiPlayCircle />
         </button>
     );
@@ -94,9 +98,10 @@ function MicroIcon() {
     );
 }
 
+
 function SettingIcon() {
     return (
-        <button className={styles['wrapper']}>
+        <button className={around}>
             <AiOutlineSetting />
         </button>
     );
@@ -104,7 +109,7 @@ function SettingIcon() {
 
 function ProfileIcon() {
     return (
-        <button className={styles['wrapper']}>
+        <button className={around}>
             <BsFillPersonFill />
         </button>
     );
