@@ -5,18 +5,19 @@ import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Search from '../pages/Search';
 import Playlist from '../pages/Playlist';
-
+import SignUp from '../pages/SignUp';
 
 const publicRoutes = [
     { path: '/', component: Home },
     { path: '/account', component: Account },
-    { path: 'login', component: Login },
-    { path: 'search', component: Search }
+    { path: '/login', component: Login },
+    { path: '/search', component: Search },
+    { path: '/sign-up', component: SignUp }
 ];
 const privateRoutes = [
-    { path: 'profile', component: Profile },
+    { path: '/profile', component: Profile },
     { path: '/library', component: Library },
-    { path: '/plalist', component: Playlist }
+    { path: '/playlist', component: Playlist }
 ];
 
 export { publicRoutes, privateRoutes }

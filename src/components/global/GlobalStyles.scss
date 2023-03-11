@@ -33,6 +33,16 @@
     outline: none;
 }
 
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-bg);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    border-radius: 10px;
+}
+
 #root {
     margin: 0 0;
     display: flex;
