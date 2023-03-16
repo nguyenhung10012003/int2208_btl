@@ -1,86 +1,90 @@
-import './SignUp.pages.css';
+import styles from './SignUp.module.scss';
+
+
+const root = document.getElementById('root');
+root.style.display = 'block';
 
 function SignUp() {
     return (
-        <div className='WrapSignUp'>
-            <div className='SignUp'>
-                <h1 className='headingSignUp'>
+        // <div className={styles['WrapSignUp']}>
+            <div className={styles['SignUp']}>
+                <h1 className={styles['headingSignUp']}>
                     OneMusic
                 </h1>
-                <div className='buttons'>
-                    <button type='button' className='btnSignUpFacebook'>
-                        <i class="iconSignUp fa-brands fa-facebook"></i>
+                <div className={styles['buttons']}>
+                    <button type='button' className={styles['btnSignUpFacebook']}>
+                        <i className={`${styles.iconSignUp} fa-brands fa-facebook`}></i>
                         Đăng ký bằng Facebook
                     </button>
 
-                    <button type='button' className='btnSignUpGoogle '>
-                        <i class="iconGoogleSignUp fa-brands fa-google"></i>
+                    <button type='button' className={styles['btnSignUpGoogle']}>
+                        <i className={`${styles.iconGoogleSignUp} fa-brands fa-google`}></i>
                         Đăng ký bằng Google
                     </button>
                 </div>
-                <span className='spanOr'>
+                    <span className={styles['spanOr']}>
                     hoặc
                 </span>
-                <div className='formGroup'>
-                    <div className='formInput'>
-                        <span className='headInput'>Email của bạn là gì?</span>
-                        <input type={'email'} className='inputData' placeholder='Nhập email của bạn.' required ></input>
+                    <form className={styles['formGroup']}>
+                        <div className={styles['formInput']}>
+                            <span className={styles['headInput']}>Email của bạn là gì?</span>
+                            <input type={'email'} className={styles['inputData']} placeholder='Nhập email của bạn.' required ></input>
                     </div>
-                    <div className='formInput'>
-                        <span className='headInput'>Xác nhận lại email</span>
-                        <input type={'email'} className='inputData' placeholder='Nhập lại email của bạn.' required ></input>
+                        <div className={styles['formInput']}>
+                            <span className={styles['headInput']}>Xác nhận lại email</span>
+                            <input type={'email'} className={styles['inputData']} placeholder='Nhập lại email của bạn.' required ></input>
                     </div>
-                    <div className='formInput'>
-                        <span className='headInput'>Tạo mật khẩu</span>
-                        <input type={'password'} className='inputData' placeholder='Tạo mật khẩu.' required ></input>
+                    <div className={styles['formInput']}>
+                        <span className={styles['headInput']}>Tạo mật khẩu</span>
+                        <input type={'password'} className={styles['inputData']} placeholder='Tạo mật khẩu.' required ></input>
                     </div>
-                    <div className='formInput'>
-                        <span className='headInput'>Xác nhận lại mật khẩu</span>
-                        <input type={'password'} className='inputData' placeholder='Nhập lại mật khẩu.' required ></input>
+                    <div className={styles['formInput']}>
+                        <span className={styles['headInput']}>Xác nhận lại mật khẩu</span>
+                        <input type={'password'} className={styles['inputData']} placeholder='Nhập lại mật khẩu.' required ></input>
                     </div>
-                    <div className='formInput'>
-                        <span className='headInput'>Họ tên của bạn</span>
-                        <input type={'text'} className='inputData' placeholder='Nhập họ tên của bạn .' required ></input>
+                    <div className={styles['formInput']}>
+                        <span className={styles['headInput']}>Họ tên của bạn</span>
+                        <input type={'text'} className={styles['inputData']} placeholder='Nhập họ tên của bạn .' required ></input>
                     </div>
-                    <div className='inputGender'>
-                        <span className='headInputGender'>Giới tính của bạn:</span>
-                        <div class="radioInputGender">
-                            <input id="radioInput" name="radio" type="radio" checked></input>
-                            <label for="radioInput" class="radio-label">Nam</label>
+                    <div className={styles['inputGender']}>
+                        <span className={styles['headInputGender']}>Giới tính của bạn:</span>
+                        <div className={styles["radioInputGender"]}>
+                            <input className={styles.radioInput} id="radioInputMale" name="radio" type="radio"></input>
+                            <label className={styles["radio-label"]}>Nam</label>
                         </div>
-                        <div class="radioInputGender">
-                            <input id="radioInput" name="radio" type="radio" checked></input>
-                            <label for="radioInput" class="radio-label">Nữ</label>
+                        <div className={styles["radioInputGender"]}>
+                            <input className={styles.radioInput} id="radioInputFemale" name="radio" type="radio"></input>
+                            <label className={styles["radio-label"]}>Nữ</label>
                         </div>
-                        <div class="radioInputGender">
-                            <input id="radioInput" name="radio" type="radio" checked></input>
-                            <label for="radioInput" class="radio-label">Khác</label>
+                        <div className={styles["radioInputGender"]}>
+                            <input className={styles.radioInput} id="radioInputDiff" name="radio" type="radio"></input>
+                            <label className={styles["radio-label"]}>Khác</label>
                         </div>
                     </div>
-                    <div className='footerSignUp'>
-                        <span className='rulesSignUp'>
+                    <div className={styles['footerSignUp']}>
+                        <span className={styles['rulesSignUp']}>
                             Bằng việc nhấp vào nút Đăng ký, bạn đồng ý với
-                            <a href='#' className='rulesSignUpLink'> Điều khoản và điều kiện sử dụng </a>
+                            <a href='#' className={styles['rulesSignUpLink']}> Điều khoản và điều kiện sử dụng </a>
                             của OneMusic.
                         </span>
 
-                        <span className='rulesSignUp'>
+                        <span className={styles['rulesSignUp']}>
                             Để tìm hiểu thêm về cách thức OneMusic thu thập, sử dụng, chia sẻ và bảo vệ dữ liệu cá nhân của bạn, vui lòng xem
-                            <a href='#' className='rulesSignUpLink'> Chính sách quyền riêng tư của OneMusic.</a>
+                            <a href='#' className={styles['rulesSignUpLink']}> Chính sách quyền riêng tư của OneMusic.</a>
                         </span>
 
-                        <button type='submit' className='submitSignUp'>
+                        <button type='submit' className={styles['submitSignUp']}>
                             Đăng ký
                         </button>
 
-                        <span className='hasAccount'>
+                        <span className={styles['hasAccount']}>
                             Bạn có tài khoản?
-                            <a className='hasAccountLink' href='#'> Đăng nhập</a>
+                            <a className={styles['hasAccountLink']} href='#'> Đăng nhập</a>
                         </span>
                     </div>
-                </div>
+                </form>
             </div>
-        </div>
+        // </div>
     );
 }
 

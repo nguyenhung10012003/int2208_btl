@@ -12,7 +12,7 @@ const publicRoutes = [
     { path: '/account', component: Account },
     { path: '/login', component: Login },
     { path: '/search', component: Search },
-    { path: '/sign-up', component: SignUp }
+    { path: '/sign-up', component: SignUp, layout: null }
 ];
 const privateRoutes = [
     { path: '/profile', component: Profile },

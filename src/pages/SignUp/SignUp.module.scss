@@ -1,26 +1,22 @@
 ::placeholder {
     color: #6a6a6a;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    padding: 6px;
-  }
-  
-  .WrapSignUp {
-    display: flex;
-    justify-content: center;
+    padding: 12px;
   }
   
   .SignUp {
     display: flex;
     text-align: center;
     align-items: center;
-    /* justify-content: space-between; */
     flex-direction: column;
     max-width: 450px;
+    line-height: 0.8rem;
   }
   
   .headingSignUp {
-    margin: 40px;
+    font-size: 2.4rem;
+    margin: 20px 0 20px 0;
   }
   
   .btnSignUpFacebook {
@@ -85,7 +81,7 @@
     content: "";
     position: absolute;
     right: -150px;
-    top: 14px;
+    top: 10px;
     height: 1px;
     width: 140px;
     background-color: #7f8387;
@@ -95,7 +91,7 @@
     content: "";
     position: absolute;
     left: -150px;
-    top: 14px;
+    top: 10px;
     height: 1px;
     width: 140px;
     background-color: #7f8387;
@@ -115,7 +111,7 @@
   
   .headInput{
     display: block;
-    margin: 0 0 16px 8px;
+    margin-bottom: 16px;
     text-align: left;
     font-size: 16px;
     font-weight: 500;
@@ -144,10 +140,12 @@
     text-align: left;
     font-size: 16px;
     font-weight: 500;
+    position: relative;
+    top: 5px;
   }
   
   
-  #radioInput {
+  .radioInput {
     width: 20px;
     height: 18px;
     margin: 4px;
@@ -156,7 +154,7 @@
   .radio-label {
     margin-left: 4px;
     position: relative;
-    top: -2.5px;
+    top: -3px;
   }
   
   .submitSignUp {
