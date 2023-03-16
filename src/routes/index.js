@@ -10,7 +10,7 @@ import SignUp from '../pages/SignUp';
 const publicRoutes = [
     { path: '/', component: Home },
     { path: '/account', component: Account },
-    { path: '/login', component: Login },
+    { path: '/login', component: Login, layout: null},
     { path: '/search', component: Search },
     { path: '/sign-up', component: SignUp, layout: null }
 ];
