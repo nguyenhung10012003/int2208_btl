@@ -1,3 +1,5 @@
+import { ProfileLayout } from '../components/Layouts';
+
 import Account from '../pages/Account';
 import Home from '../pages/Home';
 import Library from '../pages/Library';
@@ -19,7 +21,7 @@ const privateRoutes = [
     { path: '/library', component: Library },
     { path: '/playlist', component: Playlist },
     { path: '/infor-song', component: InforSong},
-    { path: '/profile', component: Profile, layout: null}
+    { path: '/profile', component: Profile, layout: ProfileLayout}
 ];
 
 export { publicRoutes, privateRoutes }
