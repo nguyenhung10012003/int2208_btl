@@ -16,10 +16,10 @@ const publicRoutes = [
     { path: '/sign-up', component: SignUp, layout: null }
 ];
 const privateRoutes = [
-    { path: '/profile', component: Profile },
     { path: '/library', component: Library },
     { path: '/playlist', component: Playlist },
-    { path: '/infor-song', component: InforSong}
+    { path: '/infor-song', component: InforSong},
+    { path: '/profile', component: Profile, layout: null}
 ];
 
 export { publicRoutes, privateRoutes }

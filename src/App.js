@@ -24,6 +24,9 @@ function App() {
           {privateRoutes.map((router, index) => {
             const Page = router.component;
             let Layout = DefaultLayout;
+            if(router.layout === null) {
+              Layout = Fragment;
+            }
             return <Route
               key={index}
               path={router.path}
