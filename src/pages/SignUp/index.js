@@ -13,7 +13,7 @@ function SignUp() {
                 </h1>
                 <div className={styles['buttons']}>
                     <button type='button' className={styles['btnSignUpFacebook']}>
-                        <i className={`${styles.iconSignUp} fa-brands fa-facebook`}></i>
+                        <i className={`${styles.iconFacebookSignUp} fa-brands fa-facebook`}></i>
                         Đăng ký bằng Facebook
                     </button>
 

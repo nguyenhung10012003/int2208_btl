@@ -6,11 +6,12 @@
     height: 100%;
     flex-direction: column;
     overflow: auto;
+    margin-bottom: 24px;
 }
 
 .header {
     display: flex;
-    padding: 40px 0;
+    padding: 40px 0 24px 0;
     background-color: rgba(43, 45, 57, 0.25);
 }
 

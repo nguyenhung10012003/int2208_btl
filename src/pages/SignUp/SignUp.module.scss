@@ -38,7 +38,7 @@
     background-color: #384f81;
   }
   
-  .iconSignUp {
+  .iconFacebookSignUp {
       position: relative;
       margin-right: 16px;
       font-size: 24px;
@@ -52,7 +52,7 @@
     background-color: white;
     color: #535353;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 650;
     line-height: 40px;
     margin-bottom: 20px;
     cursor: pointer;
@@ -107,6 +107,7 @@
     flex-direction: column;
     position: relative;
     left: 0;
+    padding-left: 8px;
   }
   
   .headInput{
