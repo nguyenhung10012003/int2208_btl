@@ -21,6 +21,4 @@
 # Định hướng làm CSDL sử dụng MongoDB
 
 # Một số framework làm back-end: 
-
-# Học liệu: 
-* [Font-end] (https://fullstack.edu.vn/)
+* [font-end ] (https://fullstack.edu.vn/)
