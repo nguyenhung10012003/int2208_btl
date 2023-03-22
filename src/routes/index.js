@@ -1,4 +1,4 @@
-import { ProfileLayout } from '../components/Layouts';
+import { AccountLayout } from '../components/Layouts';
 
 import Account from '../pages/Account';
 import Home from '../pages/Home';
@@ -12,16 +12,16 @@ import InforSong from '../pages/InforSong';
 
 const publicRoutes = [
     { path: '/', component: Home },
-    { path: '/account', component: Account },
+    { path: '/account', component: Account, layout: AccountLayout },
     { path: '/search', component: Search },
-    { path: '/login', component: Login, layout: null},
+    { path: '/login', component: Login, layout: null },
     { path: '/sign-up', component: SignUp, layout: null }
 ];
 const privateRoutes = [
     { path: '/library', component: Library },
     { path: '/playlist', component: Playlist },
-    { path: '/infor-song', component: InforSong},
-    { path: '/profile', component: Profile, layout: ProfileLayout}
+    { path: '/infor-song', component: InforSong },
+    { path: '/profile', component: Profile }
 ];
 
 export { publicRoutes, privateRoutes }

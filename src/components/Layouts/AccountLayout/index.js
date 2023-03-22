@@ -1,8 +1,8 @@
-import styles from './ProfileLayout.module.scss'
+import styles from './AccountLayout.module.scss'
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-function ProfileLayout({ children }) {
+function AccountLayout({ children }) {
     return ( 
         <div>
             <Header />
@@ -14,4 +14,4 @@ function ProfileLayout({ children }) {
      );
 }
 
-export default ProfileLayout;
+export default AccountLayout;
