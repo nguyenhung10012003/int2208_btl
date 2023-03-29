@@ -1,32 +1,12 @@
+import {useState, useEffect} from "react";
 import Sections from "./Sections";
-
+import axios from "axios";
 function Home() {
-    const data = [
-        {
-            title: 'New',
-            cards:
-                [
-                    { title: 'abc', img: 'holder.js/100px160' },
-                    { title: 'abc', img: 'holder.js/100px160' },
-                    { title: 'abc', img: 'holder.js/100px160' },
-                    { title: 'abc', img: 'holder.js/100px160' }
-                ]
-        },
-        {
-            title: 'New',
-            cards:
-                [
-                    { title: 'abc', img: 'holder.js/100px160' },
-                    { title: 'abc', img: 'holder.js/100px160' },
-                    { title: 'abc', img: 'holder.js/100px160' },
-                    { title: 'abc', img: 'holder.js/100px160' }
-                ]
-        }
-    ]
+
 
     return (
 
-        <Sections data={data} />
+        <Sections/>
 
     );
 }

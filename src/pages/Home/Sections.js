@@ -1,30 +1,36 @@
-import { Card } from "react-bootstrap";
+import {Card, Col, Row} from "react-bootstrap";
 import Styles from './Home.module.scss';
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-function Sections({ data }) {
+function Sections() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/')
+            .then((res) => setData(res.data.albums.items))
+            .catch((err) => console.log(err));
+    }, []);
     return (
         <div className={Styles['wrapper']}>
-            {data.map((sec, index) => {
+            <h2>New Release</h2>
+            <Row xs={"auto"} md={"auto"} className='g-4'>
+            {data.map((item, index) => {
+                let img = item.images[0].url;
+                let name = item.name;
+                let id = item.id;
                 return (
-                    <section key={index} title={sec.title} className={Styles['section']}>
-                        <div className={Styles['section-title']}>
-                            <h2>{sec.title}</h2>
-                            <a>Show all</a>
-                        </div>
-                        <div className={Styles['card-wrapper']}>
-                            {sec.cards.map((card, index) => {
-                                return (
-                                    <Card key={index} className={Styles['card']}>
-                                        <Card.Img variant="top" src={card.img} className={Styles['c-img']} />
-                                        <Card.Title className={Styles['c-title']}>{card.title}</Card.Title>
-                                    </Card>
-
-                                )
-                            })}
-                        </div>
-                    </section>
+                    <Col key={id} className={Styles['card-wrapper']}>
+                    <Card className={Styles['card']}>
+                        <Card.Img  variant="top" src={img} className={Styles['c-image']}/>
+                        <Card.Text className={Styles['c-title']}>
+                            <a href = '#' className={Styles['title']}>{name}</a>
+                        </Card.Text>
+                    </Card>
+                    </Col>
                 )
             })}
+            </Row>
         </div>
     )
 }
