@@ -13,7 +13,7 @@ const spotifyApi = new SpotifyWebApi({
                 console.log(data.body['access_token']);
             })
             .catch((error) => {
-                console.log(error);
+                console.log("Can't get token: " + error);
             })
     }
 
@@ -24,7 +24,7 @@ const spotifyApi = new SpotifyWebApi({
                 console.log('Refresh access token: ' + data.body['access_token']);
             })
             .catch((error) => {
-                console.log(error);
+                console.log("Can't get token: " + error);
             })
     }, 3599 * 1000)
 

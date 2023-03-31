@@ -3,11 +3,12 @@ import Styles from './Home.module.scss';
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+const SERVER_PORT = 3001;
 function Sections() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/')
+        axios.get(`http://localhost:${SERVER_PORT}/`)
             .then((res) => setData(res.data.albums.items))
             .catch((err) => console.log(err));
     }, []);
