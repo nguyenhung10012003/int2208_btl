@@ -22,7 +22,16 @@ class SiteController {
         else {
             res.redirect(urlRedirect.signUp + '?message=failure');
         }
+    }
 
+    async login(req, res) {
+        const authUser = req.body;
+        const check = await user.find(authUser);
+        if(check) {
+            res.redirect(urlRedirect.home);
+        } else {
+            res.redirect(urlRedirect.login + '?message=failure');
+        }
     }
 }
 
