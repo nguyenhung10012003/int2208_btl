@@ -16,19 +16,21 @@ function Profile() {
             </div>
         </div>
 
-        <i className={`${styles.iconDots} fa-solid fa-ellipsis`}></i>
+        <div className={styles['list']}>
+            <i className={`${styles.iconDots} fa-solid fa-ellipsis`}></i>
 
-        <div className={styles['list-link']}>
-            <a href=''>Playlist công khai</a>
-            <a href=''>hiển thị tất cả</a>
-        </div>
+            <div className={styles['list-link']}>
+                <a href=''>Playlist công khai</a>
+                <a href=''>hiển thị tất cả</a>
+            </div>
 
-        <div className={styles['list-container']}>
-            <ListMusic/>
-            <ListMusic/>
-            <ListMusic/>
-            <ListMusic/>
-            <ListMusic/>
+            <div className={styles['list-container']}>
+                <ListMusic/>
+                <ListMusic/>
+                <ListMusic/>
+                <ListMusic/>
+                <ListMusic/>
+            </div>
         </div>
     </div>
     );
