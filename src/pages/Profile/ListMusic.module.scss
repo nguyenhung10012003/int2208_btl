@@ -1,0 +1,38 @@
+.list-content {
+    background-color: #181818;
+    width: 190px;
+    height: 260px;
+    border-radius : 10px;
+}
+
+.list-content_img {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    background-color: #333333;
+    margin: auto;
+    margin-top: 10px;
+    border-radius : 10px;
+}
+
+.iconPlay {
+    position: absolute;
+    font-size: 50px;
+    color: #06d6a0;
+    bottom: 0;
+    right: 0;
+}
+
+.iconPlay:hover {
+    font-size: 55px;
+    transition: all 0.2s ease-in-out;
+}
+
+.list-content_text {
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
