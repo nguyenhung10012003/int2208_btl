@@ -2,7 +2,7 @@
     color: #6a6a6a;
     font-size: 16px;
     font-weight: 500;
-    padding: 12px;
+
   }
   
   .Login {
@@ -173,5 +173,8 @@
   .hasAccountLink{
     color:#1c9646;
   }
-  
-  
+
+  .login-status {
+    color: red;
+    margin: 12px 0;
+  }

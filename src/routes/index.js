@@ -9,13 +9,15 @@ import Search from '../pages/Search';
 import Playlist from '../pages/Playlist';
 import SignUp from '../pages/SignUp';
 import InforSong from '../pages/InforSong';
+import Album from "../pages/Album";
 
 const publicRoutes = [
     { path: '/', component: Home },
     { path: '/account', component: Account, layout: AccountLayout },
     { path: '/search', component: Search },
     { path: '/login', component: Login, layout: null },
-    { path: '/sign-up', component: SignUp, layout: null }
+    { path: '/sign-up', component: SignUp, layout: null },
+    { path: '/album', component: Album}
 ];
 const privateRoutes = [
     { path: '/library', component: Library },

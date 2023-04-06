@@ -1,69 +1,102 @@
 import styles from "./SignUp.module.scss";
-import axios from "axios";
+import signupApi from "../../api/SignupApi";
+import {Link, useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 function FormSignup() {
-    const urlSignup = 'http://localhost:3001/sign-up';
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState(
+        {email: '', password: '', confirmPassword: '', name: '', gender: null}
+    );
+    const [message, setMessage] = useState('');
+    const [showMessage, setShowMessage] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        axios.post(urlSignup, formData)
-            .then((res) => {
-                // Xử lý phản hồi từ server ở đây
-
-            })
-            .catch((error) => {
-                console.error(error);
+        if (formData.password.length < 6) {
+            setMessage("Mật khẩu tối thiểu 6 kí tự");
+            setShowMessage(true);
+        }
+        else if (formData.password !== formData.confirmPassword) {
+            setMessage("Mật khẩu xác nhận không khớp");
+            setShowMessage(true);
+        }
+        else {
+            const data = {
+                email: formData.email,
+                password: formData.password,
+                name: formData.name,
+                gender: formData.gender
+            }
+            signupApi.signUp(data).then(res => {
+                console.log(res);
+                if (res === 0) {
+                    setMessage("Email đã được sử dụng");
+                    setShowMessage(true);
+                } else {
+                    const user = {email: data.email};
+                    localStorage.setItem('user', JSON.stringify(user));
+                    navigate('/');
+                }
             });
-    };
+        }
+    }
+
+    const handleChange = (event) => {
+        setShowMessage(false);
+        setFormData({
+                        ...formData,
+                        [event.target.name]: event.target.value
+                    });
+    }
     return (
-        <form className={styles['formGroup']}>
+        <form className={styles['formGroup']} onSubmit={handleSubmit}>
             <div className={styles['formInput']}>
                 <span className={styles['headInput']}>Email của bạn là gì?</span>
                 <input type={'email'} name='email' className={styles['inputData']} placeholder='Nhập email của bạn.'
-                       required></input>
+                       onChange={handleChange} required></input>
             </div>
             <div className={styles['formInput']}>
                 <span className={styles['headInput']}>Tạo mật khẩu</span>
                 <input type={'password'} name='password' className={styles['inputData']} placeholder='Tạo mật khẩu.'
-                       required></input>
+                       onChange={handleChange} required></input>
             </div>
             <div className={styles['formInput']}>
                 <span className={styles['headInput']}>Xác nhận lại mật khẩu</span>
-                <input type={'password'} className={styles['inputData']} placeholder='Nhập lại mật khẩu.'
-                       required></input>
+                <input type={'password'} name='confirmPassword' className={styles['inputData']}
+                       placeholder='Nhập lại mật khẩu.'
+                       onChange={handleChange} required></input>
             </div>
             <div className={styles['formInput']}>
                 <span className={styles['headInput']}>Họ tên của bạn</span>
                 <input type={'text'} name='name' className={styles['inputData']} placeholder='Nhập họ tên của bạn .'
-                       required></input>
+                       onChange={handleChange} required></input>
             </div>
             <div className={styles['inputGender']}>
                 <span className={styles['headInputGender']}>Giới tính của bạn:</span>
                 <div className={styles["radioInputGender"]}>
                     <input className={styles.radioInput} id="radioInputMale" name='gender' type="radio"
-                           value="male"></input>
+                           onChange={handleChange} value="male"></input>
                     <label className={styles["radio-label"]}>Nam</label>
                 </div>
                 <div className={styles["radioInputGender"]}>
                     <input className={styles.radioInput} id="radioInputFemale" name='gender' type="radio"
-                           value="female"></input>
+                           onChange={handleChange} value="female"></input>
                     <label className={styles["radio-label"]}>Nữ</label>
                 </div>
                 <div className={styles["radioInputGender"]}>
                     <input className={styles.radioInput} id="radioInputDiff" name='gender' type="radio"
-                           value="other"></input>
+                           onChange={handleChange} value="other"></input>
                     <label className={styles["radio-label"]}>Khác</label>
                 </div>
             </div>
-
-            <button type='submit' className={styles['submitSignUp']} formAction={urlSignup} formMethod={'post'}
-                    onSubmit={handleSubmit}>Đăng ký
+            {showMessage && <div className={styles['warning']}>{message}</div>}
+            <button type='submit' className={styles['submitSignUp']}>Đăng ký
             </button>
             <span className={styles['hasAccount']}>
-                            {`Bạn có tài khoản? `}
-                <a className={styles['hasAccountLink']} href='#'>Đăng nhập</a>
-                    </span>
+                {`Bạn có tài khoản? `}
+                <Link className={styles['hasAccountLink']} to={'/login'}>Đăng nhập</Link>
+            </span>
 
         </form>
     )

@@ -1,16 +1,22 @@
 import {Card, Col, Row} from "react-bootstrap";
 import Styles from './Home.module.scss';
 import {useEffect, useState} from "react";
-import axios from "axios";
+import postcardApi from "../../api/PostcardApi";
 
-const SERVER_PORT = 3001;
 function Sections() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:${SERVER_PORT}/`)
-            .then((res) => setData(res.data.albums.items))
-            .catch((err) => console.log(err));
+        const fetchNewRealease = async () => {
+            try {
+                const response = await postcardApi.getNewRelease({});
+                setData(response.albums.items);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        fetchNewRealease();
     }, []);
     return (
         <div className={Styles['wrapper']}>

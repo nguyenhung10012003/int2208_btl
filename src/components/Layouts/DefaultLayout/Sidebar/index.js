@@ -1,5 +1,6 @@
 import styles from './Sidebar.module.scss'
 import { HomeIcon, SearchIcon, LikeIcon, LibraryIcon, AddIcon } from '../../components/IconBox';
+import {Link} from "react-router-dom";
 
 
 function Sidebar() {
@@ -7,30 +8,30 @@ function Sidebar() {
         <div className={styles['wrapper']}>
             <div className={styles['side-wrapper']}>
                 <div className={styles['side-menu']}>
-                    <a href='#'>
+                    <Link to={`http://localhost:3000`}>
                         <HomeIcon />
                         <span>Home</span>
-                    </a>
-                    <a href='#'>
+                    </Link>
+                    <Link to={`http://localhost:3000/search`}>
                         <SearchIcon />
                         Search
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className={styles['side-wrapper']}>
                 <div className={styles['side-menu']}>
-                    <a href='#' >
+                    <Link to={`http://localhost:3000/library`} >
                         <LibraryIcon />
                         Library
-                    </a>
-                    <a href='#'>
+                    </Link>
+                    <Link to={`http://localhost:3000/`}>
                         <LikeIcon />
                         Liked Song
-                    </a>
-                    <a href='#'>
+                    </Link>
+                    <Link to={`http://localhost:3000`}>
                         <AddIcon />
                         New Playlist
-                    </a>
+                    </Link>
                 </div>
             </div>
 

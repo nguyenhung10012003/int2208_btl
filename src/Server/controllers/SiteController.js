@@ -17,20 +17,20 @@ class SiteController {
         const find = await user.findOne({email: newUser.email});
         if(!find) {
             await user.create(req.body);
-            res.redirect(urlRedirect.login);
+            res.send('1');
         }
         else {
-            res.redirect(urlRedirect.signUp + '?message=failure');
+            res.send('0');
         }
     }
 
     async login(req, res) {
         const authUser = req.body;
-        const check = await user.find(authUser);
+        const check = await user.findOne(authUser);
         if(check) {
-            res.redirect(urlRedirect.home);
+            res.send('1');
         } else {
-            res.redirect(urlRedirect.login + '?message=failure');
+            res.send('0');
         }
     }
 }
