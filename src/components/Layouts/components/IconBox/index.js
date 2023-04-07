@@ -5,9 +5,11 @@ import { AiFillHome, AiOutlineHome, AiFillHeart, AiOutlineSetting, AiOutlineHear
 import { MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop } from 'react-icons/md';
 import { GiMicrophone } from 'react-icons/gi'
 import { RiPlayListLine } from 'react-icons/ri'
+import React, { useState } from 'react';
 
 
 const around = `${styles['wrapper']} ${styles['around']}`;
+const aroundButton = `${styles['wrapper']} ${styles['around']} ${styles['list']}`;
 const large = `${styles['wrapper']} ${styles['large']}`;
 
 function SearchIcon() {
@@ -108,9 +110,21 @@ function SettingIcon() {
 }
 
 function ProfileIcon() {
+    const [showList, setShowList] = useState(false);
+  
+    const handleToggleList = () => {
+      setShowList(!showList);
+    };
     return (
-        <button className={around}>
-            <BsFillPersonFill />
+        <button className={aroundButton}>
+            <BsFillPersonFill onClick={handleToggleList}/>
+            {showList && (
+                <ul className={styles['content']}>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+            )}
         </button>
     );
 }

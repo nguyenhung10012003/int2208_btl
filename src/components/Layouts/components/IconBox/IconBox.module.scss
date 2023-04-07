@@ -19,3 +19,26 @@
 .large {
     font-size: 30px;
 }
+
+.list {
+    position: relative;
+}
+
+.content {
+    position: absolute;
+    bottom: 200;
+    width: 100px;
+    list-style-type: none;
+    margin: 120px 0px 0px 0px;
+    background-color: black;
+    padding: 0;
+}
+
+.content > li {
+    padding: 5px;
+    margin: 2px;
+}
+
+.content > li:hover {
+    background-color: #3E3E3E;
+}

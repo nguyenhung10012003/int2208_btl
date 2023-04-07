@@ -1,5 +1,5 @@
 import styles from './Profile.module.scss';
-import ListMusic from "./ListMusic";
+import ListMusic from "../components/ListMusic/ListMusic";
 import React, { useState } from 'react';
 
 
