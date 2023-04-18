@@ -1,73 +1,70 @@
-import {Link} from 'react-router-dom'
+/* eslint-disable no-undef */
+import {Link, useParams} from 'react-router-dom'
 import styles from './InforSong.module.scss'
+import FormAddSong from './FormAddSong';
+import {useEffect, useState} from "react";
+import postcardApi from "../../api/PostcardApi";
+import axios from 'axios';
 
 function InforSong() {
+
+    // data default
     const data = {
+        id: 'abcxyz',
         name: 'Name song',
-        img: 'holder.js/100px160',
-        singer: {
+        img: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
+        artist: {
             name: 'Singer name',
-            img: "https://imglarger.com/Images/before-after/ai-image-enlarger-1-after-2.jpg"
+            img: 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
         },
-        duration: '3:00',
-        // eslint-disable-next-line no-useless-concat
-        lyric: `They go crazy
-        Yeah
-        
-        They comin' in and out, in and out, in and out
-        
-        Trap spot boomin'
-        
-        Got the money comin' in, it ain't no issues
-        
-        I just a fucked a rapper bitch, I should diss you
-        
-        Got the Mac 11 cocked, it got the kick too
-        
-        Servin' niggas like Doughbeezy in my house shoes
-        
-        Ya baby mama fuck me better when the rent's due
-        
-        I just a fucked a rapper bitch, I should diss you
-        
-        She sucked my dick, she came home, I bet she kissed you
-        
-        Treat me like I'm Al Capone, nigga, fuck you
-        
-        John Gotti, Illuminati, nigga, fuck you
-        
-        I put a middle finger up, because, fuck you
-        
-        This money got me geekin' up, nigga, fuck you
-        
-        Red bottoms with the fur like Frank Luc
-        
-        I bought some VVS and she caught the chain flu
-        
-        I fucked this R&B bitch, I should thank you
-        
-        Yah, I was sippin' my codeine from the beginnin'
-        
-        She jocked my whole team, she seen who's winnin'
-        
-        We light Liv up on a Sunday, come see us livin'
-        
-        This for my dogs on the one way in penitentiaries
-        
-        Send a direct hit, you gotta pay attention
-        
-        I just lit my wrist up, I need some more attention
-        
-        She didn't wanna play fair, I put her on suspension
-        
-        I put a key on Greyhound now I'm in a new dimension
-        
-        Offered her 25, keep tryin' to take some of my percentage
-        
-        I was petrified you know my right wrist authentic
-        
-        I get glorified, that Richard Mille cost 250`
+        duration: 100000,
+        lyrics: 'lyric...'
     };
+
+    const params = useParams();
+
+    const [track, setData] = useState([]);
+    const [lyrics, setLyric] = useState([]);
+    const [artist, setDataArtist] = useState([]);
+
+    useEffect(() => {
+        const fetchTrack = async () => {
+            try {
+                const response = await postcardApi.getTrack(params.id);
+                setData({
+                    id: response.track.id,
+                    name: response.track.name, 
+                    image: response.track.album.images[0].url,
+                    duration: response.track.duration_ms,
+                });
+                setDataArtist({
+                    name: response.artist.name,
+                    image: response.artist.images[0].url,
+                });
+                const resLyric = await axios.get(`https://spotify-lyric-api.herokuapp.com/?url=https://open.spotify.com/track/${response.track.id}?autoplay=true`);
+                setLyric(resLyric.data.lines);
+               
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchTrack();
+        
+    }, [params.id]);
+    
+    // chage data
+    data.id = track.id === undefined ? data.id : track.id;
+    data.name = track.name;
+    data.img = track.image;
+    data.duration = track.duration;
+
+    data.artist.name = artist.name;
+    data.artist.img = artist.image;
+    //
+    if(lyrics.length === 0) {
+        lyrics.push({words: "Lyrics not avaiable"});
+    }
 
     return ( 
         <div className={styles['wrapper']}>
@@ -78,12 +75,12 @@ function InforSong() {
                 <div className={styles['header__infor']}>
                     <div className={styles['infor__heading']}>
                         <span className={styles['text-playlist']}>Song</span>
-                        <h2 className={styles['heading-text']}>{data.singer.name}</h2>
+                        <h2 className={styles['heading-text']}>{data.name}</h2>
                     </div>
                     <div className={styles['infor__description']}>
-                    <img src={data.singer.img} alt=''/>
-                        <Link to='/profile' className={styles['infor_link-singer']}>{data.singer.name}</Link>
-                        <span className={styles['duration-song']}> . {data.duration}</span>
+                    <img src={data.artist.img} alt=''/>
+                        <Link to='/profile-artist' className={styles['infor_link-singer']}>{data.artist.name}</Link>
+                        <span className={styles['duration-song']}> . {Math.floor(data.duration / 1000 / 60)} phút {Math.floor(data.duration % 60)} giây</span>
                     </div>
                 </div>
             </header>
@@ -93,19 +90,24 @@ function InforSong() {
                         <i className={"fa-solid fa-circle-play"}></i>
                         {/* <i class="fa-solid fa-circle-pause"></i> */}
                     </div>
+                    <FormAddSong data={data} />
                 </div>
                 <div className={styles['content-spacing']}>
                     <h3>Lyrics</h3>
                     <span className={styles['content__lyrics']}>
-                        {data.lyric}
+                        {lyrics.map((line, index) => {
+                            return (
+                                <p key={index}>{line.words}</p>
+                            )
+                        })}
                     </span>
                     <div className={styles['content__artist']}>
                         <div className={styles['artist-img']}>
-                            <img src={data.singer.img} alt=''/>
+                            <img src={data.artist.img} alt=''/>
                         </div>
                         <div className={styles['artist-descripton']}>
-                            <span>Artist</span>
-                            <a href='/profile-artist'>{data.singer.name}</a>
+                            <h4>Artist</h4>
+                            <Link to='/profile-artist' className={styles['infor_link-singer']}>{data.artist.name}</Link>
                         </div>
                     </div>
                 </div>

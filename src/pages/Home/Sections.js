@@ -2,8 +2,10 @@ import {Card, Col, Row} from "react-bootstrap";
 import Styles from './Home.module.scss';
 import {useEffect, useState} from "react";
 import postcardApi from "../../api/PostcardApi";
+import { Link } from "react-router-dom";
 
 function Sections() {
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -31,7 +33,9 @@ function Sections() {
                     <Card className={Styles['card']}>
                         <Card.Img  variant="top" src={img} className={Styles['c-image']}/>
                         <Card.Text className={Styles['c-title']}>
-                            <a href = '#' className={Styles['title']}>{name}</a>
+                            <Link to = {{
+                                pathname: `album/${id}`
+                            }} className={Styles['title']}>{name}</Link>
                         </Card.Text>
                     </Card>
                     </Col>

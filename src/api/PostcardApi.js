@@ -7,7 +7,18 @@ class PostcardApi {
     };
 
     getAlbum = (params) => {
+        const url = `/album/${params}`;
+        return axiosClient.get(url);
+    }
 
+    getTrack = (params) => {
+        const url = `/infor-song/${params}`;
+        return axiosClient.get(url);
+    }
+
+    getLibrary = (params) => {
+        const url = '/library';
+        return axiosClient.get(url);
     }
 }
 
