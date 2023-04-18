@@ -28,7 +28,7 @@ function Sidebar() {
                         <LikeIcon />
                         Liked Song
                     </Link>
-                    <Link to={`http://localhost:3000`}>
+                    <Link to={`http://localhost:3000/playlist/create`}>
                         <AddIcon />
                         New Playlist
                     </Link>

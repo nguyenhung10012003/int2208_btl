@@ -22,7 +22,7 @@ function Create() {
             image: formData.image,
         }
 
-        playlistApi.createNewPlaylist(data);
+        console.log(playlistApi.createNewPlaylist(data));
         navigate('/library')
     }
 
@@ -33,21 +33,17 @@ function Create() {
         });
     }
 
-    const handleChangeImage = (event) => {
+    const handleChangeImage = async (event) => {
         const input = event.target;
 
-        const selectedFile = input.files[0];
-        const reader = new FileReader();
+        // const file = input.files[0];
+        const file2 = await resizeImage(input.files[0], 160, 160);
 
-        reader.onload = (event) => {
-            setFormData({ ...formData, image: URL.createObjectURL(input.files[0]) });
-        };
-      
-        reader.readAsDataURL(selectedFile);
+        const base64 = await convertToBase64(file2);
 
-        // if (input.files && input.files[0] && input.files[0].type.startsWith("image/")) {
-        // setFormData({ ...formData, image: URL.createObjectURL(input.files[0]) });
-        // }
+        if (input.files && input.files[0]) {
+        setFormData({ ...formData, image: base64 });
+        }
         
     }
 
@@ -68,7 +64,8 @@ function Create() {
                     <img className={styles['image-create']} src={formData.image} alt='' width='160' height='160'></img>
                     <input type="file"
                             accept=".jpeg, .png, .jpg"
-                     className={styles['input-image-create']} onChange={handleChangeImage}></input>
+                            onChange={handleChangeImage}
+                     className={styles['input-image-create']} ></input>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className={styles['input-playlist']}>
@@ -91,3 +88,54 @@ function Create() {
 }
 
 export default Create;
+
+function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result)
+        };
+        fileReader.onerror = (error) => {
+            reject(error)
+        }
+    })
+}
+
+function resizeImage(file, maxWidth, maxHeight) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        let width = img.width;
+        let height = img.height;
+  
+        // Tính toán kích thước mới của hình ảnh
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+  
+        // Thiết lập kích thước của canvas
+        canvas.width = width;
+        canvas.height = height;
+  
+        // Vẽ hình ảnh mới lên canvas
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        // Chuyển canvas thành file và resolve
+        canvas.toBlob((blob) => {
+          resolve(blob);
+        }, file.type || 'image/jpeg');
+      };
+      img.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }

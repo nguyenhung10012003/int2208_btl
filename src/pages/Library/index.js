@@ -31,7 +31,6 @@ function Library() {
     }, [])
 
     dataLibrary.cards = data === undefined ? dataLibrary.cards : data;
-    console.log(data);
     return (
         <div className={Styles['wrapper']}>
             <div className={Styles['section-title']}>
