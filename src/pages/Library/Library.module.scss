@@ -22,10 +22,15 @@
     width: 100%;
     justify-content: space-between;
     margin: 10px 0px 0px 20px;
+    
 
     & a {
         margin-right: 40px;
         cursor: pointer;
+    }
+
+    h2 {
+        color: #fff
     }
 }
 
@@ -56,8 +61,15 @@
 .c-title {
     align-self: flex-start;
     margin: 10px;
+ 
+
+    .link-playlist {
+        text-decoration: none;
+        color: #ffffff;
+    }
 }
 
 .c-text {
     margin-left: 10px;
+    color: #b3b3b3;
 }

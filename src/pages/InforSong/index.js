@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-import {Link, useParams} from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styles from './InforSong.module.scss'
 import FormAddSong from './FormAddSong';
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import postcardApi from "../../api/PostcardApi";
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ function InforSong() {
                 const response = await postcardApi.getTrack(params.id);
                 setData({
                     id: response.track.id,
-                    name: response.track.name, 
+                    name: response.track.name,
                     image: response.track.album.images[0].url,
                     duration: response.track.duration_ms,
                 });
@@ -43,16 +43,16 @@ function InforSong() {
                 });
                 const resLyric = await axios.get(`https://spotify-lyric-api.herokuapp.com/?url=https://open.spotify.com/track/${response.track.id}?autoplay=true`);
                 setLyric(resLyric.data.lines);
-               
+
             } catch (err) {
                 console.log(err);
             }
         };
 
         fetchTrack();
-        
+
     }, [params.id]);
-    
+
     // chage data
     data.id = track.id === undefined ? data.id : track.id;
     data.name = track.name;
@@ -62,15 +62,15 @@ function InforSong() {
     data.artist.name = artist.name;
     data.artist.img = artist.image;
     //
-    if(lyrics.length === 0) {
-        lyrics.push({words: "Lyrics not avaiable"});
+    if (lyrics.length === 0) {
+        lyrics.push({ words: "Lyrics not available" });
     }
 
-    return ( 
+    return (
         <div className={styles['wrapper']}>
             <header className={styles['header']}>
                 <div className={styles['header__img']}>
-                    <img src={data.img} alt='Img - playlist'/>
+                    <img src={data.img} alt='Img - playlist' />
                 </div>
                 <div className={styles['header__infor']}>
                     <div className={styles['infor__heading']}>
@@ -78,7 +78,7 @@ function InforSong() {
                         <h2 className={styles['heading-text']}>{data.name}</h2>
                     </div>
                     <div className={styles['infor__description']}>
-                    <img src={data.artist.img} alt=''/>
+                        <img src={data.artist.img} alt='' />
                         <Link to='/profile-artist' className={styles['infor_link-singer']}>{data.artist.name}</Link>
                         <span className={styles['duration-song']}> . {Math.floor(data.duration / 1000 / 60)} phút {Math.floor(data.duration % 60)} giây</span>
                     </div>
@@ -103,7 +103,7 @@ function InforSong() {
                     </span>
                     <div className={styles['content__artist']}>
                         <div className={styles['artist-img']}>
-                            <img src={data.artist.img} alt=''/>
+                            <img src={data.artist.img} alt='' />
                         </div>
                         <div className={styles['artist-descripton']}>
                             <h4>Artist</h4>

@@ -15,7 +15,7 @@
     background-color: rgba(43, 45, 57, 0.25);
 }
 
-.header__img {
+.header__img img{
     height: 232px;
     min-width: 232px;
     width: 232px;
@@ -23,11 +23,6 @@
     border-radius: 2px;
     margin-left: 32px;
     background-color: rgba(130, 136, 162, 0.25);
-
-    img {
-        height: 232px;
-        width: 232px;
-    }
 }
 
 .header__infor {
@@ -54,16 +49,20 @@
 .infor__description {
      margin-top: 10px;
      font-size: 1.2rem;
+
+     .infor_link-artist {
+        text-decoration: none;
+        color: #fff;
+
+        &:hover {
+            text-decoration: underline;
+        }
+     }
 }
 
 .infor_link-profile {
     color: var(--text-header);
     text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-        color: var(--text-header)
-    }
 }
 
 .numberOfSong {
@@ -107,10 +106,6 @@
     
     .header-title {
         flex: 1;
-    }
-    
-    .header-album {
-        width: 30%;
     }
     
     .header-duration {
