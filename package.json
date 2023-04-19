@@ -20,7 +20,8 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
-    "spotify-web-api-node": "^5.0.2"
+    "react-slick": "^0.29.0",
+    "zingmp3-api-full": "^1.0.14"
   },
   "devDependencies": {
     "nodemon": "^2.0.22",
