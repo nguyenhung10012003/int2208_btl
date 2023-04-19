@@ -9,15 +9,10 @@ function Album() {
         name: 'Album',
         img: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
         artistName: 'unknown',
-        items: [
-            {name: 'Song 1', id: 'id_1', artistName: 'artist - name', album: 'album1', duration: '3:46'},
-            {name: 'Song 2', id: 'id_3', artistName: 'artist - name', album: 'album2', duration: '3:46'},
-
-        ]
+        items: [],
     };
 
     const params = useParams();
-
     const [album, setData] = useState([]);
     const [artist, setDataArtist] = useState([]);
 
@@ -55,7 +50,7 @@ function Album() {
         <div className={styles['wrapper']}>
             <header className={styles['header']}>
                 <div className={styles['header__img']}>
-                    <img src={data.img} alt='Img - album'/>
+                    <img src={data.img} alt='Img - album' width="232" height="232" />
                 </div>
                 <div className={styles['header__infor']}>
                     <div className={styles['infor__heading']}>

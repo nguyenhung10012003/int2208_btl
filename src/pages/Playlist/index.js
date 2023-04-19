@@ -31,13 +31,7 @@ function Playlist() {
     }, [params.id]);
 
     data.name = playlist.name;
-    fetch(playlist.image)
-        .then(res => {
-            data.image = playlist.image;
-        })
-        .catch(err => {
-            console.log(err);
-        })
+    data.image = playlist.image;
     data.description = playlist.description;
     data.tracks = playlist.tracks === undefined ? data.tracks : playlist.tracks;
 

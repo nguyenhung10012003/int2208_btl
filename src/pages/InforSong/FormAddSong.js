@@ -22,9 +22,17 @@ function FormAddSong({data}) {
         fetchLibrary();
     }, [])
 
-    const toggleAdd = () => {
+    // if(showPlaylist === true) {
+    //     document.body.onclick = () => {
+    //         setShowPlaylist(false);
+    //     }
+    // }
+
+    const toggleAdd = (e) => {
         setShowPlaylist(!showPlaylist);
+        e.preventDefault();
     };
+
 
     const handleSubmit = (dataChange, event) => {
         event.preventDefault();
@@ -44,8 +52,10 @@ function FormAddSong({data}) {
             tracks: dataChange.tracks,
         }
         playlist.addSong(dataChange._id, dataUpdate);
-
+        setShowPlaylist(false);
     }
+
+    console.log(showPlaylist);
 
     return (
         <div className={styles['add-song-to-playlist']}>
@@ -57,7 +67,7 @@ function FormAddSong({data}) {
                     <h4>Playlists</h4>
                     {dataLibrary.map((item, index) => {
                         return (
-                            <form onSubmit={handleSubmit.bind(this, item)} key={index} className={styles['playlists']}>
+                            <form onSubmit={handleSubmit.bind(this, item)} key={index} className={styles['form-add-song']}>
                                 <button type='submit'>{item.name}</button>
                             </form>    
                         )

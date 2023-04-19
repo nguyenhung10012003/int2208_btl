@@ -5,10 +5,10 @@ function Section({data}) {
     if(data.tracks !== undefined) {
         return ( 
             data.tracks.map((item, index) => {
-                let img = 'https://i.scdn.co/image/ab67616d0000b2731744248a6fd87af0769d7073';
-                let name = item.name;
                 let id = item.id;
-                let nameArtist = data.artistName;
+                let img = item.image;
+                let name = item.name;
+                let nameArtist = item.artistName;
                 return (                    
                     <div key={index} className={styles['body-list']}>
                         <div className={styles['body-serial']}>
