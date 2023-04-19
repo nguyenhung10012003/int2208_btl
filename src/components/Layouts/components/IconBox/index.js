@@ -6,6 +6,7 @@ import { MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop } from 'react-i
 import { GiMicrophone } from 'react-icons/gi'
 import { RiPlayListLine } from 'react-icons/ri'
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const around = `${styles['wrapper']} ${styles['around']}`;
@@ -119,11 +120,13 @@ function ProfileIcon() {
         <button className={aroundButton}>
             <BsFillPersonFill onClick={handleToggleList}/>
             {showList && (
-                <ul className={styles['content']}>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                </ul>
+                <div onClick={handleToggleList} className={styles['background-content']}>
+                    <ul className={styles['content']}>
+                        <li>Tài khoản</li>
+                        <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
+                        <li>Đăng xuất</li>
+                    </ul>
+                </div>
             )}
         </button>
     );
