@@ -12,6 +12,22 @@ function Profile() {
       setIsDivVisible(!isDivVisible);
     };
 
+    const dataProfile = {
+        name: 'Name',
+        cnt : '1',
+        img :'https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong-600x600.jpg',
+    }
+    
+    const data = {
+        title: 'My playlist',
+        img: 'holder.js/100px160',
+        listSong: [
+            {name: 'Song 1', img: 'holder.js/100px160' , singer: 'Singer1', album: 'album1', duration: '3:46'},
+            {name: 'Song 2', img: 'holder.js/100px160' , singer: 'Singer2', album: 'album1', duration: '3:41'}
+
+        ]
+    };
+
     return (
     <div className={styles['profile']}>
         <div className={styles['header']}>
