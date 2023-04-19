@@ -22,7 +22,7 @@ function Album() {
                 const response = await albumApi.getAlbum(params.albumId);
                 setData({
                     name: response.data.title,
-                    image: response.data.thumbnail,
+                    image: response.data.thumbnailM,
                     artists: response.data.artists,
                     artistsNames: response.data.artistsNames,
                     items: response.data.song.items,

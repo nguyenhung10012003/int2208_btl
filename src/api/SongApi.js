@@ -7,7 +7,7 @@ class SongApi {
     }
 
     getInfoSong = (params) => {
-        const url = `/song/${params}`;
+        const url = `/song/infor-song/${params}`;
         return axiosClient.get(url);
     }
 

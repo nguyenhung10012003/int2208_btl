@@ -43,6 +43,7 @@ class SiteController {
             res.send(data);
         })
     }
+
 }
 
 module.exports = new SiteController();

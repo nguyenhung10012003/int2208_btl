@@ -7,6 +7,7 @@ function Section({data}) {
             data.items.map((item, index) => {
                 let name = item.title;
                 let id = item.encodeId;
+                let image = item.thumbnail;
                 let nameArtist = item.artistsNames;
                 let duration = item.duration;
                 return (                    
@@ -16,6 +17,9 @@ function Section({data}) {
                             {/* <i className="fa-solid fa-play"></i> */}
                         </div>
                         <div className={styles['body-title']}>
+                            <div className={styles['image-song']}>
+                                <img src={image} alt='i'/>
+                            </div>
                             <div className={styles['des-title']}>
                                 <Link to={{
                                     pathname: `/infor-song/${id}`
