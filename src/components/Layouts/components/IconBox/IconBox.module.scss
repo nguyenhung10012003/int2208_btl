@@ -24,19 +24,43 @@
     position: relative;
 }
 
+.background-content {
+    position: fixed;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
 .content {
     position: absolute;
+    border-radius: 5px;
+    right: 0;
     bottom: 200;
     width: 100px;
     list-style-type: none;
-    margin: 120px 0px 0px 0px;
+    margin: 50px 50px 0px 0px;
     background-color: black;
     padding: 0;
 }
 
+.content-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.content-link:hover {
+    color: inherit;
+}
+
 .content > li {
-    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
     margin: 2px;
+    text-align: left;
 }
 
 .content > li:hover {
