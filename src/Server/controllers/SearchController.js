@@ -1,26 +1,23 @@
-const spotifyApi = require("../spotifyRequest");
+const zingMp3 = require("../ZingMP3Request");
 
 class SearchController {
 
+    search(req, res) {
+        const keySearch = req.params.key;
+        console.log(keySearch);
+        zingMp3.search(keySearch).then((data) => {
+            res.send(data);
+        })
+    }
+
     index(req, res) {
         // Lấy các gợi ý âm nhạc
-        spotifyApi.getRecommendations({
-                                          "limit": 10,
-                                          "market": 'US',
-                                          "seed_artists": '0LcJLqbBmaGUft1e9Mm8HV',
-                                          "seed_genres": 'indie',
-                                          "seed_tracks": '4NHQUGzhtTLFvgF5SZesLK'
-                                      })
-            .then(function (data) {
-                console.log(data.body);
-            }, function (err) {
-                console.log('Something went wrong!', err);
-            });
+        zingMp3.getNewReleaseChart().then((data) => {
+            res.send(data);
+        })
     }
 
-    search(req, res) {
 
-    }
 }
 
 module.exports = new SearchController();

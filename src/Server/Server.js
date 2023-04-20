@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config({path: __dirname + '../../../.env'});
 
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.SERVER_PORT || 3001;
 
 const app = express();
 app.use(cors({
@@ -19,5 +19,5 @@ db.connect();
 
 route(app);
 app.listen(PORT, () => {
-    console.log(`Server start at localhost:${PORT}`);
+    console.log(`Server start at http://localhost:${PORT}`);
 })

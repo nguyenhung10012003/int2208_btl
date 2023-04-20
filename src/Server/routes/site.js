@@ -8,5 +8,7 @@ route.get('/', siteController.index);
 route.post('/sign-up', siteController.signUp);
 //Login
 route.post('/login', siteController.login);
+//Album
+route.get('/album/:id', siteController.album);
 
 module.exports = route;

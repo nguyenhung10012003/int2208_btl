@@ -1,114 +1,119 @@
-import {Link} from 'react-router-dom'
+/* eslint-disable no-undef */
+import {Link, useParams} from 'react-router-dom'
 import styles from './InforSong.module.scss'
+import AddSong from './addSong/AddSong';
+import songApi from '../../api/SongApi';
+import {useEffect, useState} from "react";
 
 function InforSong() {
+
+    // data default
     const data = {
+        id: 'abcxyz',
         name: 'Name song',
-        img: 'holder.js/100px160',
-        singer: {
+        img: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
+        artist: {
             name: 'Singer name',
-            img: "https://imglarger.com/Images/before-after/ai-image-enlarger-1-after-2.jpg"
+            img: 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
         },
-        duration: '3:00',
-        // eslint-disable-next-line no-useless-concat
-        lyric: `They go crazy
-        Yeah
-        
-        They comin' in and out, in and out, in and out
-        
-        Trap spot boomin'
-        
-        Got the money comin' in, it ain't no issues
-        
-        I just a fucked a rapper bitch, I should diss you
-        
-        Got the Mac 11 cocked, it got the kick too
-        
-        Servin' niggas like Doughbeezy in my house shoes
-        
-        Ya baby mama fuck me better when the rent's due
-        
-        I just a fucked a rapper bitch, I should diss you
-        
-        She sucked my dick, she came home, I bet she kissed you
-        
-        Treat me like I'm Al Capone, nigga, fuck you
-        
-        John Gotti, Illuminati, nigga, fuck you
-        
-        I put a middle finger up, because, fuck you
-        
-        This money got me geekin' up, nigga, fuck you
-        
-        Red bottoms with the fur like Frank Luc
-        
-        I bought some VVS and she caught the chain flu
-        
-        I fucked this R&B bitch, I should thank you
-        
-        Yah, I was sippin' my codeine from the beginnin'
-        
-        She jocked my whole team, she seen who's winnin'
-        
-        We light Liv up on a Sunday, come see us livin'
-        
-        This for my dogs on the one way in penitentiaries
-        
-        Send a direct hit, you gotta pay attention
-        
-        I just lit my wrist up, I need some more attention
-        
-        She didn't wanna play fair, I put her on suspension
-        
-        I put a key on Greyhound now I'm in a new dimension
-        
-        Offered her 25, keep tryin' to take some of my percentage
-        
-        I was petrified you know my right wrist authentic
-        
-        I get glorified, that Richard Mille cost 250`
+        duration: 0,
+        lyrics: [],
     };
+
+    const params = useParams();
+
+    const [song, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchTrack = async () => {
+            try {
+                const resInfor = await songApi.getInfoSong(params.id);
+                const resLyric = await songApi.getLyric(params.id);
+                setData({
+                    id: resInfor.data.encodeId,
+                    name: resInfor.data.title,
+                    image: resInfor.data.thumbnailM,
+                    duration: resInfor.data.duration,
+                    lyrics: resLyric.data.sentences,
+                    artist: {
+                        name: resInfor.data.artists[0].name,
+                        img: resInfor.data.artists[0].thumbnailM,
+                    }
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchTrack();
+    
+    }, [params.id]);
+    
+    // console.log(song.lyrics);
+
+    // chage data
+    data.id = song.id === undefined ? data.id : song.id;
+    data.name = song.name;
+    data.img = song.image;
+    data.duration = song.duration;
+    data.artist = song.artist === undefined ? data.artist : song.artist;
+    data.lyrics = song.lyrics === undefined ? data.lyrics : song.lyrics;
+    if(data.lyrics.length === 0) {
+        data.lyrics.push({words: "Lyrics not available"});
+    } else {
+        let lyric = [];
+        song.lyrics.forEach((item, index) => {
+            const words = item.words.map((word) => word.data).join(' ');
+            lyric.push({words});
+        });
+        data.lyrics = lyric;
+    }
+
 
     return ( 
         <div className={styles['wrapper']}>
             <header className={styles['header']}>
-                <div className={styles['header__img']}>
-                    <img src={data.img} alt='Img - playlist'/>
-                </div>
-                <div className={styles['header__infor']}>
-                    <div className={styles['infor__heading']}>
-                        <span className={styles['text-playlist']}>Song</span>
-                        <h2 className={styles['heading-text']}>{data.singer.name}</h2>
-                    </div>
-                    <div className={styles['infor__description']}>
-                    <img src={data.singer.img} alt=''/>
-                        <Link to='/profile' className={styles['infor_link-singer']}>{data.singer.name}</Link>
-                        <span className={styles['duration-song']}> . {data.duration}</span>
-                    </div>
-                </div>
+               <div className={styles['header__img']}>
+                   <img src={data.img} alt='Img - playlist'/>
+               </div>
+               <div className={styles['header__infor']}>
+                   <div className={styles['infor__heading']}>
+                       <span className={styles['text-playlist']}>Song</span>
+                       <h2 className={styles['heading-text']}>{data.name}</h2>
+                   </div>
+                   <div className={styles['infor__description']}>
+                        <img src={data.artist.img} alt='' />
+                       <Link to='/profile-artist' className={styles['infor_link-singer']}>{data.artist.name}</Link>
+                       <span className={styles['duration-song']}> . {Math.floor(data.duration / 60)} phút {Math.floor(data.duration % 60)} giây</span>
+                   </div>
+               </div>
             </header>
             <div className={styles['content']}>
-                <div className={styles['viewport']}>
-                    <div className={styles['playAndPause-icon']}>
-                        <i className={"fa-solid fa-circle-play"}></i>
-                        {/* <i class="fa-solid fa-circle-pause"></i> */}
-                    </div>
-                </div>
-                <div className={styles['content-spacing']}>
-                    <h3>Lyrics</h3>
-                    <span className={styles['content__lyrics']}>
-                        {data.lyric}
-                    </span>
-                    <div className={styles['content__artist']}>
-                        <div className={styles['artist-img']}>
-                            <img src={data.singer.img} alt=''/>
-                        </div>
-                        <div className={styles['artist-descripton']}>
-                            <span>Artist</span>
-                            <a href='/profile-artist'>{data.singer.name}</a>
-                        </div>
-                    </div>
-                </div>
+               <div className={styles['viewport']}>
+                   <div className={styles['playAndPause-icon']}>
+                       <i className={"fa-solid fa-circle-play"}></i>
+                       {/* <i class="fa-solid fa-circle-pause"></i>  */}
+                   </div>
+                   <AddSong data={data} />
+               </div>
+               <div className={styles['content-spacing']}>
+                   <h3>Lyrics</h3>
+                   <span className={styles['content__lyrics']}>
+                       {data.lyrics.map((lyric, index) => {
+                           return (
+                               <p key={index}>{lyric.words}</p>
+                           )
+                       })}
+                   </span>
+                   <div className={styles['content__artist']}>
+                       <div className={styles['artist-img']}>
+                           <img src={data.artist.img} alt=''/>
+                       </div>
+                       <div className={styles['artist-descripton']}>
+                           <h4>Artist</h4>
+                           <Link to='/profile-artist' className={styles['infor_link-singer']}>{data.artist.name}</Link>
+                       </div>
+                   </div>
+               </div>
             </div>
         </div>
 

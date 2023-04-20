@@ -4,7 +4,7 @@ const route = express.Router();
 const searchController = require('../controllers/SearchController');
 
 //Search with param
-route.get('/:query', searchController.search);
+route.get('/:key', searchController.search);
 //Search
 route.get('/', searchController.index);
 

@@ -11,7 +11,6 @@ export const AuthProvider = ({children}) => {
         const user = {email: data.email};
         localStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);
-        console.log("call login");
     };
 
     const handleLogout = () => {

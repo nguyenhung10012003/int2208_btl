@@ -1,0 +1,69 @@
+.add-song-to-playlist {
+    position: relative;
+
+    .add-playlist-icon {
+        font-size: 1.6rem;
+        line-height: 3.4rem;
+        color:#c8c4b9;
+        margin-right: 32px;
+    
+        &:hover {
+            transform: scale(1.1, 1.1);
+            color: var(--text-header);
+        }
+    }
+    
+    .add-playlist-icon:active + .wrapper-form {
+        display: block;
+        z-index: 1;
+    }
+
+}
+
+.wrapper-form {
+    position: absolute;
+    top: 0;
+    left: 80%;
+    width: 240px;
+    height: auto;
+    background-color: #282828;
+    border-radius: 5px;
+
+    h4 {
+        position: relative;
+        color: #b3b3b3;
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 8px 0;
+    }
+
+    h4::after {
+        position: absolute;
+        content: "";
+        height: 1px;
+        width: 100%;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        background-color: #b3b3b3;
+    }
+}
+
+.form-add-song {
+    display: block;
+    color: #b3b3b3;
+    padding: 8px 12px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: #424242;
+        border-radius: 3px;
+        cursor: default;
+    }
+}
+
+.form-add-song button {
+    width: 100%;
+    color: #fff;
+    text-align: left;
+}
