@@ -1,24 +1,26 @@
 import styles from './AddSong.module.scss';
 import { useEffect, useState } from 'react';
-import playlist from "../../../api/PlaylistApi";
+import playlistApi from "../../../api/PlaylistApi";
 
 function FormAddSong({data}) {
-    const listPlaylist = [];
 
     const [dataLibrary, setData] = useState([]);
 
     const [showPlaylist, setShowPlaylist] = useState(false);
 
-    // useEffect(() => {
-    //     const fetchLibrary = async () => {
-    //         try {
-    //         } catch(err) {
-    //             console.log(err);
-    //         }
-    //     }
+    useEffect(() => {
+        const fetchLibrary = async () => {
+            try {
+                const response = await playlistApi.getAllPlaylistByUser({});
+                setData(response);
+                console.log(response)
+            } catch(err) {
+                console.log(err);
+            }
+        }
 
-    //     fetchLibrary();
-    // }, [])
+        fetchLibrary();
+    }, [])
 
     // if(showPlaylist === true) {
     //     document.body.onclick = () => {
@@ -35,29 +37,31 @@ function FormAddSong({data}) {
     const handleSubmit = (dataChange, event) => {
         event.preventDefault();
 
-        // dataChange.tracks.push({
-        //     id: data.id,
-        //     name: data.name,
-        //     image: data.img,
-        //     artistName: data.artist.name,
-        // });
+        dataChange.tracks.push({
+            id: data.id,
+            name: data.name,
+            image: data.img,
+            artist: data.artist,
+            album: data.album,
+            duration: data.duration,
+        });
 
-        // const dataUpdate = {
-        //     user_id: dataChange.user_id,
-        //     name: dataChange.name,
-        //     description: dataChange.description,
-        //     image: dataChange.image,
-        //     tracks: dataChange.tracks,
-        // }
-        // playlist.addSong(dataChange._id, dataUpdate);
+        const dataUpdate = {
+            user_id: dataChange.user_id,
+            name: dataChange.name,
+            description: dataChange.description,
+            image: dataChange.image,
+            tracks: dataChange.tracks,
+        }
+        playlistApi.addSong(dataChange._id, dataUpdate);
         setShowPlaylist(false);
     }
 
-    if(listPlaylist.length === 0) {
-        listPlaylist.push({name: 'NO PLAYLIST '});
+    if(dataLibrary.length === 0) {
+        dataLibrary.push({name: 'NO PLAYLIST '});
     }
 
-    console.log(showPlaylist);
+    // console.log(showPlaylist);
 
     return (
         <div className={styles['add-song-to-playlist']}>
@@ -67,7 +71,7 @@ function FormAddSong({data}) {
             {showPlaylist &&
                 <div className={styles['wrapper-form']}>
                     <h4>Playlists</h4>
-                    {listPlaylist.map((item, index) => {
+                    {dataLibrary.map((item, index) => {
                         return (
                             <form onSubmit={handleSubmit.bind(this, item)} key={index} className={styles['form-add-song']}>
                                 <button type='submit'>{item.name}</button>

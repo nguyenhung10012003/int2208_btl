@@ -9,12 +9,17 @@ function InforSong() {
 
     // data default
     const data = {
-        id: 'abcxyz',
+        id: '',
         name: 'Name song',
         img: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
         artist: {
-            name: 'Singer name',
+            id: '',
+            name: 'singer name',
             img: 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
+        },
+        album: {
+            id: '',
+            name: '',
         },
         duration: 0,
         lyrics: [],
@@ -36,10 +41,16 @@ function InforSong() {
                     duration: resInfor.data.duration,
                     lyrics: resLyric.data.sentences,
                     artist: {
+                        id: resInfor.data.artists[0].id,
                         name: resInfor.data.artists[0].name,
                         img: resInfor.data.artists[0].thumbnailM,
-                    }
+                    },
+                    album: {
+                        id: resInfor.data.album.encodeId,
+                        name: resInfor.data.album.title,
+                    },
                 });
+                console.log(resInfor.data.album.title, );
             } catch (err) {
                 console.log(err);
             }
@@ -47,8 +58,6 @@ function InforSong() {
         fetchTrack();
     
     }, [params.id]);
-    
-    // console.log(song.lyrics);
 
     // chage data
     data.id = song.id === undefined ? data.id : song.id;
@@ -56,6 +65,7 @@ function InforSong() {
     data.img = song.image;
     data.duration = song.duration;
     data.artist = song.artist === undefined ? data.artist : song.artist;
+    data.album = song.album === undefined ? data.album : song.album;
     data.lyrics = song.lyrics === undefined ? data.lyrics : song.lyrics;
     if(data.lyrics.length === 0) {
         data.lyrics.push({words: "Lyrics not available"});

@@ -1,32 +1,54 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './Playlist.module.scss'
 import Section from './Sections';
+import playlistApi from '../../api/PlaylistApi';
+import { useState, useEffect } from 'react';
 
 function Playlist() {
     const data = {
-        title: 'My playlist',
-        img: 'holder.js/100px160',
-        listSong: [
-            {name: 'Song 1', img: 'holder.js/100px160' , singer: 'Singer1', album: 'album1', duration: '3:46'},
-            {name: 'Song 2', img: 'holder.js/100px160' , singer: 'Singer2', album: 'album1', duration: '3:41'}
-
-        ]
+        name: 'My playlist',
+        image: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
+        description: '',
+        tracks: [],
     };
+
+    const params = useParams();
+
+    const [playlist, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchTrack = async () => {
+            try {
+                const response = await playlistApi.getPlaylist(params.id);
+                setData(response);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchTrack();
+        
+    }, [params.id]);
+
+    data.name = playlist.name;
+    data.image = playlist.image;
+    data.description = playlist.description;
+    data.tracks = playlist.tracks === undefined ? data.tracks : playlist.tracks;
 
     return (
         <div className={styles['wrapper']}>
             <header className={styles['header']}>
                 <div className={styles['header__img']}>
-                    <img src={data.img} alt='Img - playlist'/>
+                    <img src={data.image} alt='Img - playlist'/>
                 </div>
                 <div className={styles['header__infor']}>
                     <div className={styles['infor__heading']}>
                         <span className={styles['text-playlist']}>Playlist</span>
-                        <h2 className={styles['heading-text']}>{data.title}</h2>
+                        <h2 className={styles['heading-text']}>{data.name}</h2>
                     </div>
                     <div className={styles['infor__description']}>
                         <Link to='/profile' className={styles['infor_link-profile']}>Create by me</Link>
-                        <span className={styles['numberOfSong']}> . {data.listSong.length} songs</span>
+                        <span className={styles['numberOfSong']}> . {data.tracks.length} songs</span>
                     </div>
                 </div>
             </header>

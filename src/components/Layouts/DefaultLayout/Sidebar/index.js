@@ -28,7 +28,7 @@ function Sidebar() {
                         <LikeIcon />
                         Liked Song
                     </Link>
-                    <Link to={`${HOST}`}>
+                    <Link to={`${HOST}/playlist/create`}>
                         <AddIcon />
                         New Playlist
                     </Link>

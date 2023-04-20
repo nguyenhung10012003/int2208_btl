@@ -23,6 +23,11 @@
     border-radius: 2px;
     margin-left: 32px;
     background-color: rgba(130, 136, 162, 0.25);
+
+    img {
+        height: 232px;
+        width: 232px;
+    }
 }
 
 .header__infor {
@@ -41,9 +46,8 @@
 }
 
 .heading-text {
-    font-size: 6.0rem;
+    font-size: 4.0rem;
     font-weight: 700;
-    line-height: 90%;
     margin-bottom: 20px;
 }
 
@@ -55,6 +59,11 @@
 .infor_link-profile {
     color: var(--text-header);
     text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+        color: var(--text-header)
+    }
 }
 
 .numberOfSong {
@@ -146,7 +155,7 @@
         display: flex;
         align-items: center;
          
-        .image-song {
+        .image-song img {
             width: 40px;
             height: 40px;
             background-color: #fff;
@@ -154,14 +163,34 @@
             border-radius: 1px;
         }
 
-        h3 {
-            font-size: 1.2rem;
-            margin: 0;
+        .infor-song, 
+        .profile-artist {
+            display: block;
+            text-decoration:none;
         }
 
-        span {
-            font-size: 0.9rem;
+
+
+        .infor-song {
+            font-size: 1.2rem;
+            margin: 0;
+            color: #b3b3b3;
+
+            &:hover {
+                color: #fff;
+            }
         }
+
+        .profile-artist {
+            font-size: 0.9rem;
+            color: #b3b3b3;
+
+            &:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+        }
+
     }
     
     .body-album {
@@ -179,6 +208,14 @@
     }
 }
 
+.body-album-link {
+    text-decoration: none;
+    color: #b3b3b3;
+
+    &:hover {
+        color: #fff;
+    }
+}
 
 
 
