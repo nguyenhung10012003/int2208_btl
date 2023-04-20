@@ -9,5 +9,7 @@ route.post('/create', playlistController.create);
 route.get('/user/library', playlistController.library);
 // add song to playlist
 route.put('/addSong/:id', playlistController.addSong);
+// delete song
+route.patch('/deleteSong/:id', playlistController.deleteSong);
 
 module.exports = route;

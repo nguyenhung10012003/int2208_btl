@@ -20,6 +20,11 @@ class PlaylistApi {
         const url = `/playlist/addSong/${params}`;
         return axiosClient.put(url, data)
     }
+
+    deleteSong = (params, data) => {
+        const url = `/playlist/deleteSong/${params}`;
+        return axiosClient.patch(url, data);
+    }
 }
 
 export default new PlaylistApi();

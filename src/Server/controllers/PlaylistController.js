@@ -31,6 +31,16 @@ class PlaylistController {
           console.log(error);
         })
     }
+    // [patch] delete song from playlist
+    deleteSong(req, res) {
+      Playlist.findOneAndUpdate({_id: req.params.id}, {tracks: req.body})
+        .then(() => {
+          console.log('delete song from playlist done');
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
 
     // get all playlist by user_id
     library(req, res) {

@@ -1,4 +1,5 @@
 import styles from './Playlist.module.scss';
+import DeleteSong from './DeleteSong';
 import { Link } from "react-router-dom";
 
 function Section({data}) {
@@ -37,6 +38,9 @@ function Section({data}) {
                         </div>
                         <div className={styles['body-duration']}>
                             <span>{Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây</span>
+                        </div>
+                        <div className={styles['body-delete']}>
+                            <DeleteSong data={{data: data, index: index}}/>
                         </div>
                     </div>
                 )

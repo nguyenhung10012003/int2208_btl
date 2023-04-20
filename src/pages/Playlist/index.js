@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 function Playlist() {
     const data = {
+        id: '',
         name: 'My playlist',
         image: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
         description: '',
@@ -30,6 +31,7 @@ function Playlist() {
         
     }, [params.id]);
 
+    data.id = playlist._id;
     data.name = playlist.name;
     data.image = playlist.image;
     data.description = playlist.description;
@@ -72,6 +74,8 @@ function Playlist() {
                         </div>
                         <div className={styles['header-duration']}>
                             <span>Duration</span>
+                        </div>
+                        <div className={styles['header-delete']}>
                         </div>
                     </div>
                     <div className={styles['content__list-song']}>
