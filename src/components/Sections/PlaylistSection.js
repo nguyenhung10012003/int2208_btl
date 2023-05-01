@@ -21,7 +21,6 @@ function PlaylistSection({items, limit = false}) {
         }
     }, [windowWidth]);
     if (limit) items = items.slice(0, num);
-    console.log(items.length);
     return (
         <div className={styles['sec-wrapper']}>
             {items.map((item, index) => {

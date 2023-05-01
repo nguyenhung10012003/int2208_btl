@@ -16,8 +16,6 @@ class SearchController {
             res.send(data);
         })
     }
-
-
 }
 
 module.exports = new SearchController();
