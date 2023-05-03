@@ -1,9 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
 import styles from './Album.module.scss'
-import Section from './Sections';
 import {useEffect, useState} from "react";
 import albumApi from '../../api/AlbumApi';
 import {usePlayer} from "../../hooks/PlayerContext";
+import SongCard from "../../components/SongCard/SongCard"
 
 function Album() {
     const data = {
@@ -16,7 +16,6 @@ function Album() {
 
     const params = useParams();
     const [album, setData] = useState([]);
-    // const [artist, setDataArtist] = useState([]);
     const handlePlay = () => {
         setListTrack(data.items);
         setNowSong(0);
@@ -88,7 +87,34 @@ function Album() {
                         </div>
                     </div>
                     <div className={styles['content__list-song']}>
-                        <Section data={data}></Section>
+                        {
+                            data.items?.map((item, index) => {
+                                let title = item.title;
+                                let id = item.encodeId;
+                                let img = item.thumbnailM;
+                                let artist = {
+                                    id: item.artists[0].id,
+                                    name: item.artists[0].name,
+                                    img: item.artists[0].thumbnailM
+                                }
+                                let duration = item.duration;
+                                let album = {};
+                                if(item.hasOwnProperty('album')) {
+                                    album =  {
+                                        id: item.album.encodeId === undefined ? '' : item.album.encodeId,
+                                        name: item.album.title,
+                                    }
+                                }
+                
+                                return (                 
+                                   <SongCard index={index} id={id}
+                                             title={title} img={img}
+                                            artist = {artist} duration = {duration}
+                                            album = {album}
+                                   />
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>
