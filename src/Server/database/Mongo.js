@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Connection URL
-const url = 'mongodb+srv://nguyenhung1012003:Nguyenduchung1012003@cluster0.p2cwdej.mongodb.net/test';
+const url = 'mongodb+srv://nguyenhung1012003:Nguyenduchung1012003@cluster0.p2cwdej.mongodb.net';
 
 // Database Name
 const dbName = 'one_music';

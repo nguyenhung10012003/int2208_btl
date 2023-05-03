@@ -17,13 +17,35 @@
 .control-left {
     display: flex;
     min-width: 240px;
+    flex-direction: row;
+    width: 25%;
+    & .control-left-text {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+
+        & .song-title {
+            text-decoration: none;
+
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-size: large;
+
+            & :hover {
+                color: var(--text-secondary);
+            }
+        }
+    }
 }
 
 .player {
     display: flex;
     flex-direction: column;
     padding: 0 5px;
-    width: 500px;
+    width: 400px;
     min-width: 200px;
 }
 
@@ -36,16 +58,13 @@
     justify-self: center;
 }
 
-.time-bar {
-    height: 20px;
-    padding: 5px 0;
-}
+
 
 .control-right {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 10px 0;
-    width: 240px;
+    width: 25%;
     min-width: 150px;
 }

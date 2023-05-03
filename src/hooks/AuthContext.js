@@ -18,9 +18,13 @@ export const AuthProvider = ({children}) => {
         setIsLoggedIn(false);
     };
 
+    const getUser = () => {
+        return localStorage.getItem("user");
+    }
+
     return (
         <AuthContext.Provider
-            value={{isLoggedIn, handleLogin, handleLogout}}
+            value={{isLoggedIn, handleLogin, handleLogout, getUser}}
         >
             {children}
         </AuthContext.Provider>

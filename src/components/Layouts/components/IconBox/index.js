@@ -1,22 +1,40 @@
 import styles from './IconBox.module.scss';
-import { BiSearch, BiLibrary, BiPauseCircle, BiSkipNext, BiSkipPrevious, BiPlayCircle, BiShuffle } from 'react-icons/bi';
-import { BsFillPersonFill } from 'react-icons/bs'
-import { AiFillHome, AiOutlineHome, AiFillHeart, AiOutlineSetting, AiOutlineHeart } from 'react-icons/ai';
-import { MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop } from 'react-icons/md';
-import { GiMicrophone } from 'react-icons/gi'
-import { RiPlayListLine } from 'react-icons/ri'
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {BiSearch, BiLibrary, BiPauseCircle, BiSkipNext, BiSkipPrevious, BiPlayCircle, BiShuffle} from 'react-icons/bi';
+import {BsFillPersonFill, BsCaretUp, BsCaretDown, BsRepeat, BsRepeat1} from 'react-icons/bs'
+import {AiFillHome, AiOutlineHome, AiFillHeart, AiOutlineSetting, AiOutlineHeart} from 'react-icons/ai';
+import {MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop} from 'react-icons/md';
+import {GiMicrophone} from 'react-icons/gi';
+import {RiPlayListLine} from 'react-icons/ri';
+import {RxSpeakerLoud, RxSpeakerOff} from 'react-icons/rx';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 
 const around = `${styles['wrapper']} ${styles['around']}`;
 const aroundButton = `${styles['wrapper']} ${styles['around']} ${styles['list']}`;
 const large = `${styles['wrapper']} ${styles['large']}`;
+const activeColor = '#c273ed';
 
 function SearchIcon() {
     return (
         <button className={styles['wrapper']}>
-            <BiSearch />
+            <BiSearch/>
+        </button>
+    )
+}
+
+function UpDownIcon({isUp = true}) {
+    return (
+        <button className={styles['wrapper']}>
+            {isUp ? <BsCaretUp/> : <BsCaretDown/>}
+        </button>
+    )
+}
+
+function SpeakerIcon({isMute = true, onClick}) {
+    return (
+        <button onClick={onClick} className={styles['wrapper']}>
+            {!isMute ? <RxSpeakerLoud/> : <RxSpeakerOff/>}
         </button>
     )
 }
@@ -24,7 +42,7 @@ function SearchIcon() {
 function HomeIcon() {
     return (
         <button className={styles['wrapper']}>
-            <AiFillHome />
+            <AiFillHome/>
         </button>
     )
 }
@@ -32,15 +50,15 @@ function HomeIcon() {
 function LibraryIcon() {
     return (
         <button className={styles['wrapper']}>
-            <BiLibrary />
+            <BiLibrary/>
         </button>
     );
 }
 
-function LikeIcon() {
+function LikeIcon({liked = false}) {
     return (
         <button className={styles['wrapper']}>
-            <AiFillHeart />
+            {liked ? <AiFillHeart/> : <AiOutlineHeart/>}
         </button>
     );
 }
@@ -48,55 +66,70 @@ function LikeIcon() {
 function AddIcon() {
     return (
         <button className={styles['wrapper']}>
-            <MdPlaylistAdd />
+            <MdPlaylistAdd/>
         </button>
     );
 }
 
-function NextIcon() {
+function NextIcon({onClick}) {
     return (
-        <button className={large}>
-            <BiSkipNext />
+        <button onClick={onClick} className={large}>
+            <BiSkipNext/>
         </button>
     );
 }
 
-function PreviousIcon() {
+function PreviousIcon({onClick}) {
     return (
-        <button className={large}>
-            <BiSkipPrevious />
+        <button onClick={onClick} className={large}>
+            <BiSkipPrevious/>
         </button>
     );
 }
 
-function PlayIcon() {
+function PlayIcon({onClick}) {
     return (
-        <button className={large}>
-            <BiPlayCircle />
+        <button onClick={onClick} className={large}>
+            <BiPlayCircle/>
         </button>
     );
 }
 
-function RandomIcon() {
+function RandomIcon({onClick}) {
     return (
-        <button className={styles['wrapper']}>
-            < BiShuffle />
+        <button onClick={onClick} className={styles['wrapper']}>
+            < BiShuffle/>
         </button>
     );
 }
 
-function LoopIcon() {
-    return (
-        <button className={styles['wrapper']}>
-            <MdLoop />
-        </button>
-    );
+function LoopIcon({onClick, type}) {
+    if (type == 0) {
+        return (
+            <button onClick={onClick} className={styles['wrapper']}>
+                <BsRepeat/>
+            </button>
+        );
+    } else if (type == 1) {
+        return (
+            <button onClick={onClick} className={styles['wrapper']}>
+                <BsRepeat color={activeColor}/>
+            </button>
+        );
+    } else {
+        return (
+            <button onClick={onClick} className={styles['wrapper']}>
+                <BsRepeat1 color={activeColor}/>
+            </button>
+        );
+    }
+
 }
 
-function MicroIcon() {
+function MicroIcon({onClick}) {
     return (
-        <button className={styles['wrapper']}>
-            <GiMicrophone />
+        <button onClick={onClick} className={styles['wrapper']}>
+            <GiMicrophone/>
         </button>
     );
 }
@@ -105,16 +138,16 @@ function MicroIcon() {
 function SettingIcon() {
     return (
         <button className={around}>
-            <AiOutlineSetting />
+            <AiOutlineSetting/>
         </button>
     );
 }
 
 function ProfileIcon() {
     const [showList, setShowList] = useState(false);
-  
+
     const handleToggleList = () => {
-      setShowList(!showList);
+        setShowList(!showList);
     };
     return (
         <button className={aroundButton}>
@@ -135,7 +168,7 @@ function ProfileIcon() {
 function PlaylistIcon() {
     return (
         <button className={styles['wrapper']}>
-            <RiPlayListLine />
+            <RiPlayListLine/>
         </button>
     );
 }
@@ -143,7 +176,7 @@ function PlaylistIcon() {
 function NextPageIcon() {
     return (
         <button className={styles['wrapper']}>
-            <MdNavigateNext />
+            <MdNavigateNext/>
         </button>
     );
 }
@@ -151,13 +184,21 @@ function NextPageIcon() {
 function PrevPageIcon() {
     return (
         <button className={styles['wrapper']}>
-            <MdNavigateBefore />
+            <MdNavigateBefore/>
         </button>
     );
+}
+
+function PauseIcon({onClick}) {
+    return (
+        <button className={large} onClick={onClick}>
+            <BiPauseCircle/>
+        </button>
+    )
 }
 
 export {
     SearchIcon, HomeIcon, LibraryIcon, LikeIcon, AddIcon, NextIcon, RandomIcon,
     PreviousIcon, PlaylistIcon, ProfileIcon, PlayIcon, SettingIcon, MicroIcon, LoopIcon,
-    NextPageIcon, PrevPageIcon
+    NextPageIcon, PrevPageIcon, PauseIcon, UpDownIcon, SpeakerIcon
 }

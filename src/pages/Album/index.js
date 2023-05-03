@@ -3,6 +3,7 @@ import styles from './Album.module.scss'
 import Section from './Sections';
 import {useEffect, useState} from "react";
 import albumApi from '../../api/AlbumApi';
+import {usePlayer} from "../../hooks/PlayerContext";
 
 function Album() {
     const data = {
@@ -11,10 +12,15 @@ function Album() {
         artistName: 'unknown',
         items: [],
     };
+    const {setListTrack, setNowSong} = usePlayer();
 
     const params = useParams();
     const [album, setData] = useState([]);
     // const [artist, setDataArtist] = useState([]);
+    const handlePlay = () => {
+        setListTrack(data.items);
+        setNowSong(0);
+    }
 
     useEffect(() => {
         const fetchTrack = async () => {
@@ -35,7 +41,7 @@ function Album() {
 
         fetchTrack();
         
-    }, [params.albumId]);
+    }, []);
 
     // changeData
     data.name = album.name;
@@ -62,7 +68,7 @@ function Album() {
             </header>
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
-                    <div className={styles['playAndPause-icon']}>
+                    <div className={styles['playAndPause-icon']} onClick={handlePlay}>
                         <i className="fa-solid fa-circle-play"></i>
                         {/* <i class="fa-solid fa-circle-pause"></i> */}
                     </div>
