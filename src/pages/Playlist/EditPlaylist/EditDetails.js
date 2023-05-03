@@ -1,9 +1,12 @@
-import { useState } from "react";
-import styles from './CreateNewPlaylist.module.scss'
+import styles from '../CreateNewPlaylist/CreateNewPlaylist.module.scss';
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import playlistApi from '../../../api/PlaylistApi'
 
-function CreateNewPlaylist(props) {
+function EditDetails(props) {
+    const dataInput = props.data;
+
+    console.log(dataInput)
 
     const [formData, setFormData] = useState({
         user_id: 'user',
@@ -11,6 +14,17 @@ function CreateNewPlaylist(props) {
         description: '',
         image: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
     });
+
+    useEffect(() => {
+        setFormData(
+            {
+                user_id: dataInput.id,
+                name: dataInput.name,
+                description: dataInput.description,
+                image: dataInput.image,
+            }
+        )
+    }, [props.data])
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -21,7 +35,7 @@ function CreateNewPlaylist(props) {
             description: formData.description,
             image: formData.image,
         }
-        playlistApi.createNewPlaylist(data);
+        playlistApi.editDetails(data.user_id, data);
 
         props.onClick(false);
 
@@ -52,10 +66,11 @@ function CreateNewPlaylist(props) {
         props.onClick(false);
     }
 
+
     return (
         <div className={styles['modal']}>
             <header>
-                <h3>New playlist</h3>
+                <h3>Edit details</h3>
                 <Link onClick={handleClickClose} className={styles['close-icon']}>
                     <i className="fa-solid fa-xmark"></i>
                 </Link>
@@ -72,13 +87,13 @@ function CreateNewPlaylist(props) {
                     <div className={styles['input-playlist']}>
                         <label>Name</label>
                         <input className={styles["input-name"]} type={'text'} name='name' required
-                            onChange={handleChange}>
+                            onChange={handleChange} value={formData.name}>
                         </input>
                     </div>
                     <div className={styles['input-playlist']}>
                         <label>Description</label>
                         <textarea className={styles["input-description"]} type={'text'} name='description'
-                            onChange={handleChange}>
+                            onChange={handleChange} value={formData.description}>
                         </textarea>
                     </div>
                     <button className={styles["submit"]} type="submit" >Save</button>
@@ -88,7 +103,7 @@ function CreateNewPlaylist(props) {
     )
 }
 
-export default CreateNewPlaylist;
+export default EditDetails;
 
 function convertToBase64(file) {
     return new Promise((resolve, reject) => {

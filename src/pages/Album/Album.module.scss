@@ -118,6 +118,10 @@
             float: right;
         }
     }
+    
+    .header-addSong {
+        width: 5%;
+    }
 
     &::after {
         position: absolute;
@@ -204,7 +208,20 @@
         margin-right: 20px;
         justify-content: flex-end;
     }
+
+    .body-addSong {
+        width: 5%;
+    }
 }
+
+.wrapper-form {
+    display: none;
+}
+
+.body-list:hover .wrapper-form {
+    display: block;
+}
+
 
 
 

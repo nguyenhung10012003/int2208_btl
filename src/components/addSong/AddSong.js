@@ -1,6 +1,6 @@
 import styles from './AddSong.module.scss';
 import { useEffect, useState } from 'react';
-import playlistApi from "../../../api/PlaylistApi";
+import playlistApi from "../../api/PlaylistApi";
 
 function FormAddSong({data}) {
 
@@ -13,20 +13,13 @@ function FormAddSong({data}) {
             try {
                 const response = await playlistApi.getAllPlaylistByUser({});
                 setData(response);
-                console.log(response)
             } catch(err) {
                 console.log(err);
             }
         }
 
         fetchLibrary();
-    }, [])
-
-    // if(showPlaylist === true) {
-    //     document.body.onclick = () => {
-    //         setShowPlaylist(false);
-    //     }
-    // }
+    }, [showPlaylist])
 
     const toggleAdd = (e) => {
         setShowPlaylist(!showPlaylist);
@@ -45,23 +38,14 @@ function FormAddSong({data}) {
             album: data.album,
             duration: data.duration,
         });
-
-        const dataUpdate = {
-            user_id: dataChange.user_id,
-            name: dataChange.name,
-            description: dataChange.description,
-            image: dataChange.image,
-            tracks: dataChange.tracks,
-        }
-        playlistApi.addSong(dataChange._id, dataUpdate);
+        
+        playlistApi.addSong(dataChange._id, dataChange.tracks);
         setShowPlaylist(false);
     }
 
     if(dataLibrary.length === 0) {
         dataLibrary.push({name: 'NO PLAYLIST '});
     }
-
-    // console.log(showPlaylist);
 
     return (
         <div className={styles['add-song-to-playlist']}>

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import {Link, useParams} from 'react-router-dom'
 import styles from './InforSong.module.scss'
-import AddSong from './addSong/AddSong';
+import AddSong from '../../components/addSong/AddSong';
 import songApi from '../../api/SongApi';
 import {useEffect, useState} from "react";
 
@@ -50,7 +50,6 @@ function InforSong() {
                         name: resInfor.data.album.title,
                     },
                 });
-                console.log(resInfor.data.album.title, );
             } catch (err) {
                 console.log(err);
             }

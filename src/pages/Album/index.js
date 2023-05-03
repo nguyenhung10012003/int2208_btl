@@ -43,8 +43,6 @@ function Album() {
     data.artistName = album.artistsNames;
     data.items = album.items === undefined ? data.items : album.items;
 
-    console.log(album.artistsNames)
-
     return (
         <div className={styles['wrapper']}>
             <header className={styles['header']}>
@@ -79,6 +77,8 @@ function Album() {
                         </div>
                         <div className={styles['header-duration']}>
                             <span>Duration</span>
+                        </div>
+                        <div className={styles['header-addSong']}>
                         </div>
                     </div>
                     <div className={styles['content__list-song']}>

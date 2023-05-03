@@ -1,7 +1,6 @@
-import styles from './Playlist.module.scss';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import playlistApi from "../../api/PlaylistApi";
+import styles from '../Playlist.module.scss';
+import { useNavigate } from "react-router-dom";
+import playlistApi from "../../../api/PlaylistApi";
 
 function DeleteSong({data}) {
     const navigate = useNavigate();
@@ -16,7 +15,6 @@ function DeleteSong({data}) {
         navigate(`/playlist/${data.data.id}`);
     }
 
-    console.log(data);
     return (
         <form onSubmit={handleSubmit}  className={styles['form-delete']} >
             <button type='submit' className={styles['btn-delete']}>

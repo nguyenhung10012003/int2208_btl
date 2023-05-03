@@ -1,5 +1,5 @@
 import styles from './Playlist.module.scss';
-import DeleteSong from './DeleteSong';
+import DeleteSong from './EditPlaylist/DeleteSong';
 import { Link } from "react-router-dom";
 
 function Section({data}) {

@@ -2,6 +2,8 @@ import { Link, useParams } from 'react-router-dom';
 import styles from './Playlist.module.scss'
 import Section from './Sections';
 import playlistApi from '../../api/PlaylistApi';
+import DeletePlaylist from './EditPlaylist/DeletePlaylist';
+import EditDetails from './EditPlaylist/EditDetails';
 import { useState, useEffect } from 'react';
 
 function Playlist() {
@@ -13,7 +15,23 @@ function Playlist() {
         tracks: [],
     };
 
+
     const params = useParams();
+    const [isDisEdit, setIsDisEdit] = useState(false);
+    const [isDisMenu, setIsDisMenu] = useState(false);
+
+    const handleClick = () => {
+        setIsDisEdit(!isDisEdit);
+
+        // if(isDisMenu === true) {
+        //     setIsDisMenu(false)
+        // }
+    };
+
+    const handleClickMenu = () => {
+        setIsDisMenu(!isDisMenu)
+    }
+
 
     const [playlist, setData] = useState([]);
 
@@ -28,7 +46,7 @@ function Playlist() {
         };
 
         fetchTrack();
-        
+
     }, [params.id]);
 
     data.id = playlist._id;
@@ -41,7 +59,7 @@ function Playlist() {
         <div className={styles['wrapper']}>
             <header className={styles['header']}>
                 <div className={styles['header__img']}>
-                    <img src={data.image} alt='Img - playlist'/>
+                    <img src={data.image} alt='Img - playlist' />
                 </div>
                 <div className={styles['header__infor']}>
                     <div className={styles['infor__heading']}>
@@ -49,7 +67,7 @@ function Playlist() {
                         <h2 className={styles['heading-text']}>{data.name}</h2>
                     </div>
                     <div className={styles['infor__description']}>
-                        <Link to='/profile' className={styles['infor_link-profile']}>Create by me</Link>
+                        <Link to='/profile' className={styles['infor_link-profile']}>By me</Link>
                         <span className={styles['numberOfSong']}> . {data.tracks.length} songs</span>
                     </div>
                 </div>
@@ -59,6 +77,28 @@ function Playlist() {
                     <div className={styles['playAndPause-icon']}>
                         <i className="fa-solid fa-circle-play"></i>
                         {/* <i class="fa-solid fa-circle-pause"></i> */}
+                    </div>
+                    <div className={styles['options-playlist']}>
+                        <i className={`${styles.iconDots} fa-solid fa-ellipsis`} onClick={handleClickMenu}></i>
+                        {
+                            isDisMenu && 
+                            <div className={styles['options-menu']}>
+                            <ul className={styles['options-list']}>
+                                <li className={styles['options']}>
+                                    <button onClick={handleClick}>Edit details</button>
+                                    {isDisEdit &&
+                                        <div>
+                                            <div onClick={handleClick} className={styles['hidden_background']}></div>
+                                            <EditDetails onClick={handleClick} data={data} />
+                                        </div>
+                                    }
+                                </li>
+                                <li className={styles['options']}>
+                                    <DeletePlaylist data={data} />
+                                </li>
+                            </ul>
+                        </div>
+                        }
                     </div>
                 </div>
                 <div className={styles['content-spacing']}>
@@ -84,7 +124,7 @@ function Playlist() {
                 </div>
             </div>
         </div>
-        );
+    );
 }
 
 export default Playlist;

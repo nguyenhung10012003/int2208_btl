@@ -1,12 +1,14 @@
 .add-song-to-playlist {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .add-playlist-icon {
+        float: left;
         font-size: 1.6rem;
-        line-height: 3.4rem;
         color:#c8c4b9;
         margin-right: 32px;
-    
         &:hover {
             transform: scale(1.1, 1.1);
             color: var(--text-header);
