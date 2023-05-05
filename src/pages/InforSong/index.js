@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import {Link, useParams} from 'react-router-dom'
 import styles from './InforSong.module.scss'
-import AddSong from '../../components/addSong/AddSong';
+import AddSong from '../../components/AddSong/AddSong';
 import songApi from '../../api/SongApi';
 import {useEffect, useState} from "react";
 
@@ -46,8 +46,8 @@ function InforSong() {
                         img: resInfor.data.artists[0].thumbnailM,
                     },
                     album: {
-                        id: resInfor.data.album.encodeId,
-                        name: resInfor.data.album.title,
+                        id: resInfor.data.album?.encodeId,
+                        name: resInfor.data.album?.title,
                     },
                 });
             } catch (err) {

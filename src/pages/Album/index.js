@@ -15,8 +15,13 @@ function Album() {
     const {setListTrack, setNowSong} = usePlayer();
 
     const params = useParams();
+
+    const [isPlaying, setIsPlaying] = useState(false);
+
     const [album, setData] = useState([]);
+
     const handlePlay = () => {
+        setIsPlaying(!isPlaying);
         setListTrack(data.items);
         setNowSong(0);
     }
@@ -68,8 +73,8 @@ function Album() {
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
                     <div className={styles['playAndPause-icon']} onClick={handlePlay}>
-                        <i className="fa-solid fa-circle-play"></i>
-                        {/* <i class="fa-solid fa-circle-pause"></i> */}
+                        {!isPlaying && <i className="fa-solid fa-circle-play"></i>}
+                        {isPlaying && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                 </div>
                 <div className={styles['content-spacing']}>
@@ -105,9 +110,8 @@ function Album() {
                                         name: item.album.title,
                                     }
                                 }
-                
                                 return (                 
-                                   <SongCard index={index} id={id}
+                                   <SongCard key={index} index={index} id={id}
                                              title={title} img={img}
                                             artist = {artist} duration = {duration}
                                             album = {album}

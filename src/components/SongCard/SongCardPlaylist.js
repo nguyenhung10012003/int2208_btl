@@ -1,18 +1,10 @@
-import styles from './SongCard.module.scss';
+import styles from './SongCardPlaylist.module.scss';
+// import styles from '../../pages/Playlist/Playlist.module.scss';
+import DeleteSong from '../EditPlaylist/DeleteSong';
 import { Link } from "react-router-dom";
-import AddSongInCard from '../AddSong/AddSongInCard';
 import { useState } from 'react';
 
-function SongCard({index, id, title, img, artist, duration, album }) {
-
-    const dataSubmit = {
-        id: id,
-        name: title,
-        img: img,
-        duration: duration,
-        artist: artist,
-        album: album,
-    }
+function SongCardPlaylist({ index, id, title, img, artist, duration, album, idPlaylist, tracks }) {
 
     const [isPlaying, setPlaying] = useState(false);
 
@@ -21,7 +13,7 @@ function SongCard({index, id, title, img, artist, duration, album }) {
     }
 
     return (
-        <div className={styles['wrapper']}>
+        <div key={index} className={styles['wrapper']}>
             <div className={styles['serial']}>
                 <span className={styles['serial-index']}>{index + 1}</span>
                 <button className={styles['btn-play-music']} onClick={handlePlay}>
@@ -31,7 +23,7 @@ function SongCard({index, id, title, img, artist, duration, album }) {
             </div>
             <div className={styles['title']}>
                 <div className={styles['image-song']}>
-                    <img src={img} alt='' />
+                    <img src={img} alt='i' />
                 </div>
                 <div className={styles['des-title']}>
                     <Link to={{
@@ -43,18 +35,18 @@ function SongCard({index, id, title, img, artist, duration, album }) {
                 </div>
             </div>
             <div className={styles['album']}>
-                <span>{ }</span>
+                <Link to={`/album/${album?.id}`} className={styles['album-link']}>
+                    {album?.name}
+                </Link>
             </div>
             <div className={styles['duration']}>
-                <span> {Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây </span>
+                <span>{Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây</span>
             </div>
-            <div className={styles['add-song']}>
-                <div className={styles['wrapper-form-add-song']}>
-                    <AddSongInCard data={dataSubmit}/>
-                </div>
+            <div className={styles['delete']}>
+                <DeleteSong index={index} id={idPlaylist} tracks={tracks} />
             </div>
         </div>
     )
 }
 
-export default SongCard;
+export default SongCardPlaylist;

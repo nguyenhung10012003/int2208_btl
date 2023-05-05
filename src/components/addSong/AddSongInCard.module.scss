@@ -8,6 +8,7 @@
         float: left;
         font-size: 1.6rem;
         color:#c8c4b9;
+        margin-top: 4px;
         margin-right: 32px;
         &:hover {
             transform: scale(1.1, 1.1);
@@ -22,10 +23,10 @@
 
 }
 
-.wrapper-form {
+.wrapper-form-in-card {
     position: absolute;
-    top: 0;
-    left: 80%;
+    bottom: 0;
+    right: 100%;
     width: 240px;
     height: auto;
     background-color: #282828;
@@ -68,33 +69,4 @@
     width: 100%;
     color: #fff;
     text-align: left;
-}
-
-.wrapper-form-in-card {
-    position: absolute;
-    bottom: 0;
-    right: 100%;
-    width: 240px;
-    height: auto;
-    background-color: #282828;
-    border-radius: 5px;
-
-    h4 {
-        position: relative;
-        color: #b3b3b3;
-        text-align: center;
-        font-size: 1.2rem;
-        margin: 8px 0;
-    }
-
-    h4::after {
-        position: absolute;
-        content: "";
-        height: 1px;
-        width: 100%;
-        bottom: -8px;
-        left: 0;
-        right: 0;
-        background-color: #b3b3b3;
-    }
 }

@@ -1,6 +1,6 @@
-import styles from '../Playlist.module.scss';
+import styles from '../../pages/Playlist/Playlist.module.scss';
 import { useNavigate } from "react-router-dom";
-import playlistApi from "../../../api/PlaylistApi";
+import playlistApi from "../../api/PlaylistApi";
 
 function DeletePlaylist({data}) {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ function DeletePlaylist({data}) {
         playlistApi.deletePlaylist(data.id);
 
         navigate(`/library`);
-        window.location.reload();
+        // window.location.reload();
     }
 
     return (
