@@ -63,7 +63,7 @@ class PlaylistController {
 
     // get all playlist by user_id
     async library(req, res) {
-      Playlist.find({})
+      Playlist.find({user_id: req.params.user})
       .then((playlist) => {
         playlist = playlist.map(playlist => playlist.toObject())
         res.send(playlist);

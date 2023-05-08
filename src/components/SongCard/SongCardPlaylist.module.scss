@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     position: relative;
-    color: #b3b3b3;
+    color:#b3b3b3;
     height: auto;
     padding: 12px 0;
 
@@ -16,7 +16,7 @@
         width: 40px;
         margin-left: 20px;
     }
-
+    
     &:hover .serial-index {
         display: none;
     }
@@ -33,7 +33,7 @@
         flex: 1;
         display: flex;
         align-items: center;
-
+         
         .image-song img {
             width: 40px;
             height: 40px;
@@ -42,13 +42,11 @@
             border-radius: 1px;
         }
 
-        .infor-song,
+        .infor-song, 
         .profile-artist {
             display: block;
-            text-decoration: none;
+            text-decoration:none;
         }
-
-
 
         .infor-song {
             font-size: 1.0rem;
@@ -71,30 +69,54 @@
         }
 
     }
-
+    
     .album {
         display: flex;
         align-items: center;
         width: 30%;
-    }
 
+        .album-link {
+            text-decoration: none;
+            color: #b3b3b3;
+        
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+    
     .duration {
+        width: 10%;
         display: flex;
         align-items: center;
-        width: 10%;
         margin-right: 20px;
         justify-content: flex-end;
     }
 
-    .add-song {
+    .delete {
         width: 5%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+
+        .form-delete {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn-delete {
+            color: #b3b3b3
+        }
     }
 }
 
-.wrapper-form-add-song {
+.btn-delete {
     display: none;
 }
 
-.wrapper:hover .wrapper-form-add-song {
+.wrapper:hover .btn-delete {
     display: block;
 }

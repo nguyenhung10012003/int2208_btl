@@ -1,7 +1,7 @@
 import styles from './Sidebar.module.scss'
 import { HomeIcon, SearchIcon, LikeIcon, LibraryIcon, AddIcon } from '../../components/IconBox';
 import {Link} from "react-router-dom";
-import CreateNewPlaylist from '../../../../pages/Playlist/CreateNewPlaylist';
+import CreateNewPlaylist from '../../../CreateNewPlaylist';
 import { useState } from 'react';
 
 const HOST = 'http://localhost:3000';
