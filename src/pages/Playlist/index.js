@@ -18,13 +18,19 @@ function Playlist() {
 
     const params = useParams();
     const [isDisEdit, setIsDisEdit] = useState(false);
+    const [isDisDelete, setIsDisDelete] = useState(false);
     const [isDisMenu, setIsDisMenu] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
 
     const handleClick = () => {
         setIsDisEdit(!isDisEdit);
-
+        setIsDisMenu(false);
     };
+
+    const handleClickDelete = () => {
+        setIsDisDelete(!isDisDelete);
+        setIsDisMenu(false);
+    }
 
     const handlePlay = () => {
         setIsPlaying(!isPlaying);
@@ -88,18 +94,25 @@ function Playlist() {
                             <div className={styles['options-menu']}>
                                 <ul className={styles['options-list']}>
                                     <li className={styles['options']}>
-                                        <button onClick={handleClick}>Edit details</button>
-                                        {isDisEdit &&
-                                            <div>
-                                                <div onClick={handleClick} className={styles['hidden_background']}></div>
-                                                <EditDetails onClick={handleClick} data={data} />
-                                            </div>
-                                        }
+                                        <button className={styles['btn-options']} onClick={handleClick}>Edit details</button>
+
                                     </li>
                                     <li className={styles['options']}>
-                                        <DeletePlaylist data={data} />
+                                        <button className={styles['btn-options']} onClick={handleClickDelete}>Delete</button>
                                     </li>
                                 </ul>
+                            </div>
+                        }
+                        {isDisEdit &&
+                            <div>
+                                <div onClick={handleClick} className={styles['hidden_background']}></div>
+                                <EditDetails onClick={handleClick} data={data} />
+                            </div>
+                        }
+                        {isDisDelete &&
+                            <div>
+                                <div onClick={handleClickDelete} className={styles['hidden_background']}></div>
+                                <DeletePlaylist onClick={handleClickDelete} data={data} />
                             </div>
                         }
                     </div>
@@ -131,9 +144,9 @@ function Playlist() {
                             let duration = item.duration;
                             return (
                                 <SongCardPlaylist key={index} index={index} id={id}
-                                title={title} img={img}
-                               artist = {artist} duration = {duration}
-                               album = {album} idPlaylist={data.id} tracks={data.tracks}/>
+                                    title={title} img={img}
+                                    artist={artist} duration={duration}
+                                    album={album} idPlaylist={data.id} tracks={data.tracks} />
                             )
                         })}
                     </div>
