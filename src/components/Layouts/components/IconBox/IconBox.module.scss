@@ -15,11 +15,15 @@
     border-radius: 50%;
     background-color: var(--sidebar-popup-bg);
     color: #fff;
+    &:hover {
+        background-color: var(--content-bg);
+    }
 }
 
 .large {
     font-size: 30px;
 }
+
 
 .list {
     position: relative;

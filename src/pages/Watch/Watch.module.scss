@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.image-wrapper {
+  display: flex;
+  width: 50%;
+  aspect-ratio: 1/1;
+  margin: 50px;
+
+}
+
+.thumb {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.board {
+  display: flex;
+  width: 50%;
+}

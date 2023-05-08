@@ -115,6 +115,7 @@ function Album() {
                                              title={title} img={img}
                                             artist = {artist} duration = {duration}
                                             album = {album}
+                                             key={index}
                                    />
                                 )
                             })

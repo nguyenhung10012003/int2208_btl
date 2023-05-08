@@ -8,6 +8,7 @@ const user = new Schema({
     email: { type: String, default: '' },
     password: { type: String, default: '' },
     likeSong: {type: Array, default: [] },
+    avatar: {type: String, default: ''},
     create: { type: Date, default: Date.now },
                         });
 

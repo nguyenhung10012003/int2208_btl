@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.board-nav {
+  flex-direction: row;
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.title {
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  font-size: larger;
+  padding: 10px 0;
+  transition: 0.5s;
+  &:hover {
+    background-color: var(--alpha-bg);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 2px;
+  height: 60vh;
+}

@@ -20,6 +20,16 @@ class SongApi {
         const url = `/song/artist/${params}`;
         return axiosClient.get(url);
     }
+
+    getComment = (params) => {
+        const url = `song/comment/${params}`;
+        return axiosClient.get(url);
+    }
+
+    postComment = (params, data) => {
+        const url = `song/comment/new`;
+        return axiosClient.post(url, data);
+    }
 }
 
 export default new SongApi();
