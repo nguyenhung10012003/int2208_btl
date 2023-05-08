@@ -24,7 +24,7 @@ function FormLogin() {
             if (res === 0) {
                 setShowMess(true);
             } else {
-                handleLogin(data);
+                handleLogin(res);
                 navigate('/');
             }
         })

@@ -10,12 +10,6 @@ function Playbar() {
 
     const {listTrack, nowSong, setNowSong} = usePlayer();
     const [src, setSrc] = useState('');
-    const [show, setShow] = useState(false);
-    
-    useEffect(() => {
-        if (listTrack.length > 0) setShow(true);
-        else setShow(false);
-    }, [listTrack.length]);
 
     useEffect(() => {
         //update when change current song
@@ -51,8 +45,7 @@ function Playbar() {
     }
 
     return (
-        <>
-            {show && <div className={styles['wrapper']}>
+        <div className={styles['wrapper']}>
                 <ControlLeft title={listTrack[nowSong].title || ''}
                              artistNames={listTrack[nowSong].artistsNames || ''}
                              thumbnail={listTrack[nowSong].thumbnail || ''}
@@ -62,8 +55,8 @@ function Playbar() {
                         prevSong={prevSong}
                 />
                 <ControlRight songId={listTrack[nowSong].encodeId}/>
-            </div>}
-        </>
+            </div>
+
     );
 }
 

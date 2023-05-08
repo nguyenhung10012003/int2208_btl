@@ -1,6 +1,6 @@
 import styles from './IconBox.module.scss';
 import {BiSearch, BiLibrary, BiPauseCircle, BiSkipNext, BiSkipPrevious, BiPlayCircle, BiShuffle} from 'react-icons/bi';
-import {BsFillPersonFill, BsCaretUp, BsCaretDown, BsRepeat, BsRepeat1} from 'react-icons/bs'
+import {BsFillPersonFill, BsCaretUp, BsCaretDown, BsRepeat, BsRepeat1, BsSend} from 'react-icons/bs'
 import {AiFillHome, AiOutlineHome, AiFillHeart, AiOutlineSetting, AiOutlineHeart} from 'react-icons/ai';
 import {MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop} from 'react-icons/md';
 import {GiMicrophone} from 'react-icons/gi';
@@ -13,6 +13,7 @@ import {Link} from 'react-router-dom';
 const around = `${styles['wrapper']} ${styles['around']}`;
 const aroundButton = `${styles['wrapper']} ${styles['around']} ${styles['list']}`;
 const large = `${styles['wrapper']} ${styles['large']}`;
+const hover = `${styles['wrapper']} ${styles['hover']}`;
 const activeColor = '#c273ed';
 
 function SearchIcon() {
@@ -23,9 +24,9 @@ function SearchIcon() {
     )
 }
 
-function UpDownIcon({isUp = true}) {
+function UpDownIcon({isUp = true, onClick}) {
     return (
-        <button className={styles['wrapper']}>
+        <button onClick={onClick} className={styles['wrapper']}>
             {isUp ? <BsCaretUp/> : <BsCaretDown/>}
         </button>
     )
@@ -55,9 +56,9 @@ function LibraryIcon() {
     );
 }
 
-function LikeIcon({liked = false}) {
+function LikeIcon({liked = false, onClick}) {
     return (
-        <button className={styles['wrapper']}>
+        <button onClick={onClick} className={styles['wrapper']}>
             {liked ? <AiFillHeart/> : <AiOutlineHeart/>}
         </button>
     );
@@ -197,8 +198,16 @@ function PauseIcon({onClick}) {
     )
 }
 
+function SendIcon({onClick}) {
+    return (
+        <button className={around} onClick={onClick}>
+            <BsSend/>
+        </button>
+    )
+}
+
 export {
     SearchIcon, HomeIcon, LibraryIcon, LikeIcon, AddIcon, NextIcon, RandomIcon,
     PreviousIcon, PlaylistIcon, ProfileIcon, PlayIcon, SettingIcon, MicroIcon, LoopIcon,
-    NextPageIcon, PrevPageIcon, PauseIcon, UpDownIcon, SpeakerIcon
+    NextPageIcon, PrevPageIcon, PauseIcon, UpDownIcon, SpeakerIcon, SendIcon
 }
