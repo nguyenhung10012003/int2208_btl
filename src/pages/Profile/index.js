@@ -2,7 +2,9 @@ import styles from './Profile.module.scss';
 import ListMusic from "../components/ListMusic/ListMusic";
 import playlistApi from '../../api/PlaylistApi';
 import profileApi from '../../api/UserApi';
+import {useAuth} from "../../hooks/AuthContext";
 import Detail from "./Details";
+import { Link, useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 
@@ -14,12 +16,15 @@ function Profile() {
       setIsDivVisible(!isDivVisible);
     };
 
+    const params = useParams();
+    const {getUser} = useAuth();
+
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchLibrary = async () => {
             try {
-                const response = await playlistApi.getAllPlaylistByUser();
+                const response = await playlistApi.getAllPlaylistByUser(getUser().email);
                 setData(response);
             } catch(err) {
                 console.log(err);
@@ -34,7 +39,7 @@ function Profile() {
     useEffect(() => {
         const fetchLibrary = async () => {
             try {
-                const response = await profileApi.getDataUser('21020342@vnu.edu.vn');
+                const response = await profileApi.getDataUser(getUser().email);
                 setDataProfile(response);
             } catch(err) {
                 console.log(err);
@@ -61,7 +66,7 @@ function Profile() {
                         <Detail/>
                     </div>
                 )}
-                <span>{data.length} ist</span>
+                <span>{data.length} list</span>
             </div>
         </div>
 
