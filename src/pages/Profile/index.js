@@ -63,7 +63,7 @@ function Profile() {
                 {isDivVisible && (
                     <div>
                         <div onClick={handleClick} className={styles['list-hidden_background']}></div>
-                        <Detail/>
+                        <Detail onClick={handleClick}/>
                     </div>
                 )}
                 <span>{data.length} list</span>
@@ -79,13 +79,13 @@ function Profile() {
             {isDivVisible && (
                 <div>
                     <div onClick={handleClick} className={styles['list-hidden_background']}></div>
-                    <Detail data={dataProfile}/>
+                    <Detail onClick={handleClick}/>
                 </div>
             )}
 
             <div className={styles['list-link']}>
                 <a href=''>Playlist công khai</a>
-                <a href=''>hiển thị tất cả</a>
+                <Link to='/library' className={styles['content-link']}>hiển thị tất cả</Link>
             </div>
 
             <div className={styles['list-container']}>

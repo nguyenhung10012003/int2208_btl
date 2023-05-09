@@ -11,6 +11,16 @@ class ProfileController {
             console.log(error);
         })
     }
+
+    // edit user
+    async editProfile(req, res) {
+        try {
+            await Profile.updateOne({_id: req.params.id}, req.body)
+            console.log('update successfully');
+        } catch(error) {
+            console.log(error);
+        }
+        }
 }
 
 module.exports = new ProfileController();

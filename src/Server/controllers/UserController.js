@@ -18,6 +18,7 @@ class UserController {
         }).catch(() => res.status(500));
     }
 
+
     changeName(req, res) {
         const _id = req.params.id;
         const newName = req.body.name;
