@@ -5,8 +5,6 @@ import playlistApi from "../../api/PlaylistApi";
 function DeleteSong({index, id, tracks}) {
     const navigate = useNavigate();
 
-    console.log(tracks);
-
     const handleSubmit = (event) => {
         event.preventDefault();
 

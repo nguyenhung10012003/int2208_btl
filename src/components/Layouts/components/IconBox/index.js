@@ -1,10 +1,10 @@
 import styles from './IconBox.module.scss';
-import {BiSearch, BiLibrary, BiPauseCircle, BiSkipNext, BiSkipPrevious, BiPlayCircle, BiShuffle} from 'react-icons/bi';
+import {BiLibrary, BiPauseCircle, BiSkipNext, BiSkipPrevious, BiPlayCircle, BiShuffle} from 'react-icons/bi';
 import {BsFillPersonFill, BsCaretUp, BsCaretDown, BsRepeat, BsRepeat1, BsSend} from 'react-icons/bs'
 import {AiFillHome, AiOutlineHome, AiFillHeart, AiOutlineSetting, AiOutlineHeart} from 'react-icons/ai';
-import {MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop} from 'react-icons/md';
+import {MdPlaylistAdd, MdNavigateBefore, MdNavigateNext} from 'react-icons/md';
 import {GiMicrophone} from 'react-icons/gi';
-import {RiPlayListLine} from 'react-icons/ri';
+import {RiPlayListLine, RiSearchLine, RiSearchFill} from 'react-icons/ri';
 import {RxSpeakerLoud, RxSpeakerOff} from 'react-icons/rx';
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
@@ -16,10 +16,10 @@ const large = `${styles['wrapper']} ${styles['large']}`;
 const hover = `${styles['wrapper']} ${styles['hover']}`;
 const activeColor = '#c273ed';
 
-function SearchIcon() {
+function SearchIcon({active}) {
     return (
         <button className={styles['wrapper']}>
-            <BiSearch/>
+            {active ? <RiSearchFill/> :<RiSearchLine/>}
         </button>
     )
 }
@@ -40,10 +40,10 @@ function SpeakerIcon({isMute = true, onClick}) {
     )
 }
 
-function HomeIcon() {
+function HomeIcon({active}) {
     return (
         <button className={styles['wrapper']}>
-            <AiFillHome/>
+            {active ? <AiFillHome/> : <AiOutlineHome/>}
         </button>
     )
 }
@@ -96,10 +96,10 @@ function PlayIcon({onClick}) {
     );
 }
 
-function RandomIcon({onClick}) {
+function RandomIcon({onClick, active}) {
     return (
         <button onClick={onClick} className={styles['wrapper']}>
-            < BiShuffle/>
+            < BiShuffle style={active && {color: activeColor}}/>
         </button>
     );
 }

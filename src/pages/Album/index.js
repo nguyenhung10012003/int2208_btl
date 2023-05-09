@@ -88,7 +88,7 @@ function Album() {
                         <div className={styles['header-duration']}>
                             <span>Duration</span>
                         </div>
-                        <div className={styles['header-addSong']}>
+                        <div className={styles['header-AddSong']}>
                         </div>
                     </div>
                     <div className={styles['content__list-song']}>

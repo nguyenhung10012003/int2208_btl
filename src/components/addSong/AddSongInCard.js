@@ -11,6 +11,8 @@ function AddSong({data}) {
     const [dataLibrary, setData] = useState([]);
 
     const [showPlaylist, setShowPlaylist] = useState(false);
+    const [confirmAdd, setConfirmAdd] = useState(false);
+    const [playlistIndex, setPlaylistIndex] = useState(-1);
 
     useEffect(() => {
         const fetchLibrary = async () => {
@@ -30,20 +32,48 @@ function AddSong({data}) {
         e.preventDefault();
     };
 
+    const handleClick = () => {
+        setConfirmAdd(false);
+    }
 
-    const handleSubmit = (dataChange, event) => {
+    const handleSubmit = (datas, event) => {
         event.preventDefault();
 
-        dataChange.tracks.push({
-            id: data.id,
-            name: data.name,
-            image: data.img,
-            artist: data.artist,
-            album: data.album,
-            duration: data.duration,
-        });
-        
-        playlistApi.addSong(dataChange._id, dataChange.tracks);
+        let dataChange = datas.data;
+        const index = datas.index;
+
+        if (dataChange.tracks.findIndex((element) => element.id === data.id) === -1) {
+
+            dataChange.tracks.push({
+                id: data.id,
+                name: data.name,
+                image: data.img,
+                artist: data.artist,
+                album: data.album,
+                duration: data.duration,
+            });
+
+            playlistApi.addSong(dataChange._id, dataChange.tracks);
+        } else {
+            if (!confirmAdd) {
+                setConfirmAdd(true);
+                setPlaylistIndex(index);
+            } else {
+                dataChange.tracks.push({
+                    id: data.id,
+                    name: data.name,
+                    image: data.img,
+                    artist: data.artist,
+                    album: data.album,
+                    duration: data.duration,
+                });
+
+                playlistApi.addSong(dataChange._id, dataChange.tracks);
+                setConfirmAdd(false);
+            }
+        }
+
+
         setShowPlaylist(false);
     }
 
@@ -61,11 +91,30 @@ function AddSong({data}) {
                     <h4>Playlists</h4>
                     {dataLibrary.map((item, index) => {
                         return (
-                            <form onSubmit={handleSubmit.bind(this, item)} key={index} className={styles['form-add-song']}>
+                            <form onSubmit={handleSubmit.bind(this, { data: item, index: index })} key={index} className={styles['form-add-song']}>
                                 <button type='submit'>{item.name}</button>
-                            </form>    
+                            </form>   
                         )
                     })}
+                </div>
+            }
+            {confirmAdd &&
+                <div>
+                    <div onClick={handleClick} className={styles['hidden_background']}></div>
+                    <div className={styles['modal']}>
+                        <h3 className={styles['title']}>Already added</h3>
+                        <p className={styles['description']}>
+                            This is already in your playlist.
+                        </p>
+                        <form onSubmit={handleSubmit.bind(this, { data: dataLibrary[playlistIndex], index: -1 })} className={styles['form-delete']} >
+                            <button onClick={handleClick} className={styles['btn-cancel']}>
+                                Cancle
+                            </button>
+                            <button type='submit' className={styles['btn-delete']}>
+                                Add
+                            </button>
+                        </form>
+                    </div>
                 </div>
             }
         </div>

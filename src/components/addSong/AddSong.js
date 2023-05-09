@@ -33,25 +33,16 @@ function AddSong({ data }) {
     };
 
     const handleClick = () => {
-        setConfirmAdd(false)
+        setConfirmAdd(false);
     }
 
-    const handleSubmit = async (datas, event) => {
+    const handleSubmit = (datas, event) => {
         event.preventDefault();
 
         let dataChange = datas.data;
         const index = datas.index;
 
-        let dataSong = {
-            id: data.id,
-            name: data.name,
-            image: data.img,
-            artist: data.artist,
-            album: data.album,
-            duration: data.duration,
-        }
-
-        if (dataChange.tracks?.findIndex((ele) => ele.id === dataSong.id) === -1) {
+        if (dataChange.tracks.findIndex((element) => element.id === data.id) === -1) {
 
             dataChange.tracks.push({
                 id: data.id,
@@ -76,7 +67,7 @@ function AddSong({ data }) {
                     album: data.album,
                     duration: data.duration,
                 });
-    
+
                 playlistApi.addSong(dataChange._id, dataChange.tracks);
                 setConfirmAdd(false);
             }
@@ -99,7 +90,7 @@ function AddSong({ data }) {
                     <h4>Playlists</h4>
                     {dataLibrary.map((item, index) => {
                         return (
-                            <form onSubmit={handleSubmit.bind(this, {data: item, index: index})} key={index} className={styles['form-add-song']}>
+                            <form onSubmit={handleSubmit.bind(this, { data: item, index: index })} key={index} className={styles['form-add-song']}>
                                 <button type='submit'>{item.name}</button>
                             </form>
                         )
@@ -114,7 +105,7 @@ function AddSong({ data }) {
                         <p className={styles['description']}>
                             This is already in your playlist.
                         </p>
-                        <form onSubmit={handleSubmit.bind(this, {data: dataLibrary[playlistIndex], index: -1})} className={styles['form-delete']} >
+                        <form onSubmit={handleSubmit.bind(this, { data: dataLibrary[playlistIndex], index: -1 })} className={styles['form-delete']} >
                             <button onClick={handleClick} className={styles['btn-cancel']}>
                                 Cancle
                             </button>
