@@ -1,6 +1,11 @@
 import axiosClient from "./AxiosClient";
 
 class UserApi {
+    getDataUser = (params) => {
+        const url = `/profile/${params}`;
+        return axiosClient.get(url);
+    }
+
     getUserById = (params) => {
         const url = `/user/${params}`;
         return axiosClient.get(url);
