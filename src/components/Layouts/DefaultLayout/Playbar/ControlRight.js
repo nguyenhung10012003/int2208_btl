@@ -4,11 +4,11 @@ import {useEffect, useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useAuth} from "../../../../hooks/AuthContext";
 import UserApi from "../../../../api/UserApi";
+import {usePlayer} from "../../../../hooks/PlayerContext";
 
 function ControlRight({songId}) {
     const {getUser} = useAuth();
-    const [isMute, setMute] = useState(false);
-    const [soundValue, setSoundValue] = useState(100);
+    const {isMute, setMute, soundValue, setSoundValue} =  usePlayer();
     const [liked, setLiked] = useState(false);
     const [slideUp, setSlideUp] = useState(false);
     const navigation = useNavigate();
@@ -54,7 +54,6 @@ function ControlRight({songId}) {
             }
             try {
                 const like = await UserApi.isLikeSong(getUser()._id, {id: songId});
-                console.log(like);
                 setLiked(!like.err);
             } catch(err) {
                 console.log(err);
@@ -66,7 +65,7 @@ function ControlRight({songId}) {
     }, [songId])
 
     useEffect(() => {
-        if (soundValue === 0) setMute(true);
+        if (soundValue == 0) setMute(true);
         else setMute(false);
     }, [soundValue]);
 
