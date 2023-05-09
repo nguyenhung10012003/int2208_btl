@@ -1,7 +1,22 @@
 import styles from './Profile.module.scss';
-import React, { useState } from 'react';
+import profileApi from '../../api/UserApi';
+import React, { useState, useEffect } from 'react';
 
 function Detail() {
+    const [dataProfile, setDataProfile] = useState([]);
+
+    useEffect(() => {
+        const fetchLibrary = async () => {
+            try {
+                const response = await profileApi.getDataUser('21020342@vnu.edu.vn');
+                setDataProfile(response);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        fetchLibrary();
+    }, [])
 
     const [isDivVisible, setIsDivVisible] = useState(false);
   
@@ -17,11 +32,11 @@ function Detail() {
                 </div>
 
                 <div className={styles['list-hidden_content-profile']}>
-                    <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong-600x600.jpg" alt ="" className={styles['list-hidden_content-img']}></img>
-                    <div className={styles['list-hidden_content-form']}>
-                        <input type="text" placeholder="Thêm tên hiển thị"  className={styles['list-hidden_content-input']}></input>
-                        <button type="button" className={styles['list-hidden_content-button']}>Lưu</button>
-                    </div>
+                    <img src={dataProfile.image} alt ="" className={styles['list-hidden_content-img']}></img>
+                    <form className={styles['list-hidden_content-form']}>
+                        <input type="text" placeholder={dataProfile.name} className={styles['list-hidden_content-input']}></input>
+                        <button type="submit" className={styles['list-hidden_content-button']}>Lưu</button>
+                    </form>
                 </div>
             </div>
         </div>

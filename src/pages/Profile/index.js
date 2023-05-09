@@ -1,7 +1,9 @@
 import styles from './Profile.module.scss';
 import ListMusic from "../components/ListMusic/ListMusic";
+import playlistApi from '../../api/PlaylistApi';
+import profileApi from '../../api/UserApi';
 import Detail from "./Details";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 function Profile() {
@@ -12,39 +14,54 @@ function Profile() {
       setIsDivVisible(!isDivVisible);
     };
 
-    const dataProfile = {
-        name: 'Name',
-        cnt : '1',
-        img :'https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong-600x600.jpg',
-    }
-    
-    const data = {
-        title: 'My playlist',
-        img: 'holder.js/100px160',
-        listSong: [
-            {name: 'Song 1', img: 'holder.js/100px160' , singer: 'Singer1', album: 'album1', duration: '3:46'},
-            {name: 'Song 2', img: 'holder.js/100px160' , singer: 'Singer2', album: 'album1', duration: '3:41'}
+    const [data, setData] = useState([]);
 
-        ]
-    };
+    useEffect(() => {
+        const fetchLibrary = async () => {
+            try {
+                const response = await playlistApi.getAllPlaylistByUser();
+                setData(response);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        fetchLibrary();
+    }, [])
+
+    const [dataProfile, setDataProfile] = useState([]);
+
+    useEffect(() => {
+        const fetchLibrary = async () => {
+            try {
+                const response = await profileApi.getDataUser('21020342@vnu.edu.vn');
+                setDataProfile(response);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+
+        fetchLibrary();
+    }, [])
+
 
     return (
     <div className={styles['profile']}>
         <div className={styles['header']}>
             <div className={styles['header-img']}>
-                <img src="https://toigingiuvedep.vn/wp-content/uploads/2021/01/hinh-anh-cute-de-thuong-600x600.jpg" alt ="" className={styles['header-img_round']}></img>
+                <img src={dataProfile.image} alt ="" className={styles['header-img_round']}></img>
             </div>
 
             <div className={styles['header-name']}>
                 <span>Hồ sơ</span>
-                <h1 onClick={handleClick} className={styles['header-name_main']}>Name</h1>
+                <h1 onClick={handleClick} className={styles['header-name_main']}>{dataProfile.name}</h1>
                 {isDivVisible && (
                     <div>
                         <div onClick={handleClick} className={styles['list-hidden_background']}></div>
                         <Detail/>
                     </div>
                 )}
-                <span>list</span>
+                <span>{data.length} ist</span>
             </div>
         </div>
 
@@ -57,7 +74,7 @@ function Profile() {
             {isDivVisible && (
                 <div>
                     <div onClick={handleClick} className={styles['list-hidden_background']}></div>
-                    <Detail/>
+                    <Detail data={dataProfile}/>
                 </div>
             )}
 
@@ -67,11 +84,7 @@ function Profile() {
             </div>
 
             <div className={styles['list-container']}>
-                <ListMusic/>
-                <ListMusic/>
-                <ListMusic/>
-                <ListMusic/>
-                <ListMusic/>
+                <ListMusic data={data}/>
             </div>
         </div>
     </div>

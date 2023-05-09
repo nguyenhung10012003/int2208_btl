@@ -21,8 +21,6 @@ function Album() {
     const [album, setData] = useState([]);
 
     const handlePlay = () => {
-        setIsPlaying(!isPlaying);
-        setListTrack(data.items);
         setNowSong(0);
     }
 
