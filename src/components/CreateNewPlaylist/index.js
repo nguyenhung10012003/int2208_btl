@@ -9,7 +9,7 @@ function CreateNewPlaylist(props) {
 
     //get user
     const {getUser} = useAuth();
-    const user = JSON.parse(getUser());
+    const user = getUser();
 
     const navigate = useNavigate();
 

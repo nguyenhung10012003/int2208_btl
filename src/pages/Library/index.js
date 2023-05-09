@@ -6,7 +6,7 @@ import playlistApi from "../../api/PlaylistApi"
 
 function Library() {
     const {getUser} = useAuth();
-    const user = JSON.parse(getUser());
+    const user = getUser();
 
     const [data, setData] = useState([]);
 

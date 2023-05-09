@@ -1,12 +1,12 @@
-import styles from './AddSongInCard.module.scss';
+import styles from './AddSong.module.scss';
 import { useEffect, useState } from 'react';
 import playlistApi from "../../api/PlaylistApi";
 import { useAuth } from '../../hooks/AuthContext';
 
+
 function AddSong({data}) {
-    // get user
     const {getUser} = useAuth();
-    const user = JSON.parse(getUser());
+    const user = getUser();
 
     const [dataLibrary, setData] = useState([]);
 
@@ -57,7 +57,7 @@ function AddSong({data}) {
                 <i className="fa-sharp fa-solid fa-plus"></i>
             </div>
             {showPlaylist &&
-                <div className={styles['wrapper-form-in-card']}>
+                <div className={styles['wrapper-form']}>
                     <h4>Playlists</h4>
                     {dataLibrary.map((item, index) => {
                         return (
