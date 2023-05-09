@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/AuthContext';
 function AddSong({data}) {
     // get user
     const {getUser} = useAuth();
-    const user = JSON.parse(getUser());
+    const user = getUser();
 
     const [dataLibrary, setData] = useState([]);
 

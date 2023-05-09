@@ -38,7 +38,7 @@ function SongCard({index, id, title, img, artist, duration, album }) {
                         pathname: `/infor-song/${id}`
                     }} className={styles['infor-song']}>{title}</Link>
                     <Link to={{
-                        pathname: "/profile-artist"
+                        pathname: `/artist/${artist?.alias}`
                     }} className={styles['profile-artist']}>{artist.name}</Link>
                 </div>
             </div>

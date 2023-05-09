@@ -55,7 +55,7 @@ function Playlist() {
 
         fetchTrack();
 
-    }, [params.id]);
+    }, [params.id, playlist]);
 
     data.user_id = playlist.user_id;
     data.id = playlist._id;

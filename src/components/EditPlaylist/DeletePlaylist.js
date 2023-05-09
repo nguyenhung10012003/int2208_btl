@@ -1,8 +1,7 @@
 // import styles from '../../pages/Playlist/Playlist.module.scss';
 import styles from './DeletePlaylist.module.scss'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import playlistApi from "../../api/PlaylistApi";
-import { useState } from 'react';
 
 function DeletePlaylist(props) {
     const navigate = useNavigate();

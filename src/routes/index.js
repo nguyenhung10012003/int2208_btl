@@ -11,6 +11,7 @@ import SignUp from '../pages/SignUp';
 import InforSong from '../pages/InforSong';
 import Album from "../pages/Album";
 import Watch from "../pages/Watch";
+import Artist from "../pages/Artist"
 
 
 const publicRoutes = [
@@ -20,6 +21,7 @@ const publicRoutes = [
     { path: '/login', component: Login, layout: null },
     { path: '/sign-up', component: SignUp, layout: null },
     { path: '/album/:albumId', component: Album},
+    { path: '/artist/:name', component: Artist},
     { path: '/watch', component: Watch}
 ];
 const privateRoutes = [

@@ -23,7 +23,7 @@ function EditDetails(props) {
                 image: dataInput.image,
             }
         )
-    }, [props.data])
+    }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,7 +36,7 @@ function EditDetails(props) {
         playlistApi.editDetails(dataInput.id, data);
 
         props.onClick(false);
-
+        
         navigate(`/playlist/${dataInput.id}`);
     }
 

@@ -65,7 +65,7 @@ function Album() {
                         <h2 className={styles['heading-text']}>{data.name}</h2>
                     </div>
                     <div className={styles['infor__description']}>
-                        <Link to='/profile-artist' className={styles['infor_link-artist']}>{data.artistName}</Link>
+                        <span className={styles['artists']}>{data.artistName}</span>
                         <span className={styles['numberOfSong']}> . {data.items.length} songs</span>
                     </div>
                 </div>
@@ -100,6 +100,7 @@ function Album() {
                                 let artist = {
                                     id: item.artists[0].id,
                                     name: item.artists[0].name,
+                                    alias: item.artists[0].alias,
                                     img: item.artists[0].thumbnailM
                                 }
                                 let duration = item.duration;
@@ -115,7 +116,6 @@ function Album() {
                                              title={title} img={img}
                                             artist = {artist} duration = {duration}
                                             album = {album}
-                                             key={index}
                                    />
                                 )
                             })

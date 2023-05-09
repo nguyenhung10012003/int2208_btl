@@ -6,7 +6,7 @@ class PlaylistController {
     async index(req, res) {
         Playlist.findById(req.params.id)
           .then((playlist) => {
-            playlist = playlist.toObject();
+            playlist = playlist?.toObject();
             res.send(playlist);
           })
           .catch((error) => {
@@ -16,8 +16,7 @@ class PlaylistController {
 
     // [post] create new playlist
     async create(req, res) {
-        const newPlaylist = new Playlist(req.body);
-        await newPlaylist.save();
+        await Playlist.create(req.body);
         console.log('create new playlist');
     }
 
@@ -29,7 +28,7 @@ class PlaylistController {
         } catch(error) {
           console.log(error);
         }
-    }
+      }
 
     // [put] add song to playlist
     async addSong(req, res) {
