@@ -1,0 +1,126 @@
+.search-banner-img {
+    background-position: center center; 
+    width: 99%; 
+    padding-left: 2px;  
+}
+
+.search-header {
+    display: flex;
+    color: white;
+    border-bottom: 2px solid rgb(63, 44, 60);
+}
+.search-header-text {
+    margin-left: 30px;
+    display: flex;
+    color: white;
+    border-right: 1px solid rgb(63, 44, 60);
+    padding-right: 20px;
+}
+
+.search-header-button {
+    color:grey;
+    display: flex;
+    justify-content:center;
+    margin-right: 40px;
+    margin-left: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 20px;
+    font-weight: 500;
+}
+.search-header-button button:not(:first-child) {
+    margin-left: 70px; /* Khoảng cách giữa các button */
+}
+
+.search-header-button :hover{
+    color: white;
+}
+.active {
+   // text-decoration: underline;
+    color: #f2efef;
+    padding-bottom: 11px;
+    border-bottom: 2px solid white;
+}
+
+.playAndPause-icon {
+    padding: 24px 32px;
+    font-size: 3.2rem;
+    line-height: 3.4rem;
+    color: #1ed760;
+    margin-right: 32px;
+
+    &:hover {
+        font-size: 3.5rem;
+        color: #1ed760;
+    }
+}
+
+.header-content {
+    padding: 0 32px;
+    display: flex;
+    position: relative;
+    color:#b3b3b3;
+    padding: 12px 0;
+    margin-bottom: 12px;
+
+    .header-serial {
+        width: 30px;
+        margin-left: 20px;
+    }   
+    
+    .header-title {
+        margin-left: 20px;
+        flex: 1;
+    }
+    
+    .header-album {
+        width: 27%;
+    }
+    
+    .header-duration {
+        width: 10%;
+        margin-right: 100px;
+        span {
+            float: right;
+        }
+    }
+
+    .header-delete {
+        width: 8%;
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: #2d2d2c;
+        bottom: 0;
+    }
+}
+.search-text1{
+    color: #f2efef;
+    margin-top: 20px;
+    padding-left: 10px;
+    margin-left: 30px;
+    margin-bottom: 10px;
+}
+.topsong {
+    margin-left: 80px;
+}
+.img-div {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 20%;
+}
+.img {
+    height: 100%;
+    width: 100%;
+}
+
+
+
+  

@@ -2,13 +2,14 @@ import styles from './SongCard.module.scss';
 import { Link } from "react-router-dom";
 import FormAddSong from '../../components/addSong/AddSong';
 
-function SongCard({index, id, title, img, artist, duration, album }) {
+function SongCardHuy({param}) {
+    var img=param.thumbnail;
+    var title=param.title;
+    var artist=param.artistsNames;
+    var duration=`${Math.floor(param.duration / 60)}:${Math.floor(param.duration % 60)}`;
+    var id=param.encodeId;
     return (
         <div className={styles['wrapper']}>
-            <div className={styles['serial']}>
-                <span>{index + 1}</span>
-                {/* <i className="fa-solid fa-play"></i> */}
-            </div>
             <div className={styles['title']}>
                 <div className={styles['image-song']}>
                     <img src={img} alt='' />
@@ -19,14 +20,14 @@ function SongCard({index, id, title, img, artist, duration, album }) {
                     }} className={styles['infor-song']}>{title}</Link>
                     <Link to={{
                         pathname: "/profile-artist"
-                    }} className={styles['profile-artist']}>{artist.name}</Link>
+                    }} className={styles['profile-artist']}>{artist}</Link>
                 </div>
             </div>
             <div className={styles['album']}>
-                <span>{album.name}</span>
+                <span>{title}</span>
             </div>
             <div className={styles['duration']}>
-                <span> {Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây </span>
+                <span> {duration}</span>
             </div>
             <div className={styles['add-song']}>
                 {/* <div className={styles['wrapper-form']}>
@@ -37,4 +38,4 @@ function SongCard({index, id, title, img, artist, duration, album }) {
     )
 }
 
-export default SongCard;
+export default SongCardHuy;
