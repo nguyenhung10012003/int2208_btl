@@ -5,6 +5,6 @@ const userController = require('../controllers/ProfileController');
 // user-name
 route.get('/:email', userController.profileName);
 // edit profile
-route.put('/profile/:id', userController.editProfile);
+route.put('/:id', userController.editProfile);
 
 module.exports = route;

@@ -6,6 +6,7 @@ function ListMusic({data}) {
         <div className={styles['list']}>
             {
                 data.map((item, index) => {
+                    if(index < 5)
                     return (
                         <Link to={{
                                 pathname: `/playlist/${item._id}`

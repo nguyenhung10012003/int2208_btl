@@ -4,7 +4,7 @@ import {useAuth} from "../../hooks/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 
-function Detail({check}) {
+function Detail(props) {
     const navigate = useNavigate();
     const {getUser} = useAuth();
     const [dataProfile, setDataProfile] = useState([]);
@@ -20,14 +20,14 @@ function Detail({check}) {
         }
 
         fetchLibrary();
-    }, [])
+    }, [dataProfile])
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        profileApi.changeName(dataProfile._id, dataProfile);
+        profileApi.editProfile(dataProfile._id, dataProfile);
 
-        check.onClick(false);
+        props.onClick(false);
 
         navigate(`/profile`);
     }
@@ -36,13 +36,12 @@ function Detail({check}) {
         setDataProfile({
           ...dataProfile,
           [event.target.name]: event.target.value,
-          [event.target.password]: event.target.value,
         });
       };
     
   
     const handleClick = () => {
-        check.onClick(false);
+        props.onClick(false);
     };
 
     return (
@@ -57,9 +56,9 @@ function Detail({check}) {
                     <img src={dataProfile.image} alt ="" className={styles['list-hidden_content-img']}></img>
                     <form onSubmit={handleSubmit} className={styles['list-hidden_content-form']}>
                         <label className={styles['list-hidden_content-label']}>Tên</label>
-                        <input type="text" value={dataProfile.name} onChange={handleChange} name='name' className={styles['list-hidden_content-input']}></input>
+                        <input type={'text'} value={dataProfile.name} onChange={handleChange} name='name' className={styles['list-hidden_content-input']}></input>
                         <label className={styles['list-hidden_content-label']}>Mật khẩu</label>
-                        <input type="password" value={dataProfile.password} onChange={handleChange} name='password' className={styles['list-hidden_content-input']}></input>
+                        <input type={'text'} value={dataProfile.password} onChange={handleChange} name='password' className={styles['list-hidden_content-input']}></input>
                         <button type="submit" className={styles['list-hidden_content-button']}>Lưu</button>
                     </form>
                 </div>

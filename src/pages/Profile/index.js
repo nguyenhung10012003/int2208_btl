@@ -79,7 +79,7 @@ function Profile() {
             {isDivVisible && (
                 <div>
                     <div onClick={handleClick} className={styles['list-hidden_background']}></div>
-                    <Detail onClick={handleClick}/>
+                    <Detail onClick={handleClick} />
                 </div>
             )}
 
