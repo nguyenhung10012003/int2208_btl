@@ -5,8 +5,8 @@
 }
 
 .header {
-    background-color: #fff;
-    background-image: linear-gradient(to top, #00b4d8, #caf0f8);
+    //background-color: #170F23;
+    background-image: linear-gradient(to top, #5d3c21, #edac7b);
     display: flex;
 }
 
@@ -45,7 +45,8 @@
 }
 
 .list {
-    background-image: linear-gradient(to top, #333d29, #7f4f24);
+    background-image: linear-gradient(to top, #121212, #472f1c);
+    //background-color: #4b3939;
     padding-bottom: 200px;
 }
 
@@ -102,7 +103,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 530px;
-    height: 340px;
+    height: 440px;
     border-radius: 10px;
     background-color: #282828;
     opacity: 1 !important;
@@ -121,6 +122,17 @@
 
 .iconXmark {
     font-size: 30px;
+    border: 1px;
+    border-color: #c7c2c2;
+}
+
+.iconXmark::before {
+    cursor: pointer;
+
+}
+
+.iconXmark:hover {
+    color: #fff;
 }
 
 .list-hidden_content-profile {
@@ -141,16 +153,19 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-left: 20px;
     margin-right: 20px;
 }
 
 .list-hidden_content-label {
     color: #fff;
     font-size: 20px;
+    margin-top: 10px;
 }
 
 .list-hidden_content-input {
     background-color: #3E3E3E;
+    color: #fff;
     height: 40px;
     width: 240px;
     padding-left: 10px;
@@ -165,7 +180,7 @@
     background-color: #fff;
     width: 95px;
     height: 50px;
-    margin: 10px 10px 0px 140px;
+    margin: 40px 10px 0px 140px;
     border-radius: 30px;
 }
 
