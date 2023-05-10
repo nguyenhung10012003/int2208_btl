@@ -6,7 +6,9 @@ import {MdPlaylistAdd, MdNavigateBefore, MdNavigateNext} from 'react-icons/md';
 import {GiMicrophone} from 'react-icons/gi';
 import {RiPlayListLine, RiSearchLine, RiSearchFill} from 'react-icons/ri';
 import {RxSpeakerLoud, RxSpeakerOff} from 'react-icons/rx';
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
+import Button from 'react-bootstrap/Button';
+import Overlay from 'react-bootstrap/Overlay';
 import {Link} from 'react-router-dom';
 
 
@@ -145,24 +147,39 @@ function SettingIcon() {
 }
 
 function ProfileIcon() {
-    const [showList, setShowList] = useState(false);
-
-    const handleToggleList = () => {
-        setShowList(!showList);
-    };
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
     return (
-        <button className={aroundButton}>
-            <BsFillPersonFill onClick={handleToggleList}/>
-            {showList && (
-                <div onClick={handleToggleList} className={styles['background-content']}>
-                    <ul className={styles['content']}>
-                        <li>Tài khoản</li>
-                        <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
-                        <li>Đăng xuất</li>
-                    </ul>
-                </div>
-            )}
-        </button>
+        <Button className={aroundButton} ref={target} onClick={() => setShow(!show)}>
+            <BsFillPersonFill/>
+            <Overlay target={target.current} show={show} placement="bottom">
+                {({
+                placement: _placement,
+                arrowProps: _arrowProps,
+                show: _show,
+                popper: _popper,
+                hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                ...props
+                }) => (
+                    <div className={styles['main-content']}
+                      {...props}
+                      style={{
+                        position: 'absolute',
+                        padding: '2px 10px',
+                        color: 'blue',
+                        borderRadius: 3,
+                        ...props.style,
+                      }}
+                    >
+                        <ul className={styles['content']}>
+                            <li><Link to='/profile' className={styles['content-link']}>Tài khoản</Link></li>
+                            <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
+                            <li><Link to='/profile' className={styles['content-link']}>Đăng xuất</Link></li>
+                        </ul>
+                    </div>
+                    )}
+                </Overlay>
+        </Button>
     );
 }
 

@@ -43,7 +43,7 @@ function SongCard({index, id, title, img, artist, duration, album }) {
                 </div>
             </div>
             <div className={styles['album']}>
-                <span>{ }</span>
+                <span>{album.name}</span>
             </div>
             <div className={styles['duration']}>
                 <span> {Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây </span>
