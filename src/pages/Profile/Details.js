@@ -8,12 +8,18 @@ function Detail() {
     const handleClick = () => {
       setIsDivVisible(!isDivVisible);
     };
+
+    const handleClosed = () => {
+        setIsDivVisible(false);
+    }
     return (
         <div>
             <div className={styles['list-hidden_content']}>
                 <div className={styles['list-hidden_content-header']}>
                     <h1>Chi tiết hồ sơ</h1>
-                    <i onClick={handleClick} className={`${styles.iconXmark} fa-sharp fa-solid fa-xmark`}></i>
+                    <button onClick={handleClosed}>
+                        <i className={`${styles.iconXmark} fa-sharp fa-solid fa-xmark`}></i>
+                    </button>
                 </div>
 
                 <div className={styles['list-hidden_content-profile']}>
