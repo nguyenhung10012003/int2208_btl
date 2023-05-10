@@ -6,9 +6,9 @@ class SearchApi {
         return await axiosClient.get(url);
     };
 
-    getResult = (params) => {
-        const url= `/search/${params.key}`;
-        return axiosClient.get(url);
+    getResult = async (params) => {
+        const url= `/search/${params}`;
+        return await axiosClient.get(url);
     }
 }
 
