@@ -23,7 +23,7 @@ function DefaultSearch({datas}) {
          {datas.items?.map((item,index) => {
             var alb={
                 id: index,
-                name: item.title,
+                name: item.album ? item.album.title : item.title,
             }
             var ars={
                 id: item.artists[0].id,

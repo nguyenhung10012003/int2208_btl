@@ -1,13 +1,12 @@
 import styles from './SongCard.module.scss';
 import { Link } from "react-router-dom";
-import FormAddSong from '../../components/addSong/AddSong';
-
 function SongCardHuy({param}) {
     var img=param.thumbnail;
     var title=param.title;
     var artist=param.artistsNames;
     var duration=`${Math.floor(param.duration / 60)}:${Math.floor(param.duration % 60)}`;
     var id=param.encodeId;
+    var album = param.album ? param.album.title : param.title;
     return (
         <div className={styles['wrapper']}>
             <div className={styles['title']}>
@@ -24,7 +23,7 @@ function SongCardHuy({param}) {
                 </div>
             </div>
             <div className={styles['album']}>
-                <span>{title}</span>
+                <span>{album}</span>
             </div>
             <div className={styles['duration']}>
                 <span> {duration}</span>
