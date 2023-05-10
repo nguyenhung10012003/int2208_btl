@@ -10,5 +10,7 @@ route.post('/sign-up', siteController.signUp);
 route.post('/login', siteController.login);
 //Album
 route.get('/album/:id', siteController.album);
+// artist
+route.get('/artist/:name', siteController.artist);
 
 module.exports = route;

@@ -29,12 +29,11 @@ function FormSignup() {
                 gender: formData.gender
             }
             signupApi.signUp(data).then(res => {
-                console.log(res);
                 if (res === 0) {
                     setMessage("Email đã được sử dụng");
                     setShowMessage(true);
                 } else {
-                    const user = {email: data.email};
+                    const user = {email: res.email, _id: res._id};
                     localStorage.setItem('user', JSON.stringify(user));
                     navigate('/');
                 }

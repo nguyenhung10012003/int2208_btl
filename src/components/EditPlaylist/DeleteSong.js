@@ -1,18 +1,18 @@
-import styles from '../Playlist.module.scss';
+import styles from '../SongCard/SongCardPlaylist.module.scss';
 import { useNavigate } from "react-router-dom";
-import playlistApi from "../../../api/PlaylistApi";
+import playlistApi from "../../api/PlaylistApi";
 
-function DeleteSong({data}) {
+function DeleteSong({index, id, tracks}) {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        data.data.tracks.splice(data.index, 1);
+        tracks.splice(index, 1);
 
-        playlistApi.deleteSong(data.data.id, data.data.tracks);
+        playlistApi.deleteSong(id, tracks);
 
-        navigate(`/playlist/${data.data.id}`);
+        navigate(`/playlist/${id}`);
     }
 
     return (

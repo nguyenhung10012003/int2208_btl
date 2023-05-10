@@ -1,12 +1,13 @@
 import styles from './Playbar.module.scss';
 import {RandomIcon, PreviousIcon, PlayIcon, NextIcon, LoopIcon, PauseIcon} from '../../components/IconBox';
 import {useEffect, useRef, useState} from "react";
+import {usePlayer} from "../../../../hooks/PlayerContext";
 
-function Player({src, duration, nextSong, prevSong}) {
+function Player({src, duration}) {
 
-    const [isPlay, setPlay] = useState(true);
-    const [loop, setLoop] = useState(0);
-    const [isShuffle, setShuffle] = useState(false);
+    const {soundValue, isPlay, setPlay, loop,
+        prevSong, nextSong, autoNext,
+        setLoop, isShuffle, setShuffle} = usePlayer();
     const audioRef = useRef(new Audio(src));
     const intervalRef = useRef();
     const [trackProgress, setTrackProgress] = useState(0);
@@ -47,19 +48,9 @@ function Player({src, duration, nextSong, prevSong}) {
         // start progress of the audio
         startTimer();
 
-    }, [src]);
-
-    useEffect(() => {
         // Set up event listener for audio end
         audioRef.current.addEventListener('ended', () => {
-            if (loop == 2) {
-                audioRef.current.currentTime = 0;
-                audioRef.current.play();
-            } else if (loop == 1) {
-                nextSong();
-            } else {
-                setPlay(false);
-            }
+            autoNext();
         });
 
         // Clean up the event listener on unmount
@@ -68,7 +59,16 @@ function Player({src, duration, nextSong, prevSong}) {
                 setPlay(false);
             });
         };
-    }, [audioRef]);
+
+    }, [src]);
+
+    useEffect(() => {
+        audioRef.current.volume = soundValue / 100;
+    }, [soundValue])
+
+    useEffect(() => {
+        audioRef.current.loop = (loop === 2);
+    }, [loop])
 
     useEffect(() => {
         // if user press play button then we will play the currently selected music
@@ -77,7 +77,6 @@ function Player({src, duration, nextSong, prevSong}) {
             startTimer();
         } else {
             // if user press pause button then we will pause the currently playing music
-            console.log("pause");
             audioRef.current.pause();
             clearInterval(intervalRef.current);
         }
@@ -86,12 +85,13 @@ function Player({src, duration, nextSong, prevSong}) {
     const onChangeTrackProgress = (e) => {
         setTrackProgress(e.target.value);
         audioRef.current.currentTime = e.target.value;
+        audioRef.current.play();
         setPlay(true);
     };
     return (
         <div className={styles['player']}>
             <div className={styles['controler']}>
-                <RandomIcon onClick={toggleShuffle}/>
+                <RandomIcon active={isShuffle} onClick={toggleShuffle}/>
                 <PreviousIcon onClick={prevSong}/>
                 {!isPlay ? <PlayIcon onClick={togglePlay}/> : <PauseIcon onClick={togglePlay}/>}
                 <NextIcon onClick={nextSong}/>

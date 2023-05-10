@@ -1,0 +1,139 @@
+.add-song-to-playlist {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .add-playlist-icon {
+        float: left;
+        font-size: 1.6rem;
+        color:#c8c4b9;
+        margin-top: 4px;
+        margin-right: 32px;
+        &:hover {
+            transform: scale(1.1, 1.1);
+            color: var(--text-header);
+        }
+    }
+    
+    .add-playlist-icon:active + .wrapper-form {
+        display: block;
+        z-index: 1;
+    }
+
+}
+
+.wrapper-form-in-card {
+    position: absolute;
+    bottom: 0;
+    right: 100%;
+    width: 240px;
+    height: auto;
+    background-color: #282828;
+    border-radius: 5px;
+
+    h4 {
+        position: relative;
+        color: #b3b3b3;
+        text-align: center;
+        font-size: 1.2rem;
+        margin: 8px 0;
+    }
+
+    h4::after {
+        position: absolute;
+        content: "";
+        height: 1px;
+        width: 100%;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        background-color: #b3b3b3;
+    }
+}
+
+.form-add-song {
+    display: block;
+    color: #b3b3b3;
+    padding: 8px 12px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: #424242;
+        border-radius: 3px;
+        cursor: default;
+    }
+}
+
+.form-add-song button {
+    width: 100%;
+    color: #fff;
+    text-align: left;
+}
+
+
+///
+/// 
+.hidden_background {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.modal {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    color: #000;
+    padding: 30px;
+    border-radius: 5px;
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 650;
+}
+
+.description {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 1.2rem;
+    margin: 8px 0;
+}
+
+.form-delete {
+    display: flex;
+    font-size: 1.2rem;
+    justify-content: flex-end;
+
+    .btn-cancel,
+    .btn-delete {
+        height: 50px;
+        width: 120px;
+        border-radius: 50px;
+        color: #111;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 40px;
+        margin: 20px 10px 0;
+        cursor: pointer;
+        border:none;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    .btn-delete {
+        background-color: #1ed760;
+    }
+}

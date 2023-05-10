@@ -11,6 +11,10 @@ class HomeApi {
         return axiosClient.get(url);
     }
 
+    getArtist = (params) => {
+        const url = `/artist/${params}`;
+        return axiosClient.get(url);
+    }
 }
 
 export default new HomeApi();

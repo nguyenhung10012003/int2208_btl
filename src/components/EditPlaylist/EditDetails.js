@@ -1,12 +1,12 @@
 import styles from '../CreateNewPlaylist/CreateNewPlaylist.module.scss';
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import playlistApi from '../../../api/PlaylistApi'
+import { Link, useNavigate } from "react-router-dom";
+import playlistApi from '../../api/PlaylistApi'
 
 function EditDetails(props) {
+    const navigate = useNavigate();
+    
     const dataInput = props.data;
-
-    console.log(dataInput)
 
     const [formData, setFormData] = useState({
         user_id: 'user',
@@ -18,28 +18,26 @@ function EditDetails(props) {
     useEffect(() => {
         setFormData(
             {
-                user_id: dataInput.id,
                 name: dataInput.name,
                 description: dataInput.description,
                 image: dataInput.image,
             }
         )
-    }, [props.data])
+    }, [])
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const data = {
-            user_id: formData.user_id,
             name: formData.name,
             description: formData.description,
             image: formData.image,
         }
-        playlistApi.editDetails(data.user_id, data);
+        playlistApi.editDetails(dataInput.id, data);
 
         props.onClick(false);
-
-        window.location.reload();
+        
+        navigate(`/playlist/${dataInput.id}`);
     }
 
     const handleChange = (event) => {

@@ -8,7 +8,7 @@ route.post('/create', playlistController.create);
 // edit details playlist
 route.put('/editDetails/:id', playlistController.editDetails);
 // get library 
-route.get('/user/library', playlistController.library);
+route.get('/:user/library', playlistController.library);
 // add song to playlist
 route.patch('/addSong/:id', playlistController.addSong);
 // delete song

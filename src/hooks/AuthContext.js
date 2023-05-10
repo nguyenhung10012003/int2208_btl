@@ -8,7 +8,8 @@ export const AuthProvider = ({children}) => {
     );
 
     const handleLogin = (data) => {
-        const user = {email: data.email};
+        console.log(data);
+        const user = {email: data.email, id: data._id};
         localStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);
     };
@@ -19,7 +20,7 @@ export const AuthProvider = ({children}) => {
     };
 
     const getUser = () => {
-        return localStorage.getItem("user");
+        return JSON.parse(localStorage.getItem("user"));
     }
 
     return (

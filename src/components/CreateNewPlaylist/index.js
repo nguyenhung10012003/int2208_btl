@@ -1,9 +1,17 @@
 import { useState } from "react";
 import styles from './CreateNewPlaylist.module.scss'
-import { Link } from "react-router-dom";
-import playlistApi from '../../../api/PlaylistApi'
+import { Link, useNavigate } from "react-router-dom";
+import playlistApi from '../../api/PlaylistApi'
+import { useAuth } from "../../hooks/AuthContext"; 
+
 
 function CreateNewPlaylist(props) {
+
+    //get user
+    const {getUser} = useAuth();
+    const user = getUser();
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         user_id: 'user',
@@ -16,7 +24,7 @@ function CreateNewPlaylist(props) {
         event.preventDefault();
 
         const data = {
-            user_id: formData.user_id,
+            user_id: user.email,
             name: formData.name,
             description: formData.description,
             image: formData.image,
@@ -25,7 +33,7 @@ function CreateNewPlaylist(props) {
 
         props.onClick(false);
 
-        window.location.reload();
+        navigate(`/library`);
     }
 
     const handleChange = (event) => {

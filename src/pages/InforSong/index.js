@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import {Link, useParams} from 'react-router-dom'
 import styles from './InforSong.module.scss'
-import AddSong from '../../components/addSong/AddSong';
+import AddSong from '../../components/AddSong/AddSong';
 import songApi from '../../api/SongApi';
 import {useEffect, useState} from "react";
 
@@ -15,6 +15,7 @@ function InforSong() {
         artist: {
             id: '',
             name: 'singer name',
+            alias: '',
             img: 'https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png'
         },
         album: {
@@ -28,6 +29,11 @@ function InforSong() {
     const params = useParams();
 
     const [song, setData] = useState([]);
+    const [isPlaying, setPlaying] = useState(false);
+
+    const handlePlay = () => {
+        setPlaying(!isPlaying);
+    }
 
     useEffect(() => {
         const fetchTrack = async () => {
@@ -43,11 +49,12 @@ function InforSong() {
                     artist: {
                         id: resInfor.data.artists[0].id,
                         name: resInfor.data.artists[0].name,
+                        alias: resInfor.data.artists[0].alias,
                         img: resInfor.data.artists[0].thumbnailM,
                     },
                     album: {
-                        id: resInfor.data.album.encodeId,
-                        name: resInfor.data.album.title,
+                        id: resInfor.data.album?.encodeId,
+                        name: resInfor.data.album?.title,
                     },
                 });
             } catch (err) {
@@ -91,17 +98,17 @@ function InforSong() {
                    </div>
                    <div className={styles['infor__description']}>
                         <img src={data.artist.img} alt='' />
-                       <Link to='/profile-artist' className={styles['infor_link-singer']}>{data.artist.name}</Link>
+                       <Link to={`/artist/${data.artist?.alias}`} className={styles['infor_link-singer']}>{data.artist.name}</Link>
                        <span className={styles['duration-song']}> . {Math.floor(data.duration / 60)} phút {Math.floor(data.duration % 60)} giây</span>
                    </div>
                </div>
             </header>
             <div className={styles['content']}>
                <div className={styles['viewport']}>
-                   <div className={styles['playAndPause-icon']}>
-                       <i className={"fa-solid fa-circle-play"}></i>
-                       {/* <i class="fa-solid fa-circle-pause"></i>  */}
-                   </div>
+                    <div className={styles['playAndPause-icon']} onClick={handlePlay}>
+                        {!isPlaying && <i className="fa-solid fa-circle-play"></i>}
+                        {isPlaying && <i className="fa-solid fa-circle-pause"></i>}
+                    </div>
                    <AddSong data={data} />
                </div>
                <div className={styles['content-spacing']}>
@@ -119,7 +126,7 @@ function InforSong() {
                        </div>
                        <div className={styles['artist-descripton']}>
                            <h4>Artist</h4>
-                           <Link to='/profile-artist' className={styles['infor_link-singer']}>{data.artist.name}</Link>
+                           <Link to={`/artist/${data.artist?.alias}`} className={styles['infor_link-singer']}>{data.artist.name}</Link>
                        </div>
                    </div>
                </div>

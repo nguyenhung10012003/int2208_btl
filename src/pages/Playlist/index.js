@@ -1,13 +1,14 @@
 import { Link, useParams } from 'react-router-dom';
 import styles from './Playlist.module.scss'
-import Section from './Sections';
+import SongCardPlaylist from '../../components/SongCard/SongCardPlaylist';
 import playlistApi from '../../api/PlaylistApi';
-import DeletePlaylist from './EditPlaylist/DeletePlaylist';
-import EditDetails from './EditPlaylist/EditDetails';
+import DeletePlaylist from '../../components/EditPlaylist/DeletePlaylist';
+import EditDetails from '../../components/EditPlaylist/EditDetails';
 import { useState, useEffect } from 'react';
 
 function Playlist() {
     const data = {
+        user_id: 'user',
         id: '',
         name: 'My playlist',
         image: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
@@ -15,18 +16,25 @@ function Playlist() {
         tracks: [],
     };
 
-
     const params = useParams();
     const [isDisEdit, setIsDisEdit] = useState(false);
+    const [isDisDelete, setIsDisDelete] = useState(false);
     const [isDisMenu, setIsDisMenu] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const handleClick = () => {
         setIsDisEdit(!isDisEdit);
-
-        // if(isDisMenu === true) {
-        //     setIsDisMenu(false)
-        // }
+        setIsDisMenu(false);
     };
+
+    const handleClickDelete = () => {
+        setIsDisDelete(!isDisDelete);
+        setIsDisMenu(false);
+    }
+
+    const handlePlay = () => {
+        setIsPlaying(!isPlaying);
+    }
 
     const handleClickMenu = () => {
         setIsDisMenu(!isDisMenu)
@@ -47,8 +55,9 @@ function Playlist() {
 
         fetchTrack();
 
-    }, [params.id]);
+    }, [params.id, playlist]);
 
+    data.user_id = playlist.user_id;
     data.id = playlist._id;
     data.name = playlist.name;
     data.image = playlist.image;
@@ -74,30 +83,37 @@ function Playlist() {
             </header>
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
-                    <div className={styles['playAndPause-icon']}>
-                        <i className="fa-solid fa-circle-play"></i>
-                        {/* <i class="fa-solid fa-circle-pause"></i> */}
+                    <div className={styles['playAndPause-icon']} onClick={handlePlay}>
+                        {!isPlaying && <i className="fa-solid fa-circle-play"></i>}
+                        {isPlaying && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                     <div className={styles['options-playlist']}>
                         <i className={`${styles.iconDots} fa-solid fa-ellipsis`} onClick={handleClickMenu}></i>
                         {
-                            isDisMenu && 
+                            isDisMenu &&
                             <div className={styles['options-menu']}>
-                            <ul className={styles['options-list']}>
-                                <li className={styles['options']}>
-                                    <button onClick={handleClick}>Edit details</button>
-                                    {isDisEdit &&
-                                        <div>
-                                            <div onClick={handleClick} className={styles['hidden_background']}></div>
-                                            <EditDetails onClick={handleClick} data={data} />
-                                        </div>
-                                    }
-                                </li>
-                                <li className={styles['options']}>
-                                    <DeletePlaylist data={data} />
-                                </li>
-                            </ul>
-                        </div>
+                                <ul className={styles['options-list']}>
+                                    <li className={styles['options']}>
+                                        <button className={styles['btn-options']} onClick={handleClick}>Edit details</button>
+
+                                    </li>
+                                    <li className={styles['options']}>
+                                        <button className={styles['btn-options']} onClick={handleClickDelete}>Delete</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        {isDisEdit &&
+                            <div>
+                                <div onClick={handleClick} className={styles['hidden_background']}></div>
+                                <EditDetails onClick={handleClick} data={data} />
+                            </div>
+                        }
+                        {isDisDelete &&
+                            <div>
+                                <div onClick={handleClickDelete} className={styles['hidden_background']}></div>
+                                <DeletePlaylist onClick={handleClickDelete} data={data} />
+                            </div>
                         }
                     </div>
                 </div>
@@ -119,7 +135,20 @@ function Playlist() {
                         </div>
                     </div>
                     <div className={styles['content__list-song']}>
-                        <Section data={data}></Section>
+                        {data.tracks.map((item, index) => {
+                            let id = item.id;
+                            let img = item.image;
+                            let title = item.name;
+                            let artist = item.artist;
+                            let album = item.album;
+                            let duration = item.duration;
+                            return (
+                                <SongCardPlaylist key={index} index={index} id={id}
+                                    title={title} img={img}
+                                    artist={artist} duration={duration}
+                                    album={album} idPlaylist={data.id} tracks={data.tracks} />
+                            )
+                        })}
                     </div>
                 </div>
             </div>

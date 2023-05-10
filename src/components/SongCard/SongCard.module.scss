@@ -1,82 +1,100 @@
-
 .wrapper {
   display: flex;
   position: relative;
   color:#b3b3b3;
   height: auto;
-  padding: 6px 0;
-  border-bottom: 0.2px solid rgb(71, 58, 71);
+  padding: 12px 0;
 
-  &:hover {
-      background-color: #5b5b5b;
-      border-radius: 5px;
-  }
+    &:hover {
+        background-color: #5b5b5b;
+        border-radius: 5px;
+    }
 
-  .serial {
-      display: flex;
-      align-items: center;
-      width: 40px;
-      margin-left: 20px;
-  } 
+    .serial {
+        display: flex;
+        align-items: center;
+        width: 40px;
+        margin-left: 20px;
+    }
 
-  .title {
-      flex: 1;
-      display: flex;
-      align-items: center;
-       
-      .image-song img {
-          width: 40px;
-          height: 40px;
-          background-color: #fff;
-          margin-right: 16px;
-          border-radius: 1px;
-      }
+    &:hover .serial-index {
+        display: none;
+    }
 
-      .infor-song, 
-      .profile-artist {
-          display: block;
-          text-decoration:none;
-      }
+    .btn-play-music {
+        display: none;
+    }
+
+    &:hover .btn-play-music {
+        display: block;
+    }
+
+    .title {
+        flex: 1;
+        display: flex;
+        align-items: center;
+
+        .image-song img {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            margin-right: 16px;
+            border-radius: 1px;
+        }
+
+        .infor-song,
+        .profile-artist {
+            display: block;
+            text-decoration: none;
+        }
 
 
 
-      .infor-song {
-          font-size: 1.0rem;
-          margin: 0;
-          color: #b3b3b3;
+        .infor-song {
+            font-size: 1.0rem;
+            margin: 0;
+            color: #b3b3b3;
 
-          &:hover {
-              color: #fff;
-          }
-      }
+            &:hover {
+                color: #fff;
+            }
+        }
 
-      .profile-artist {
-          font-size: 0.9rem;
-          color: #b3b3b3;
+        .profile-artist {
+            font-size: 0.9rem;
+            color: #b3b3b3;
 
-          &:hover {
-              color: #fff;
-              text-decoration: underline;
-          }
-      }
+            &:hover {
+                color: #fff;
+                text-decoration: underline;
+            }
+        }
 
-  }
-  
-  .album {
-      display: flex;
-      align-items: center;
-      width: 30%;
-  }
-  
-  .duration {
-      display: flex;
-      align-items: center;
-      width: 10%;
-      margin-right: 20px;
-      justify-content: flex-end;
-  }
+    }
 
-  .add-song {
-      width: 5%;
-  }
+    .album {
+        display: flex;
+        align-items: center;
+        width: 30%;
+    }
+
+    .duration {
+        display: flex;
+        align-items: center;
+        width: 10%;
+        margin-right: 20px;
+        justify-content: flex-end;
+    }
+
+    .add-song {
+        width: 5%;
+    }
+}
+
+.wrapper-form-add-song {
+    display: none;
+}
+
+.wrapper:hover .wrapper-form-add-song {
+    display: block;
 }

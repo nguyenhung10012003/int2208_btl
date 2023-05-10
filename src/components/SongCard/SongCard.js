@@ -1,13 +1,33 @@
 import styles from './SongCard.module.scss';
 import { Link } from "react-router-dom";
-import FormAddSong from '../../components/addSong/AddSong';
+import AddSongInCard from '../AddSong/AddSongInCard';
+import { useState } from 'react';
 
 function SongCard({index, id, title, img, artist, duration, album }) {
+
+    const dataSubmit = {
+        id: id,
+        name: title,
+        img: img,
+        duration: duration,
+        artist: artist,
+        album: album,
+    }
+
+    const [isPlaying, setPlaying] = useState(false);
+
+    const handlePlay = () => {
+        setPlaying(!isPlaying);
+    }
+
     return (
         <div className={styles['wrapper']}>
             <div className={styles['serial']}>
-                <span>{index + 1}</span>
-                {/* <i className="fa-solid fa-play"></i> */}
+                <span className={styles['serial-index']}>{index + 1}</span>
+                <button className={styles['btn-play-music']} onClick={handlePlay}>
+                    {!isPlaying && <i className="fa-solid fa-play"></i>}
+                    {isPlaying && <i className="fa-solid fa-pause"></i>}
+                </button>
             </div>
             <div className={styles['title']}>
                 <div className={styles['image-song']}>
@@ -18,7 +38,7 @@ function SongCard({index, id, title, img, artist, duration, album }) {
                         pathname: `/infor-song/${id}`
                     }} className={styles['infor-song']}>{title}</Link>
                     <Link to={{
-                        pathname: "/profile-artist"
+                        pathname: `/artist/${artist?.alias}`
                     }} className={styles['profile-artist']}>{artist.name}</Link>
                 </div>
             </div>
@@ -29,9 +49,9 @@ function SongCard({index, id, title, img, artist, duration, album }) {
                 <span> {Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây </span>
             </div>
             <div className={styles['add-song']}>
-                {/* <div className={styles['wrapper-form']}>
-                    <FormAddSong data={dataSubmit} className={styles['form-add-song']} />
-                </div> */}
+                <div className={styles['wrapper-form-add-song']}>
+                    <AddSongInCard data={dataSubmit}/>
+                </div>
             </div>
         </div>
     )

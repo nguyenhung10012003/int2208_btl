@@ -5011,6 +5011,14 @@ grapheme-splitter@^1.0.4:
   resolved "https://registry.npmjs.org/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
 
+group-style-loader@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/group-style-loader/-/group-style-loader-1.0.5.tgz"
+  integrity sha512-mjZN1EMb8DdXBCBoHUlsogA8J65/bQuOqeGzp3OQBtUbk3SSufd0j6N0udSEnP0/nFK0M+6mAAiTfQXJkdTmGQ==
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.1.0"
+
 gzip-size@^6.0.0:
   version "6.0.0"
   resolved "https://registry.npmjs.org/gzip-size/-/gzip-size-6.0.0.tgz"

@@ -1,31 +1,34 @@
 import styles from './IconBox.module.scss';
-import {BiSearch, BiLibrary, BiPauseCircle, BiSkipNext, BiSkipPrevious, BiPlayCircle, BiShuffle} from 'react-icons/bi';
-import {BsFillPersonFill, BsCaretUp, BsCaretDown, BsRepeat, BsRepeat1} from 'react-icons/bs'
+import {BiLibrary, BiPauseCircle, BiSkipNext, BiSkipPrevious, BiPlayCircle, BiShuffle} from 'react-icons/bi';
+import {BsFillPersonFill, BsCaretUp, BsCaretDown, BsRepeat, BsRepeat1, BsSend} from 'react-icons/bs'
 import {AiFillHome, AiOutlineHome, AiFillHeart, AiOutlineSetting, AiOutlineHeart} from 'react-icons/ai';
-import {MdPlaylistAdd, MdNavigateBefore, MdNavigateNext, MdLoop} from 'react-icons/md';
+import {MdPlaylistAdd, MdNavigateBefore, MdNavigateNext} from 'react-icons/md';
 import {GiMicrophone} from 'react-icons/gi';
-import {RiPlayListLine} from 'react-icons/ri';
+import {RiPlayListLine, RiSearchLine, RiSearchFill} from 'react-icons/ri';
 import {RxSpeakerLoud, RxSpeakerOff} from 'react-icons/rx';
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
+import Button from 'react-bootstrap/Button';
+import Overlay from 'react-bootstrap/Overlay';
 import {Link} from 'react-router-dom';
 
 
 const around = `${styles['wrapper']} ${styles['around']}`;
 const aroundButton = `${styles['wrapper']} ${styles['around']} ${styles['list']}`;
 const large = `${styles['wrapper']} ${styles['large']}`;
+const hover = `${styles['wrapper']} ${styles['hover']}`;
 const activeColor = '#c273ed';
 
-function SearchIcon() {
+function SearchIcon({active}) {
     return (
         <button className={styles['wrapper']}>
-            <BiSearch/>
+            {active ? <RiSearchFill/> :<RiSearchLine/>}
         </button>
     )
 }
 
-function UpDownIcon({isUp = true}) {
+function UpDownIcon({isUp = true, onClick}) {
     return (
-        <button className={styles['wrapper']}>
+        <button onClick={onClick} className={styles['wrapper']}>
             {isUp ? <BsCaretUp/> : <BsCaretDown/>}
         </button>
     )
@@ -39,10 +42,10 @@ function SpeakerIcon({isMute = true, onClick}) {
     )
 }
 
-function HomeIcon() {
+function HomeIcon({active}) {
     return (
         <button className={styles['wrapper']}>
-            <AiFillHome/>
+            {active ? <AiFillHome/> : <AiOutlineHome/>}
         </button>
     )
 }
@@ -55,9 +58,9 @@ function LibraryIcon() {
     );
 }
 
-function LikeIcon({liked = false}) {
+function LikeIcon({liked = false, onClick}) {
     return (
-        <button className={styles['wrapper']}>
+        <button onClick={onClick} className={styles['wrapper']}>
             {liked ? <AiFillHeart/> : <AiOutlineHeart/>}
         </button>
     );
@@ -95,10 +98,10 @@ function PlayIcon({onClick}) {
     );
 }
 
-function RandomIcon({onClick}) {
+function RandomIcon({onClick, active}) {
     return (
         <button onClick={onClick} className={styles['wrapper']}>
-            < BiShuffle/>
+            < BiShuffle style={active && {color: activeColor}}/>
         </button>
     );
 }
@@ -144,24 +147,39 @@ function SettingIcon() {
 }
 
 function ProfileIcon() {
-    const [showList, setShowList] = useState(false);
-
-    const handleToggleList = () => {
-        setShowList(!showList);
-    };
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
     return (
-        <button className={aroundButton}>
-            <BsFillPersonFill onClick={handleToggleList}/>
-            {showList && (
-                <div onClick={handleToggleList} className={styles['background-content']}>
-                    <ul className={styles['content']}>
-                        <li>Tài khoản</li>
-                        <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
-                        <li>Đăng xuất</li>
-                    </ul>
-                </div>
-            )}
-        </button>
+        <Button className={aroundButton} ref={target} onClick={() => setShow(!show)}>
+            <BsFillPersonFill/>
+            <Overlay target={target.current} show={show} placement="bottom">
+                {({
+                placement: _placement,
+                arrowProps: _arrowProps,
+                show: _show,
+                popper: _popper,
+                hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                ...props
+                }) => (
+                    <div className={styles['main-content']}
+                      {...props}
+                      style={{
+                        position: 'absolute',
+                        padding: '2px 10px',
+                        color: 'blue',
+                        borderRadius: 3,
+                        ...props.style,
+                      }}
+                    >
+                        <ul className={styles['content']}>
+                            <li><Link to='/profile' className={styles['content-link']}>Tài khoản</Link></li>
+                            <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
+                            <li><Link to='/profile' className={styles['content-link']}>Đăng xuất</Link></li>
+                        </ul>
+                    </div>
+                    )}
+                </Overlay>
+        </Button>
     );
 }
 
@@ -197,8 +215,16 @@ function PauseIcon({onClick}) {
     )
 }
 
+function SendIcon({onClick}) {
+    return (
+        <button className={around} onClick={onClick}>
+            <BsSend/>
+        </button>
+    )
+}
+
 export {
     SearchIcon, HomeIcon, LibraryIcon, LikeIcon, AddIcon, NextIcon, RandomIcon,
     PreviousIcon, PlaylistIcon, ProfileIcon, PlayIcon, SettingIcon, MicroIcon, LoopIcon,
-    NextPageIcon, PrevPageIcon, PauseIcon, UpDownIcon, SpeakerIcon
+    NextPageIcon, PrevPageIcon, PauseIcon, UpDownIcon, SpeakerIcon, SendIcon
 }
