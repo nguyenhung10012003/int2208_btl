@@ -78,6 +78,15 @@
         width: 30%;
     }
 
+    .album-link {
+        text-decoration: none;
+        color: #b3b3b3;
+    
+        &:hover {
+            color: #fff;
+        }
+    }
+
     .duration {
         display: flex;
         align-items: center;

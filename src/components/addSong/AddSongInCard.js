@@ -45,7 +45,7 @@ function AddSong({data}) {
         if (dataChange.tracks.findIndex((element) => element.id === data.id) === -1) {
 
             dataChange.tracks.push({
-                id: data.id,
+                encodeId: data.id,
                 name: data.name,
                 image: data.img,
                 artist: data.artist,
@@ -60,7 +60,7 @@ function AddSong({data}) {
                 setPlaylistIndex(index);
             } else {
                 dataChange.tracks.push({
-                    id: data.id,
+                    encodeId: data.id,
                     name: data.name,
                     image: data.img,
                     artist: data.artist,

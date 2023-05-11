@@ -44,18 +44,12 @@ function Detail(props) {
         props.onClick(false);
     };
 
-<<<<<<< HEAD
-    const handleClosed = () => {
-        setIsDivVisible(false);
-    }
-=======
->>>>>>> dc665b2636e620b48ff7ababd858704f0bde1f42
     return (
         <div>
             <div className={styles['list-hidden_content']}>
                 <div className={styles['list-hidden_content-header']}>
                     <h1>Chi tiết hồ sơ</h1>
-                    <button onClick={handleClosed}>
+                    <button onClick={handleClick}>
                         <i className={`${styles.iconXmark} fa-sharp fa-solid fa-xmark`}></i>
                     </button>
                 </div>

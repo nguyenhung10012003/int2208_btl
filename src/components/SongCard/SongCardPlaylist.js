@@ -2,23 +2,57 @@ import styles from './SongCardPlaylist.module.scss';
 // import styles from '../../pages/Playlist/Playlist.module.scss';
 import DeleteSong from '../EditPlaylist/DeleteSong';
 import { Link } from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { usePlayer } from "../../hooks/PlayerContext";
 
-function SongCardPlaylist({ index, id, title, img, artist, duration, album, idPlaylist, tracks }) {
+function SongCardPlaylist({data, index, id, title, img, artist, duration, album, idPlaylist, tracks }) {
+
+    const {setNowSong, setPlay, setListTrack} = usePlayer();
+    const {nowSong, isPlay } = usePlayer();
 
     const [isPlaying, setPlaying] = useState(false);
+    const [iconPause, setIconPause] = useState(false);
 
-    const handlePlay = () => {
-        setPlaying(!isPlaying);
+    useEffect(() => {
+        const playSong = () => {
+            if(!isPlay) {
+                setIconPause(false);
+            }
+            if(nowSong === index && isPlay) {
+                setIconPause(true);
+            }
+            if(nowSong !== index){
+                setIconPause(false);
+            }
+        }
+        playSong();
+    }, [nowSong, isPlay]);
+
+    const handlePlaySong = () => {
+        if(!isPlay) {
+            setListTrack(data.tracks);
+            setNowSong(index);
+            setPlay(true);
+            setIconPause(true);
+        } else {
+            if(!iconPause) {
+                setNowSong(index);
+                setPlay(true);
+                setIconPause(true);
+            } else {
+                setPlay(false);
+                setIconPause(false);
+            }
+        }
     }
 
     return (
         <div key={index} className={styles['wrapper']}>
             <div className={styles['serial']}>
                 <span className={styles['serial-index']}>{index + 1}</span>
-                <button className={styles['btn-play-music']} onClick={handlePlay}>
-                    {!isPlaying && <i className="fa-solid fa-play"></i>}
-                    {isPlaying && <i className="fa-solid fa-pause"></i>}
+                <button className={styles['btn-play-music']} onClick={handlePlaySong}>
+                    {!iconPause && <i className="fa-solid fa-play"></i>}
+                    {iconPause && <i className="fa-solid fa-pause"></i>}
                 </button>
             </div>
             <div className={styles['title']}>

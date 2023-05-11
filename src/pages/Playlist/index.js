@@ -5,6 +5,8 @@ import playlistApi from '../../api/PlaylistApi';
 import DeletePlaylist from '../../components/EditPlaylist/DeletePlaylist';
 import EditDetails from '../../components/EditPlaylist/EditDetails';
 import { useState, useEffect } from 'react';
+import { usePlayer } from "../../hooks/PlayerContext";
+
 
 function Playlist() {
     const data = {
@@ -22,6 +24,9 @@ function Playlist() {
     const [isDisMenu, setIsDisMenu] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
 
+    const { setListTrack, setNowSong, setPlay } = usePlayer();
+    const {nowSong, isPlay } = usePlayer();
+
     const handleClick = () => {
         setIsDisEdit(!isDisEdit);
         setIsDisMenu(false);
@@ -33,13 +38,20 @@ function Playlist() {
     }
 
     const handlePlay = () => {
-        setIsPlaying(!isPlaying);
+        if(!isPlay) {
+            setPlay(true);
+            if(nowSong === -1 ) {
+                setListTrack(data.tracks);
+                setNowSong(0);
+            }
+        } else {
+            setPlay(false)
+        }
     }
 
     const handleClickMenu = () => {
         setIsDisMenu(!isDisMenu)
     }
-
 
     const [playlist, setData] = useState([]);
 
@@ -54,8 +66,12 @@ function Playlist() {
         };
 
         fetchTrack();
-
+        
     }, [params.id, playlist]);
+
+    useEffect(() => {
+        setPlay(false);
+    }, []);
 
     data.user_id = playlist.user_id;
     data.id = playlist._id;
@@ -84,8 +100,8 @@ function Playlist() {
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
                     <div className={styles['playAndPause-icon']} onClick={handlePlay}>
-                        {!isPlaying && <i className="fa-solid fa-circle-play"></i>}
-                        {isPlaying && <i className="fa-solid fa-circle-pause"></i>}
+                        {!isPlay && <i className="fa-solid fa-circle-play"></i>}
+                        {isPlay && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                     <div className={styles['options-playlist']}>
                         <i className={`${styles.iconDots} fa-solid fa-ellipsis`} onClick={handleClickMenu}></i>
@@ -136,14 +152,14 @@ function Playlist() {
                     </div>
                     <div className={styles['content__list-song']}>
                         {data.tracks.map((item, index) => {
-                            let id = item.id;
-                            let img = item.image;
-                            let title = item.name;
+                            let id = item.encodeId;
+                            let img = item.thumbnail;
+                            let title = item.title;
                             let artist = item.artist;
                             let album = item.album;
                             let duration = item.duration;
                             return (
-                                <SongCardPlaylist key={index} index={index} id={id}
+                                <SongCardPlaylist data={data} key={index} index={index} id={id}
                                     title={title} img={img}
                                     artist={artist} duration={duration}
                                     album={album} idPlaylist={data.id} tracks={data.tracks} />

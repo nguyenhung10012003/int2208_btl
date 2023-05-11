@@ -1,9 +1,13 @@
 import styles from './SongCard.module.scss';
 import { Link } from "react-router-dom";
 import AddSongInCard from '../AddSong/AddSongInCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { usePlayer } from "../../hooks/PlayerContext";
 
-function SongCard({index, id, title, img, artist, duration, album }) {
+function SongCard({data, index, id, title, img, artist, duration, album }) {
+
+    const {setNowSong, setPlay, setListTrack} = usePlayer();
+    const {nowSong, isPlay } = usePlayer();
 
     const dataSubmit = {
         id: id,
@@ -14,19 +18,48 @@ function SongCard({index, id, title, img, artist, duration, album }) {
         album: album,
     }
 
-    const [isPlaying, setPlaying] = useState(false);
+    const [iconPause, setIconPause] = useState(false);
 
-    const handlePlay = () => {
-        setPlaying(!isPlaying);
+    useEffect(() => {
+        const playSong = () => {
+            if(!isPlay) {
+                setIconPause(false);
+            }
+            if(nowSong === index && isPlay) {
+                setIconPause(true);
+            }
+            if(nowSong !== index){
+                setIconPause(false);
+            }
+        }
+        playSong();
+    }, [nowSong, isPlay]);
+
+    const handlePlaySong = () => {
+        if(!isPlay) {
+            setListTrack(data.items);
+            setNowSong(index);
+            setPlay(true);
+            setIconPause(true);
+        } else {
+            if(!iconPause) {
+                setNowSong(index);
+                setPlay(true);
+                setIconPause(true);
+            } else {
+                setPlay(false);
+                setIconPause(false);
+            }
+        }
     }
 
     return (
         <div className={styles['wrapper']}>
             <div className={styles['serial']}>
                 <span className={styles['serial-index']}>{index + 1}</span>
-                <button className={styles['btn-play-music']} onClick={handlePlay}>
-                    {!isPlaying && <i className="fa-solid fa-play"></i>}
-                    {isPlaying && <i className="fa-solid fa-pause"></i>}
+                <button className={styles['btn-play-music']} onClick={handlePlaySong}>
+                    {!iconPause && <i className="fa-solid fa-play"></i>}
+                    {iconPause && <i className="fa-solid fa-pause"></i>}
                 </button>
             </div>
             <div className={styles['title']}>
@@ -43,7 +76,9 @@ function SongCard({index, id, title, img, artist, duration, album }) {
                 </div>
             </div>
             <div className={styles['album']}>
-                <span>{album.name}</span>
+                <Link to={`/album/${album?.id}`} className={styles['album-link']}>
+                    {album?.name}
+                </Link>
             </div>
             <div className={styles['duration']}>
                 <span> {Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây </span>

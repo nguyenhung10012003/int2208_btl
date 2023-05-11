@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import styles from './Album.module.scss'
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import albumApi from '../../api/AlbumApi';
-import {usePlayer} from "../../hooks/PlayerContext";
+import { usePlayer } from "../../hooks/PlayerContext";
 import SongCard from "../../components/SongCard/SongCard"
 
 function Album() {
@@ -12,17 +12,30 @@ function Album() {
         artistName: 'unknown',
         items: [],
     };
-    const {setListTrack, setNowSong} = usePlayer();
+    const { setListTrack, setNowSong, setPlay } = usePlayer();
+    const { isPlay } = usePlayer();
 
     const params = useParams();
 
-    const [isPlaying, setIsPlaying] = useState(false);
-
     const [album, setData] = useState([]);
+    // const [iconPause, setIconPause] = useState(false);
 
-    const handlePlay = () => {
-        setNowSong(0);
+    const handlePlayAlbum = () => {
+        if(!isPlay) {
+            setPlay(true);
+            setListTrack(data.items);
+        } else {
+            setPlay(false)
+        }
     }
+
+    // useEffect(() => {
+    //     if(!isPlay) {
+    //         setIconPause(false);
+    //     } else {
+    //         setIconPause(true);
+    //     }
+    // }, [isPlay])
 
     useEffect(() => {
         const fetchTrack = async () => {
@@ -35,14 +48,14 @@ function Album() {
                     artistsNames: response.data.artistsNames,
                     items: response.data.song.items,
                 });
-               
+
             } catch (err) {
                 console.log(err);
             }
         };
-
         fetchTrack();
-        
+        setNowSong(0);
+        setPlay(false);
     }, []);
 
     // changeData
@@ -70,9 +83,9 @@ function Album() {
             </header>
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
-                    <div className={styles['playAndPause-icon']} onClick={handlePlay}>
-                        {!isPlaying && <i className="fa-solid fa-circle-play"></i>}
-                        {isPlaying && <i className="fa-solid fa-circle-pause"></i>}
+                    <div className={styles['playAndPause-icon']} onClick={handlePlayAlbum}>
+                        {!isPlay && <i className="fa-solid fa-circle-play"></i>}
+                        {isPlay && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                 </div>
                 <div className={styles['content-spacing']}>
@@ -83,10 +96,13 @@ function Album() {
                         <div className={styles['header-title']}>
                             <span>Title</span>
                         </div>
+                        <div className={styles['header-album']}>
+                            <span>Album</span>
+                        </div>
                         <div className={styles['header-duration']}>
                             <span>Duration</span>
                         </div>
-                        <div className={styles['header-AddSong']}>
+                        <div className={styles['header-addSong']}>
                         </div>
                     </div>
                     <div className={styles['content__list-song']}>
@@ -96,25 +112,25 @@ function Album() {
                                 let id = item.encodeId;
                                 let img = item.thumbnailM;
                                 let artist = {
-                                    id: item.artists[0].id,
-                                    name: item.artists[0].name,
-                                    alias: item.artists[0].alias,
-                                    img: item.artists[0].thumbnailM
+                                    id: item.artists?.[0].id,
+                                    name: item.artists?.[0].name,
+                                    alias: item.artists?.[0].alias,
+                                    img: item.artists?.[0].thumbnailM
                                 }
                                 let duration = item.duration;
                                 let album = {};
-                                if(item.hasOwnProperty('album')) {
-                                    album =  {
+                                if (item.hasOwnProperty('album')) {
+                                    album = {
                                         id: item.album.encodeId === undefined ? '' : item.album.encodeId,
                                         name: item.album.title,
                                     }
                                 }
-                                return (                 
-                                   <SongCard key={index} index={index} id={id}
-                                             title={title} img={img}
-                                            artist = {artist} duration = {duration}
-                                            album = {album}
-                                   />
+                                return (
+                                    <SongCard data={data} key={index} index={index} id={id}
+                                        title={title} img={img}
+                                        artist={artist} duration={duration}
+                                        album={album}
+                                    />
                                 )
                             })
                         }
@@ -122,7 +138,7 @@ function Album() {
                 </div>
             </div>
         </div>
-        );
+    );
 }
 
 export default Album;

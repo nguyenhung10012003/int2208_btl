@@ -42,12 +42,13 @@ function AddSong({ data }) {
         let dataChange = datas.data;
         const index = datas.index;
 
-        if (dataChange.tracks.findIndex((element) => element.id === data.id) === -1) {
+        if (dataChange.tracks.findIndex((element) => element.encodeId === data.id) === -1) {
 
             dataChange.tracks.push({
-                id: data.id,
-                name: data.name,
-                image: data.img,
+                encodeId: data.id,
+                title: data.name,
+                thumbnail: data.img,
+                artistsNames: data.artistsNames,
                 artist: data.artist,
                 album: data.album,
                 duration: data.duration,
@@ -60,9 +61,10 @@ function AddSong({ data }) {
                 setPlaylistIndex(index);
             } else {
                 dataChange.tracks.push({
-                    id: data.id,
-                    name: data.name,
-                    image: data.img,
+                    encodeId: data.id,
+                    title: data.name,
+                    thumbnail: data.img,
+                    artistsNames: data.artistsNames,
                     artist: data.artist,
                     album: data.album,
                     duration: data.duration,
