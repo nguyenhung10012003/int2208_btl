@@ -13,7 +13,7 @@ function SongCard({ data, index, id, title, img, artist, duration, album }) {
         id: id,
         name: title,
         img: img,
-        artistsNames: data.artistsNames,
+        artistsNames: data?.artistsNames,
         duration: duration,
         artist: artist,
         album: album,
