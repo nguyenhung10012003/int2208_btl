@@ -3,8 +3,7 @@ import SearchApi from "../../api/SearchApi";
 import { useLocation ,useNavigate } from 'react-router-dom';
 import ResultSearch from './ResultSearch';
 import DefaultSearch from './DefaultSearch';
-import React, { createContext, useContext, useState,useEffect } from 'react';
-import { KeyContext } from '../../components/Layouts/DefaultLayout/Header/SearchBar';
+import React, { useContext, useState,useEffect } from 'react';
 function Search() {
     const location = useLocation();
     var searchParams = new URLSearchParams(window.location.search);
@@ -14,9 +13,9 @@ function Search() {
         const fetchSearch = async () => {
             try {
               if(searchquery) {
-                console.log(`${searchquery}:searchqueery`)
                 const response = await SearchApi.getResult(searchquery);
                 setDatas(response.data);
+                console.log(datas);
             }
               else {
                 const response = await SearchApi.getSearch();

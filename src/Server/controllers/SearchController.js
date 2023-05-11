@@ -4,7 +4,6 @@ class SearchController {
 
     search(req, res) {
         const keySearch = req.params.key;
-        console.log(keySearch);
         zingMp3.search(keySearch).then((data) => {
             res.send(data);
         })

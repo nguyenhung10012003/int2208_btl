@@ -1,5 +1,6 @@
 import styles from "./ArtistCard.module.scss"
 import React from 'react';
+import { Link } from "react-router-dom";
 function ArtistCard({param, value='normal'}) {
     var imgsrc = param.thumbnail;
     var name = param.name;
@@ -11,7 +12,9 @@ function ArtistCard({param, value='normal'}) {
         </div>
         <div className="col-md-8">
           <div className={styles['card-body']}>
+          <Link to={{pathname: `/artist/${param?.alias}`}}> 
             <h2 className={styles['card-body-title']}>{name}</h2>
+            </Link>
             <h4 className={styles['card-body-text']}>
               Nghệ sĩ
             </h4>
@@ -23,9 +26,11 @@ function ArtistCard({param, value='normal'}) {
         return (
             <div className={styles['wrapper2']}>
                 <img src={imgsrc} className={styles['card-img-2']}/>
+                <Link to={{pathname: `/artist/${param?.alias}`}}> 
                 <div className={styles['card-body-2']}>
                     <p>{name}</p>
                 </div>
+                </Link>
             </div>
         )
     }

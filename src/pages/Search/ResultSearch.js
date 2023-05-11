@@ -4,13 +4,17 @@ import ListArtist from '../../components/ArtistCard/ListArtist';
 import ListVideo from '../../components/VideoCard/ListVideo';
 import ListSong from '../../components/SongCard/ListSongCard';
 import ListPlaylist from '../../components/PlaylistCard/ListPlaylist';
-import SongCardHuy from '../../components/SongCard/SongCardHuy';
+import SongCard from '../../components/SongCard/SongCard';
 import { useState,useEffect } from "react";
 
 function ResultSearch({datas})  {
   var isArtist=true;
+  var ars;
   if(datas.top) {
-  isArtist = (datas.top.objectType ==='artist');
+    isArtist = (datas.top.objectType ==='artist');
+    if (!isArtist) {
+      ars = Array.isArray(datas.top.artists) ? datas.top.artists[0] : datas.top.artists;
+    }
   }
   const [activeButton, setActiveButton] = useState('all');
     const handleButtonClick = (index) => {
@@ -32,8 +36,8 @@ function ResultSearch({datas})  {
       {datas.top &&  (activeButton==='all') && isArtist && <ArtistCard param={datas.top} value='top'/>}
       {datas.top &&  !isArtist &&  (activeButton==='all') &&
       <div className={styles['topsong']}>
-      <SongCardHuy param={datas.top}/>
-      </div>}
+      <SongCard index={null} id={datas.top.encodeId} title={datas.top.title} img={datas.top.thumbnail} artist={ars} duration={datas.top.duration} album={''}/>
+      </div>} 
 
       
       {!datas.artists && !datas.videos && !datas.songs && !datas.playlists && (activeButton==='all') &&

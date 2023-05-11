@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ListPlaylist.module.scss";
-import PlaylistCard from "./PlaylistCard";
+import Postcard from "../Postcards/Postcard";
 function ListPlaylist({params}) {
     return (
         <div className={styles['wrapper']}>
@@ -10,11 +10,13 @@ function ListPlaylist({params}) {
             <div className={styles['card']}>
             {params?.map((param,index) => {
                 return (
-                    <PlaylistCard key={index} param={param}/>
+                    <div className={styles['postcard']}>
+                    <Postcard key={index} id={param.encodeId} img={param.thumbnail} description={param.title}/>
+                    </div>
                 )
             })}
             </div>
         </div>
-    );
+    )
 }
 export default ListPlaylist;
