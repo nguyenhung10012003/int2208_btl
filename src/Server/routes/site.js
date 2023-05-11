@@ -8,6 +8,8 @@ route.get('/', siteController.index);
 route.post('/sign-up', siteController.signUp);
 //Login
 route.post('/login', siteController.login);
+//Login
+//route.post('/logout', siteController.logout);
 //Album
 route.get('/album/:id', siteController.album);
 // artist

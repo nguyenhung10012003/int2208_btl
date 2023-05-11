@@ -11,9 +11,18 @@ import React, { useState, useEffect } from 'react';
 function Profile() {
     
     const [isDivVisible, setIsDivVisible] = useState(false);
+    const updateDataProfile = async () => {
+        try {
+          const response = await profileApi.getDataUser(getUser().email);
+          setDataProfile(response);
+        } catch (err) {
+          console.log(err);
+        }
+      };
   
     const handleClick = () => {
       setIsDivVisible(!isDivVisible);
+      updateDataProfile();
     };
 
     const params = useParams();
@@ -79,7 +88,8 @@ function Profile() {
             {isDivVisible && (
                 <div>
                     <div onClick={handleClick} className={styles['list-hidden_background']}></div>
-                    <Detail onClick={handleClick} />
+                    <Detail onClick={handleClick}/>
+
                 </div>
             )}
 
