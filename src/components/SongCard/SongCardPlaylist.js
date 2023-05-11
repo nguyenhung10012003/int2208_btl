@@ -7,21 +7,20 @@ import { usePlayer } from "../../hooks/PlayerContext";
 
 function SongCardPlaylist({data, index, id, title, img, artist, duration, album, idPlaylist, tracks }) {
 
-    const {setNowSong, setPlay, setListTrack} = usePlayer();
-    const {nowSong, isPlay } = usePlayer();
+    const {setIdListTrack, setNowSong, setPlay, setListTrack } = usePlayer();
+    const {idListTrack, nowSong, isPlay } = usePlayer();
 
-    const [isPlaying, setPlaying] = useState(false);
     const [iconPause, setIconPause] = useState(false);
 
     useEffect(() => {
         const playSong = () => {
-            if(!isPlay) {
+             if (!isPlay) {
                 setIconPause(false);
             }
-            if(nowSong === index && isPlay) {
+            if (nowSong === index && isPlay && idListTrack === data.id) {
                 setIconPause(true);
             }
-            if(nowSong !== index){
+            if (nowSong !== index) {
                 setIconPause(false);
             }
         }
@@ -29,13 +28,14 @@ function SongCardPlaylist({data, index, id, title, img, artist, duration, album,
     }, [nowSong, isPlay]);
 
     const handlePlaySong = () => {
-        if(!isPlay) {
+        if (idListTrack !== data.id) {
             setListTrack(data.tracks);
             setNowSong(index);
+            setIdListTrack(data.id);
             setPlay(true);
             setIconPause(true);
         } else {
-            if(!iconPause) {
+            if (!iconPause) {
                 setNowSong(index);
                 setPlay(true);
                 setIconPause(true);

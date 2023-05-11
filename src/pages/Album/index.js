@@ -7,41 +7,52 @@ import SongCard from "../../components/SongCard/SongCard"
 
 function Album() {
     const data = {
+        id: '',
         name: 'Album',
         img: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
         artistName: 'unknown',
         items: [],
     };
-    const { setListTrack, setNowSong, setPlay } = usePlayer();
-    const { isPlay } = usePlayer();
+    const { setIdListTrack, setListTrack, setNowSong, setPlay } = usePlayer();
+    const { idListTrack, nowSong, isPlay } = usePlayer();
 
     const params = useParams();
 
     const [album, setData] = useState([]);
-    // const [iconPause, setIconPause] = useState(false);
+    const [iconPause, setIconPause] = useState(false);
 
     const handlePlayAlbum = () => {
-        if(!isPlay) {
-            setPlay(true);
+        if ((idListTrack !== data.id) || nowSong === -1) {
             setListTrack(data.items);
-        } else {
-            setPlay(false)
+            setNowSong(0);
+            setPlay(true);
+            setIdListTrack(params.albumId);
+        } else if (idListTrack === params.albumId) {
+            if (!isPlay) {
+                setPlay(true);
+            } else {
+                setPlay(false);
+            }
         }
+
     }
 
-    // useEffect(() => {
-    //     if(!isPlay) {
-    //         setIconPause(false);
-    //     } else {
-    //         setIconPause(true);
-    //     }
-    // }, [isPlay])
+    useEffect(() => {
+        if (idListTrack === params.albumId) {
+            if (!isPlay) {
+                setIconPause(false);
+            } else {
+                setIconPause(true);
+            }
+        }
+    }, [isPlay, idListTrack])
 
     useEffect(() => {
         const fetchTrack = async () => {
             try {
                 const response = await albumApi.getAlbum(params.albumId);
                 setData({
+                    id: response.data.encodeId,
                     name: response.data.title,
                     image: response.data.thumbnailM,
                     artists: response.data.artists,
@@ -54,11 +65,17 @@ function Album() {
             }
         };
         fetchTrack();
-        setNowSong(0);
-        setPlay(false);
-    }, []);
+
+        const setBegin = () => {
+            if (idListTrack === params.albumId && isPlay) {
+                setIconPause(true);
+            }
+        }
+        setBegin();
+    }, [params.albumId]);
 
     // changeData
+    data.id = album.id;
     data.name = album.name;
     data.img = album.image;
     data.artistName = album.artistsNames;
@@ -84,8 +101,8 @@ function Album() {
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
                     <div className={styles['playAndPause-icon']} onClick={handlePlayAlbum}>
-                        {!isPlay && <i className="fa-solid fa-circle-play"></i>}
-                        {isPlay && <i className="fa-solid fa-circle-pause"></i>}
+                        {!iconPause && <i className="fa-solid fa-circle-play"></i>}
+                        {iconPause && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                 </div>
                 <div className={styles['content-spacing']}>

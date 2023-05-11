@@ -5,6 +5,7 @@ const PlayerContext = createContext();
 export const PlayerProvider = ({children}) => {
 
     const [listTrack, setListTrack] = useState([]);
+    const [idListTrack, setIdListTrack] = useState('');
     const [nowSong, setNowSong] = useState(-1);
     const [isMute, setMute] = useState(false);
     const [soundValue, setSoundValue] = useState(100);
@@ -43,7 +44,7 @@ export const PlayerProvider = ({children}) => {
 
     return (
         <PlayerContext.Provider
-            value={{ listTrack, nowSong, setNowSong, setListTrack,
+            value={{ listTrack, nowSong, setNowSong, setListTrack, idListTrack, setIdListTrack,
                 isMute, setMute, soundValue, setSoundValue,
                 isPlay, setPlay, loop, setLoop, isShuffle, setShuffle,
                 prevSong, nextSong, autoNext

@@ -22,10 +22,11 @@ function Playlist() {
     const [isDisEdit, setIsDisEdit] = useState(false);
     const [isDisDelete, setIsDisDelete] = useState(false);
     const [isDisMenu, setIsDisMenu] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
 
-    const { setListTrack, setNowSong, setPlay } = usePlayer();
-    const {nowSong, isPlay } = usePlayer();
+    const { setIdListTrack, setListTrack, setNowSong, setPlay } = usePlayer();
+    const { idListTrack, nowSong, isPlay } = usePlayer();
+
+    const [iconPause, setIconPause] = useState(false);
 
     const handleClick = () => {
         setIsDisEdit(!isDisEdit);
@@ -38,20 +39,33 @@ function Playlist() {
     }
 
     const handlePlay = () => {
-        if(!isPlay) {
+        if ((idListTrack !== data.id) || nowSong === -1) {
+            setListTrack(data.tracks);
+            setNowSong(0);
             setPlay(true);
-            if(nowSong === -1 ) {
-                setListTrack(data.tracks);
-                setNowSong(0);
+            setIdListTrack(params.id);
+        } else if (idListTrack === params.id) {
+            if (!isPlay) {
+                setPlay(true);
+            } else {
+                setPlay(false);
             }
-        } else {
-            setPlay(false)
         }
     }
 
     const handleClickMenu = () => {
         setIsDisMenu(!isDisMenu)
     }
+
+    useEffect(() => {
+        if (idListTrack === params.id) {
+            if (!isPlay) {
+                setIconPause(false);
+            } else {
+                setIconPause(true);
+            }
+        }
+    }, [isPlay, idListTrack])
 
     const [playlist, setData] = useState([]);
 
@@ -66,12 +80,14 @@ function Playlist() {
         };
 
         fetchTrack();
-        
-    }, [params.id, playlist]);
 
-    useEffect(() => {
-        setPlay(false);
-    }, []);
+        const setBegin = () => {
+            if (idListTrack === params.id && isPlay) {
+                setIconPause(true);
+            }
+        }
+        setBegin();
+    }, [params.id, playlist]);
 
     data.user_id = playlist.user_id;
     data.id = playlist._id;
@@ -100,8 +116,8 @@ function Playlist() {
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
                     <div className={styles['playAndPause-icon']} onClick={handlePlay}>
-                        {!isPlay && <i className="fa-solid fa-circle-play"></i>}
-                        {isPlay && <i className="fa-solid fa-circle-pause"></i>}
+                        {!iconPause && <i className="fa-solid fa-circle-play"></i>}
+                        {iconPause && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                     <div className={styles['options-playlist']}>
                         <i className={`${styles.iconDots} fa-solid fa-ellipsis`} onClick={handleClickMenu}></i>

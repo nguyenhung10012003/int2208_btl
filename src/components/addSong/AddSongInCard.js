@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import playlistApi from "../../api/PlaylistApi";
 import { useAuth } from '../../hooks/AuthContext';
 
-function AddSong({data}) {
+function AddSong({ data }) {
     // get user
-    const {getUser} = useAuth();
+    const { getUser } = useAuth();
     const user = getUser();
 
     const [dataLibrary, setData] = useState([]);
@@ -19,7 +19,7 @@ function AddSong({data}) {
             try {
                 const response = await playlistApi.getAllPlaylistByUser(user.email);
                 setData(response);
-            } catch(err) {
+            } catch (err) {
                 console.log(err);
             }
         }
@@ -42,12 +42,13 @@ function AddSong({data}) {
         let dataChange = datas.data;
         const index = datas.index;
 
-        if (dataChange.tracks.findIndex((element) => element.id === data.id) === -1) {
+        if (dataChange.tracks.findIndex((element) => element.encodeId === data.id) === -1) {
 
             dataChange.tracks.push({
                 encodeId: data.id,
-                name: data.name,
-                image: data.img,
+                title: data.name,
+                thumbnail: data.img,
+                artistsNames: data.artistsNames,
                 artist: data.artist,
                 album: data.album,
                 duration: data.duration,
@@ -61,8 +62,9 @@ function AddSong({data}) {
             } else {
                 dataChange.tracks.push({
                     encodeId: data.id,
-                    name: data.name,
-                    image: data.img,
+                    title: data.name,
+                    thumbnail: data.img,
+                    artistsNames: data.artistsNames,
                     artist: data.artist,
                     album: data.album,
                     duration: data.duration,
@@ -77,8 +79,8 @@ function AddSong({data}) {
         setShowPlaylist(false);
     }
 
-    if(dataLibrary.length === 0) {
-        dataLibrary.push({name: 'NO PLAYLIST '});
+    if (dataLibrary.length === 0) {
+        dataLibrary.push({ name: 'NO PLAYLIST ' });
     }
 
     return (
@@ -93,7 +95,7 @@ function AddSong({data}) {
                         return (
                             <form onSubmit={handleSubmit.bind(this, { data: item, index: index })} key={index} className={styles['form-add-song']}>
                                 <button type='submit'>{item.name}</button>
-                            </form>   
+                            </form>
                         )
                     })}
                 </div>

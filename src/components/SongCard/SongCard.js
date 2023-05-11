@@ -4,15 +4,16 @@ import AddSongInCard from '../AddSong/AddSongInCard';
 import { useEffect, useState } from 'react';
 import { usePlayer } from "../../hooks/PlayerContext";
 
-function SongCard({data, index, id, title, img, artist, duration, album }) {
+function SongCard({ data, index, id, title, img, artist, duration, album }) {
 
-    const {setNowSong, setPlay, setListTrack} = usePlayer();
-    const {nowSong, isPlay } = usePlayer();
+    const {setIdListTrack, setNowSong, setPlay, setListTrack } = usePlayer();
+    const {idListTrack, nowSong, isPlay } = usePlayer();
 
     const dataSubmit = {
         id: id,
         name: title,
         img: img,
+        artistsNames: data.artistsNames,
         duration: duration,
         artist: artist,
         album: album,
@@ -22,13 +23,13 @@ function SongCard({data, index, id, title, img, artist, duration, album }) {
 
     useEffect(() => {
         const playSong = () => {
-            if(!isPlay) {
+            if (!isPlay) {
                 setIconPause(false);
             }
-            if(nowSong === index && isPlay) {
+            if (nowSong === index && isPlay && idListTrack === data.id) {
                 setIconPause(true);
             }
-            if(nowSong !== index){
+            if (nowSong !== index) {
                 setIconPause(false);
             }
         }
@@ -36,13 +37,14 @@ function SongCard({data, index, id, title, img, artist, duration, album }) {
     }, [nowSong, isPlay]);
 
     const handlePlaySong = () => {
-        if(!isPlay) {
+        if (idListTrack !== data.id) {
             setListTrack(data.items);
             setNowSong(index);
+            setIdListTrack(data.id);
             setPlay(true);
             setIconPause(true);
         } else {
-            if(!iconPause) {
+            if (!iconPause) {
                 setNowSong(index);
                 setPlay(true);
                 setIconPause(true);
@@ -72,7 +74,7 @@ function SongCard({data, index, id, title, img, artist, duration, album }) {
                     }} className={styles['infor-song']}>{title}</Link>
                     <Link to={{
                         pathname: `/artist/${artist?.alias}`
-                    }} className={styles['profile-artist']}>{artist.name}</Link>
+                    }} className={styles['profile-artist']}>{artist?.name}</Link>
                 </div>
             </div>
             <div className={styles['album']}>
@@ -85,7 +87,7 @@ function SongCard({data, index, id, title, img, artist, duration, album }) {
             </div>
             <div className={styles['add-song']}>
                 <div className={styles['wrapper-form-add-song']}>
-                    <AddSongInCard data={dataSubmit}/>
+                    <AddSongInCard data={dataSubmit} />
                 </div>
             </div>
         </div>
