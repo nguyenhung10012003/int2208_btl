@@ -75,16 +75,18 @@ function Detail(props) {
                 <div className={styles['list-hidden_content-profile']}>
                     <img src={dataProfile.image} alt ="" className={styles['list-hidden_content-img']}></img>
                     <form onSubmit={handleSubmit} className={styles['list-hidden_content-form']}>
-                        <label className={styles['list-hidden_content-label']}>Tên</label>
-                        <input type={'text'} value={dataProfile.name} onChange={handleChange} name='name' className={styles['list-hidden_content-input']}></input>
-                        <label className={styles['list-hidden_content-label']}>Mật khẩu</label>
-                        <input type={'text'} value={dataProfile.password} onChange={handleChange} name='password' className={styles['list-hidden_content-input']}></input>
-                        <label className={styles['list-hidden_content-label']}>Xác nhận mật khẩu</label>
-                        <input type={'text'} value={confirmPass} onChange={handleChange} name='confirmPassword' className={styles['list-hidden_content-input']}></input>
-                        {isDivVisible && (
-                            <p>sai mk</p>
-                        )}
-                        <button type="submit" onClick={checkPassword} className={styles['list-hidden_content-button']}>Lưu</button>
+                        <div className={styles['list-hidden_content-data']}>
+                            <label className={styles['list-hidden_content-label']}>Tên</label>
+                            <input type={'text'} value={dataProfile.name} onChange={handleChange} name='name' className={styles['list-hidden_content-input']}></input>
+                            <label className={styles['list-hidden_content-label']}>Mật khẩu</label>
+                            <input type={'text'} value={dataProfile.password} onChange={handleChange} name='password' className={styles['list-hidden_content-input']}></input>
+                            <label className={styles['list-hidden_content-label']}>Xác nhận mật khẩu</label>
+                            <input type={'text'} value={confirmPass} onChange={handleChange} name='confirmPassword' className={styles['list-hidden_content-input']}></input>
+                            {isDivVisible && (
+                                <p className={styles['list-hidden_content-checkPass']}>sai mk</p>
+                            )}
+                        </div>
+                    <button type="submit" onClick={checkPassword} className={styles['list-hidden_content-button']}>Lưu</button>
                     </form>
                 </div>
             </div>

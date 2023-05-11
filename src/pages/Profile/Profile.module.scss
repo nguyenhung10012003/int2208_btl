@@ -157,6 +157,10 @@
     margin-right: 20px;
 }
 
+.list-hidden_content-data {
+    height: 280px;
+}
+
 .list-hidden_content-label {
     color: #fff;
     font-size: 20px;
@@ -176,11 +180,15 @@
     border: 1px solid #bee9e8;
 }
 
+.list-hidden_content-checkPass {
+    color: red;
+}
+
 .list-hidden_content-button {
     background-color: #fff;
     width: 95px;
     height: 50px;
-    margin: 40px 10px 0px 140px;
+    margin: 0px 10px 0px 140px;
     border-radius: 30px;
 }
 
