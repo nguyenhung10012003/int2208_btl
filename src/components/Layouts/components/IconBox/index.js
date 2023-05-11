@@ -146,7 +146,14 @@ function SettingIcon() {
     );
 }
 
-function ProfileIcon() {
+function ProfileIcon() {    
+/*    const handleSubmit = (event) => {
+        event.preventDefault();
+
+            handleLogout();
+            navigate('/');
+    }*/
+
     const [show, setShow] = useState(false);
     const target = useRef(null);
     return (
@@ -174,7 +181,7 @@ function ProfileIcon() {
                         <ul className={styles['content']}>
                             <li><Link to='/profile' className={styles['content-link']}>Tài khoản</Link></li>
                             <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
-                            <li><Link to='/profile' className={styles['content-link']}>Đăng xuất</Link></li>
+                            <li><Link to='/profile' className={styles['content-link']} /*onSubmit={handleSubmit}*/>Đăng xuất</Link></li>
                         </ul>
                     </div>
                     )}

@@ -1,6 +1,7 @@
-import SongCardHuy from "./SongCardHuy";
+
 import styles from "./ListSongCard.module.scss";
 import React from "react";
+import SongCard from "./SongCard";
 
 function ListSong({params}) {
     return(
@@ -10,8 +11,13 @@ function ListSong({params}) {
                 </div>
                 <div className={styles['song']}>
                 {params?.map((param,index) => {
+                    var alb={
+                        id: index,
+                        name: param.album ? param.album.title : param.title,
+                    }
+                    var ars= Array.isArray(param.artists) ? param.artists[0] : param.artists;
                     return (
-                        <SongCardHuy key={index} param={param} />
+                        <SongCard key={index} index={index} id={param.encodeId} title={param.title} img={param.thumbnail} artist={ars} duration={param.duration} album={alb}/>
                     )
                 })}
                 </div>

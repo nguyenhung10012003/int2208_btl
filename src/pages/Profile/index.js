@@ -11,9 +11,24 @@ import React, { useState, useEffect } from 'react';
 function Profile() {
 
     const [isDivVisible, setIsDivVisible] = useState(false);
+<<<<<<< HEAD
 
     const handleClick = () => {
         setIsDivVisible(!isDivVisible);
+=======
+    const updateDataProfile = async () => {
+        try {
+          const response = await profileApi.getDataUser(getUser().email);
+          setDataProfile(response);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+  
+    const handleClick = () => {
+      setIsDivVisible(!isDivVisible);
+      updateDataProfile();
+>>>>>>> b851a9436f8ef584ca68785ef9a02cae91168c4c
     };
 
     const params = useParams();
@@ -83,9 +98,23 @@ function Profile() {
                     </div>
                 )}
 
+<<<<<<< HEAD
                 <div className={styles['list-link']}>
                     <a href=''>Playlist công khai</a>
                     <Link to='/library' className={styles['content-link']}>hiển thị tất cả</Link>
+=======
+        <div className={styles['list']}>
+            <i className={`${styles.iconDots} fa-solid fa-ellipsis`}></i>
+            <ul className={styles['list-select']}>
+                <li onClick={handleClick} className={styles['list-select_1']}>Chỉnh sửa hồ sơ</li>
+                <li className={styles['list-select_2']}>Sao chép liên kết</li>
+            </ul>
+            {isDivVisible && (
+                <div>
+                    <div onClick={handleClick} className={styles['list-hidden_background']}></div>
+                    <Detail onClick={handleClick}/>
+
+>>>>>>> b851a9436f8ef584ca68785ef9a02cae91168c4c
                 </div>
 
                 <div className={styles['list-container']}>
