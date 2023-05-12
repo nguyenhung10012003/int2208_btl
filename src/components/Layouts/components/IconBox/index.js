@@ -149,6 +149,7 @@ function SettingIcon() {
 
 function ProfileIcon() {   
     const { handleLogout } = useAuth(); 
+    const {isLoggedIn} = useAuth();
     const navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -160,36 +161,41 @@ function ProfileIcon() {
     const [show, setShow] = useState(false);
     const target = useRef(null);
     return (
-        <Button className={aroundButton} ref={target} onClick={() => setShow(!show)}>
-            <BsFillPersonFill/>
-            <Overlay target={target.current} show={show} placement="bottom">
-                {({
-                placement: _placement,
-                arrowProps: _arrowProps,
-                show: _show,
-                popper: _popper,
-                hasDoneInitialMeasure: _hasDoneInitialMeasure,
-                ...props
-                }) => (
-                    <div className={styles['main-content']}
-                      {...props}
-                      style={{
-                        position: 'absolute',
-                        padding: '2px 10px',
-                        color: 'blue',
-                        borderRadius: 3,
-                        ...props.style,
-                      }}
-                    >
-                        <ul className={styles['content']}>
-                            <li><Link to='/profile' className={styles['content-link']}>Tài khoản</Link></li>
-                            <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
-                            <li><Link to='/profile' onClick={handleSubmit} className={styles['content-link']} /*onSubmit={handleSubmit}*/>Đăng xuất</Link></li>
-                        </ul>
-                    </div>
-                    )}
-                </Overlay>
-        </Button>
+        <div>
+            <Button className={aroundButton} ref={target} onClick={() => setShow(!show)}>
+                <BsFillPersonFill/>
+                <Overlay target={target.current} show={show} placement="bottom">
+                    {({
+                    placement: _placement,
+                    arrowProps: _arrowProps,
+                    show: _show,
+                    popper: _popper,
+                    hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                    ...props
+                    }) => (
+                        <div className={styles['main-content']}
+                        {...props}
+                        style={{
+                            position: 'absolute',
+                            padding: '2px 10px',
+                            color: 'blue',
+                            borderRadius: 3,
+                            ...props.style,
+                        }}
+                        >
+                            <ul className={styles['content']}>
+                                <li><Link to='/profile' className={styles['content-link']}>Tài khoản</Link></li>
+                                <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
+                                {isLoggedIn && (
+                                <li><Link to='/' onClick={handleSubmit} className={styles['content-link']}>Đăng xuất</Link></li>
+                                )}
+                            </ul>
+                        </div>
+                        )}
+                    </Overlay>
+            </Button>
+        </div>
+        
     );
 }
 
