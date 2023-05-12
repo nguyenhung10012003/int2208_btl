@@ -1,10 +1,9 @@
-import styles from '../CreateNewPlaylist/CreateNewPlaylist.module.scss';
+import styles from './EditDetails.module.scss';
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import playlistApi from '../../api/PlaylistApi'
 
 function EditDetails(props) {
-    const navigate = useNavigate();
     
     const dataInput = props.data;
 
@@ -36,8 +35,6 @@ function EditDetails(props) {
         playlistApi.editDetails(dataInput.id, data);
 
         props.onClick(false);
-        
-        navigate(`/playlist/${dataInput.id}`);
     }
 
     const handleChange = (event) => {
@@ -73,13 +70,14 @@ function EditDetails(props) {
                     <i className="fa-solid fa-xmark"></i>
                 </Link>
             </header>
-            <body>
+            <div className={styles['body-form']}>
                 <div className={styles['image-playlist']}>
                     <img className={styles['image-create']} src={formData.image} alt='' width='160' height='160'></img>
                     <input type="file"
                         accept=".jpeg, .png, .jpg"
                         onChange={handleChangeImage}
-                        className={styles['input-image-create']} ></input>
+                        className={styles['input-image-create']} >
+                    </input>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className={styles['input-playlist']}>
@@ -96,7 +94,7 @@ function EditDetails(props) {
                     </div>
                     <button className={styles["submit"]} type="submit" >Save</button>
                 </form>
-            </body>
+            </div>
         </div>
     )
 }

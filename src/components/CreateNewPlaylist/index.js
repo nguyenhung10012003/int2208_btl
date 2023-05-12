@@ -68,7 +68,7 @@ function CreateNewPlaylist(props) {
                     <i className="fa-solid fa-xmark"></i>
                 </Link>
             </header>
-            <body>
+            <div className={styles['body-form']}>
                 <div className={styles['image-playlist']}>
                     <img className={styles['image-create']} src={formData.image} alt='' width='160' height='160'></img>
                     <input type="file"
@@ -91,7 +91,7 @@ function CreateNewPlaylist(props) {
                     </div>
                     <button className={styles["submit"]} type="submit" >Save</button>
                 </form>
-            </body>
+            </div>
         </div>
     )
 }

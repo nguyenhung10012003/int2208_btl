@@ -5,6 +5,8 @@ import playlistApi from '../../api/PlaylistApi';
 import DeletePlaylist from '../../components/EditPlaylist/DeletePlaylist';
 import EditDetails from '../../components/EditPlaylist/EditDetails';
 import { useState, useEffect } from 'react';
+import { usePlayer } from "../../hooks/PlayerContext";
+
 
 function Playlist() {
     const data = {
@@ -20,7 +22,11 @@ function Playlist() {
     const [isDisEdit, setIsDisEdit] = useState(false);
     const [isDisDelete, setIsDisDelete] = useState(false);
     const [isDisMenu, setIsDisMenu] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
+
+    const { setIdListTrack, setListTrack, setNowSong, setPlay } = usePlayer();
+    const { idListTrack, nowSong, isPlay } = usePlayer();
+
+    const [iconPause, setIconPause] = useState(false);
 
     const handleClick = () => {
         setIsDisEdit(!isDisEdit);
@@ -33,13 +39,33 @@ function Playlist() {
     }
 
     const handlePlay = () => {
-        setIsPlaying(!isPlaying);
+        if ((idListTrack !== data.id) || nowSong === -1) {
+            setListTrack(data.tracks);
+            setNowSong(0);
+            setPlay(true);
+            setIdListTrack(params.id);
+        } else if (idListTrack === params.id) {
+            if (!isPlay) {
+                setPlay(true);
+            } else {
+                setPlay(false);
+            }
+        }
     }
 
     const handleClickMenu = () => {
         setIsDisMenu(!isDisMenu)
     }
 
+    useEffect(() => {
+        if (idListTrack === params.id) {
+            if (!isPlay) {
+                setIconPause(false);
+            } else {
+                setIconPause(true);
+            }
+        }
+    }, [isPlay, idListTrack])
 
     const [playlist, setData] = useState([]);
 
@@ -55,6 +81,12 @@ function Playlist() {
 
         fetchTrack();
 
+        const setBegin = () => {
+            if (idListTrack === params.id && isPlay) {
+                setIconPause(true);
+            }
+        }
+        setBegin();
     }, [params.id, playlist]);
 
     data.user_id = playlist.user_id;
@@ -84,8 +116,8 @@ function Playlist() {
             <div className={styles['content']}>
                 <div className={styles['viewport']}>
                     <div className={styles['playAndPause-icon']} onClick={handlePlay}>
-                        {!isPlaying && <i className="fa-solid fa-circle-play"></i>}
-                        {isPlaying && <i className="fa-solid fa-circle-pause"></i>}
+                        {!iconPause && <i className="fa-solid fa-circle-play"></i>}
+                        {iconPause && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                     <div className={styles['options-playlist']}>
                         <i className={`${styles.iconDots} fa-solid fa-ellipsis`} onClick={handleClickMenu}></i>
@@ -136,14 +168,14 @@ function Playlist() {
                     </div>
                     <div className={styles['content__list-song']}>
                         {data.tracks.map((item, index) => {
-                            let id = item.id;
-                            let img = item.image;
-                            let title = item.name;
+                            let id = item.encodeId;
+                            let img = item.thumbnail;
+                            let title = item.title;
                             let artist = item.artist;
                             let album = item.album;
                             let duration = item.duration;
                             return (
-                                <SongCardPlaylist key={index} index={index} id={id}
+                                <SongCardPlaylist data={data} key={index} index={index} id={id}
                                     title={title} img={img}
                                     artist={artist} duration={duration}
                                     album={album} idPlaylist={data.id} tracks={data.tracks} />

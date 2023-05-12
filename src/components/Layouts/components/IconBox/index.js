@@ -9,7 +9,8 @@ import {RxSpeakerLoud, RxSpeakerOff} from 'react-icons/rx';
 import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Overlay from 'react-bootstrap/Overlay';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {useAuth} from "../../../../hooks/AuthContext";
 
 
 const around = `${styles['wrapper']} ${styles['around']}`;
@@ -146,13 +147,15 @@ function SettingIcon() {
     );
 }
 
-function ProfileIcon() {    
-/*    const handleSubmit = (event) => {
+function ProfileIcon() {   
+    const { handleLogout } = useAuth(); 
+    const navigate = useNavigate();
+    const handleSubmit = (event) => {
         event.preventDefault();
 
             handleLogout();
             navigate('/');
-    }*/
+    }
 
     const [show, setShow] = useState(false);
     const target = useRef(null);
@@ -181,7 +184,7 @@ function ProfileIcon() {
                         <ul className={styles['content']}>
                             <li><Link to='/profile' className={styles['content-link']}>Tài khoản</Link></li>
                             <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
-                            <li><Link to='/profile' className={styles['content-link']} /*onSubmit={handleSubmit}*/>Đăng xuất</Link></li>
+                            <li><Link to='/profile' onClick={handleSubmit} className={styles['content-link']} /*onSubmit={handleSubmit}*/>Đăng xuất</Link></li>
                         </ul>
                     </div>
                     )}

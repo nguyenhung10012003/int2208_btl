@@ -4,6 +4,8 @@ import styles from './InforSong.module.scss'
 import AddSong from '../../components/AddSong/AddSong';
 import songApi from '../../api/SongApi';
 import {useEffect, useState} from "react";
+import { usePlayer } from "../../hooks/PlayerContext";
+
 
 function InforSong() {
 
@@ -12,6 +14,7 @@ function InforSong() {
         id: '',
         name: 'Name song',
         img: 'https://play-lh.googleusercontent.com/QovZ-E3Uxm4EvjacN-Cv1LnjEv-x5SqFFB5BbhGIwXI_KorjFhEHahRZcXFC6P40Xg',
+        artistsNames: '',
         artist: {
             id: '',
             name: 'singer name',
@@ -29,10 +32,27 @@ function InforSong() {
     const params = useParams();
 
     const [song, setData] = useState([]);
-    const [isPlaying, setPlaying] = useState(false);
+    const [dataSong, setDataSong] = useState([]);
+    const [isIconPause, setIconPause] = useState(false);
+
+    const { setListTrack, setNowSong, setPlay } = usePlayer();
+    const {listTrack, nowSong, isPlay} = usePlayer();
 
     const handlePlay = () => {
-        setPlaying(!isPlaying);
+        if(listTrack[nowSong]?.encodeId !== dataSong?.encodeId || nowSong === -1) {
+            setListTrack([dataSong]);
+            setNowSong(0);
+            setPlay(true);
+            setIconPause(true);
+        } else {
+            if(!isPlay) {
+                setPlay(true);
+                setIconPause(true);
+            } else {
+                setPlay(false)
+                setIconPause(false);
+            }
+        }
     }
 
     useEffect(() => {
@@ -40,10 +60,12 @@ function InforSong() {
             try {
                 const resInfor = await songApi.getInfoSong(params.id);
                 const resLyric = await songApi.getLyric(params.id);
+                setDataSong(resInfor.data);
                 setData({
                     id: resInfor.data.encodeId,
-                    name: resInfor.data.title,
-                    image: resInfor.data.thumbnailM,
+                    title: resInfor.data.title,
+                    img: resInfor.data.thumbnailM,
+                    artistsNames: resInfor.data.artistsNames,
                     duration: resInfor.data.duration,
                     lyrics: resLyric.data.sentences,
                     artist: {
@@ -61,14 +83,31 @@ function InforSong() {
                 console.log(err);
             }
         };
+        
         fetchTrack();
-    
     }, [params.id]);
+
+    useEffect(() => {
+        const playSong = () => {
+            if(!isPlay) {
+                setIconPause(false);
+            }
+            if(listTrack[nowSong]?.encodeId === dataSong.encodeId && isPlay) {
+                setIconPause(true);
+            }
+            if(nowSong === -1) {
+                setIconPause(false);
+            }
+        }
+        
+        playSong();
+    }, [isPlay]);
 
     // chage data
     data.id = song.id === undefined ? data.id : song.id;
-    data.name = song.name;
-    data.img = song.image;
+    data.name = song.title;
+    data.img = song.img;
+    data.artistsNames = song.artistsNames;
     data.duration = song.duration;
     data.artist = song.artist === undefined ? data.artist : song.artist;
     data.album = song.album === undefined ? data.album : song.album;
@@ -106,8 +145,8 @@ function InforSong() {
             <div className={styles['content']}>
                <div className={styles['viewport']}>
                     <div className={styles['playAndPause-icon']} onClick={handlePlay}>
-                        {!isPlaying && <i className="fa-solid fa-circle-play"></i>}
-                        {isPlaying && <i className="fa-solid fa-circle-pause"></i>}
+                        {!isIconPause && <i className="fa-solid fa-circle-play"></i>}
+                        {isIconPause && <i className="fa-solid fa-circle-pause"></i>}
                     </div>
                    <AddSong data={data} />
                </div>

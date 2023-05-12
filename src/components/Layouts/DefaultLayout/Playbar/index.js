@@ -2,13 +2,13 @@ import ControlLeft from './ControlLeft';
 import ControlRight from './ControlRight';
 import styles from './Playbar.module.scss'
 import Player from './Player';
-import {usePlayer} from "../../../../hooks/PlayerContext";
-import {useEffect, useState} from "react";
+import { usePlayer } from "../../../../hooks/PlayerContext";
+import { useEffect, useState } from "react";
 import SongApi from "../../../../api/SongApi";
 
 function Playbar() {
 
-    const {listTrack, nowSong, setNowSong, isShuffle} = usePlayer();
+    const { listTrack, nowSong, setNowSong, isShuffle } = usePlayer();
     const [src, setSrc] = useState();
     useEffect(() => {
         //update when change current song
@@ -25,14 +25,13 @@ function Playbar() {
 
     return (
         <div className={styles['wrapper']}>
-                <ControlLeft title={listTrack[nowSong].title || ''}
-                             artistNames={listTrack[nowSong].artistsNames || ''}
-                             thumbnail={listTrack[nowSong].thumbnail || ''}
-                />
-                <Player src={src} duration={listTrack[nowSong].duration}/>
-                <ControlRight songId={listTrack[nowSong].encodeId}/>
-            </div>
-
+            <ControlLeft title={listTrack[nowSong].title || ''}
+                artistNames={listTrack[nowSong].artistsNames || ''}
+                thumbnail={listTrack[nowSong].thumbnail || ''}
+            />
+            <Player src={src} duration={listTrack[nowSong].duration} />
+            <ControlRight songId={listTrack[nowSong].encodeId} />
+        </div>
     );
 }
 
