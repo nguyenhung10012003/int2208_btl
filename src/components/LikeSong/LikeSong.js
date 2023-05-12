@@ -4,17 +4,11 @@ import UserApi from "../../api/UserApi";
 import { useAuth } from '../../hooks/AuthContext';
 
 function LikeSong({ data }) {
-    // get user
+
     const { getUser } = useAuth();
     const user = getUser();
-    
-    // const [dataUser, setDataUser] = useState([]);
 
     const [isLiked, setLiked] = useState(false);
-
-    // const handleLike = () => {
-    //     setLiked(!isLiked);
-    // }
 
     useEffect(() => {
         const fetchTrack = async () => {
@@ -26,7 +20,7 @@ function LikeSong({ data }) {
             }
         };
         fetchTrack();
-    }, [])
+    }, [data.id])
 
     const handleLike = (event) => {
         event.preventDefault();

@@ -2,6 +2,7 @@
 import {Link, useParams} from 'react-router-dom'
 import styles from './InforSong.module.scss'
 import AddSong from '../../components/AddSong/AddSong';
+import LikeSong from '../../components/LikeSong/LikeSong';
 import songApi from '../../api/SongApi';
 import {useEffect, useState} from "react";
 import { usePlayer } from "../../hooks/PlayerContext";
@@ -147,6 +148,9 @@ function InforSong() {
                     <div className={styles['playAndPause-icon']} onClick={handlePlay}>
                         {!isIconPause && <i className="fa-solid fa-circle-play"></i>}
                         {isIconPause && <i className="fa-solid fa-circle-pause"></i>}
+                    </div>
+                    <div className={styles['like-song']}>
+                        <LikeSong data={data} />
                     </div>
                    <AddSong data={data} />
                </div>
