@@ -39,7 +39,7 @@ function Sidebar() {
                         <LibraryIcon />
                         Library
                     </Link>
-                    <Link to={`${HOST}/`} onClick={() => setTab('liked')}
+                    <Link to={`${HOST}/likedsong`} onClick={() => setTab('liked')}
                           style={tab==='liked' ? {color: '#fff'} : {}}
                     >
                         <LikeIcon liked={tab==='liked'}/>

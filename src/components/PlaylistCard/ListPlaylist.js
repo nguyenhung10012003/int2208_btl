@@ -11,7 +11,7 @@ function ListPlaylist({params}) {
             {params?.map((param,index) => {
                 return (
                     <div className={styles['postcard']}>
-                    <Postcard key={index} id={param.encodeId} img={param.thumbnail} description={param.title}/>
+                    <Postcard key={param.encodeId} id={param.encodeId} img={param.thumbnail} description={param.title}/>
                     </div>
                 )
             })}

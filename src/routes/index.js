@@ -11,8 +11,8 @@ import SignUp from '../pages/SignUp';
 import InforSong from '../pages/InforSong';
 import Album from "../pages/Album";
 import Watch from "../pages/Watch";
-import Artist from "../pages/Artist"
-
+import Artist from "../pages/Artist";
+import LikedSong from '../pages/LikedSong';
 
 const publicRoutes = [
     { path: '/', component: Home },
@@ -28,7 +28,8 @@ const privateRoutes = [
     { path: '/library', component: Library },
     { path: '/playlist/:id', component: Playlist},
     { path: '/infor-song/:id', component: InforSong },
-    { path: '/profile', component: Profile }
+    { path: '/profile', component: Profile },
+    { path: '/likedsong', component: LikedSong}
 ];
 
 export { publicRoutes, privateRoutes }
