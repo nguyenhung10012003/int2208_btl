@@ -3,7 +3,7 @@ import styles from "./ListSongCard.module.scss";
 import React from "react";
 import SongCard from "./SongCard";
 
-function ListSong({params}) {
+function ListSong({params,data}) {
     return(
         <div className={styles['wrapper']}>
                 <div className={styles['text']}>
@@ -17,7 +17,7 @@ function ListSong({params}) {
                     }
                     var ars= Array.isArray(param.artists) ? param.artists[0] : param.artists;
                     return (
-                        <SongCard key={index} index={index} id={param.encodeId} title={param.title} img={param.thumbnail} artist={ars} duration={param.duration} album={alb}/>
+                        <SongCard data={data} key={index} index={index} id={param.encodeId} title={param.title} img={param.thumbnail} artist={ars} duration={param.duration} album={alb}/>
                     )
                 })}
                 </div>

@@ -1,0 +1,39 @@
+.wrapper {
+    width: 100%px;
+    height: 300px;
+    display: flex;
+    background: linear-gradient(to right, rgb(47,34,91), rgb(74,53,145));
+    background: linear-gradient(to top,  rgb(47,34,91), rgb(74,53,145));
+    margin-top: 2px;
+    margin-bottom: 10px;
+}   
+
+.card-img {
+    padding-left: 20px;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+.card-body {
+    color: whitesmoke;
+    margin-left: 20px;
+    margin-top: 60px;
+}
+.card-body-playlist {
+    margin-left: 2px;
+    padding-top: 20px;
+}
+.card-body-liked {
+    margin-top: -10px;
+    color: whitesmoke;
+    font-weight: bolder;
+    font-size: 7vw;
+    white-space: nowrap;
+}.card-body-name {
+    margin-top: 30px;
+    margin-left: 2px;
+    color: whitesmoke;
+    margin-bottom: 35px;
+}
+.listSong{
+    display:block;
+}

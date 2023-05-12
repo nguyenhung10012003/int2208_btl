@@ -7,7 +7,9 @@ class UserController {
                      {_id: 1, email: 1, name: 1, likeSong: 1})
             .then((data) => {
             res.send(data);
-        }).catch(res.status(500));
+        }).catch((err) => {
+            res.status(500);
+        });
     }
 
     isLikeSong(req, res) {

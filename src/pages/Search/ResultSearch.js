@@ -8,6 +8,13 @@ import SongCard from '../../components/SongCard/SongCard';
 import { useState,useEffect } from "react";
 
 function ResultSearch({datas})  {
+  var dataSong = {
+    items : datas.songs,
+    }
+    var itemsTop =[datas.top,datas.top];
+    var dataTopSong = {
+      items : itemsTop,
+    }
   var isArtist=true;
   var ars;
   if(datas.top) {
@@ -32,11 +39,11 @@ function ResultSearch({datas})  {
             <button className={styles[activeButton === 'videos' ? 'active' : ""]} onClick={() =>handleButtonClick('videos')}>Videos</button>
           </div>
         </div>
-      {datas.top &&  (activeButton==='all') && <h4 className={styles['search-text1']}>Kết quả hàng đầu</h4>}
+      {datas.top &&  (activeButton==='all') && <h4 className={styles['search-text1']}>Top Result</h4>}
       {datas.top &&  (activeButton==='all') && isArtist && <ArtistCard param={datas.top} value='top'/>}
       {datas.top &&  !isArtist &&  (activeButton==='all') &&
       <div className={styles['topsong']}>
-      <SongCard index={null} id={datas.top.encodeId} title={datas.top.title} img={datas.top.thumbnail} artist={ars} duration={datas.top.duration} album={''}/>
+      <SongCard data={dataTopSong} index={null} id={datas.top.encodeId} title={datas.top.title} img={datas.top.thumbnail} artist={ars} duration={datas.top.duration} album={''}/>
       </div>} 
 
       
@@ -44,7 +51,7 @@ function ResultSearch({datas})  {
       <div className={styles['img-div']}>
       <img src={process.env.PUBLIC_URL + '/noresult.png'} alt="Nors" className={styles['img']} />
       </div>}
-      {datas.songs &&  (activeButton==='all' || activeButton==='songs') && <ListSong params={datas.songs}/>}
+      {datas.songs &&  (activeButton==='all' || activeButton==='songs') && <ListSong params={datas.songs} data={dataSong}/>}
       {datas.playlists &&  (activeButton==='all' || activeButton==='playlists') && <ListPlaylist params={datas.playlists}/>}
       {datas.videos &&  (activeButton==='all' || activeButton==='videos') && <ListVideo params={datas.videos} />}
       {datas.artists && (activeButton==='all' || activeButton==='artists') && <ListArtist params={datas.artists} />}

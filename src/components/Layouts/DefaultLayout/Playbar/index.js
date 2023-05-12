@@ -14,7 +14,7 @@ function Playbar() {
         //update when change current song
         const fetchSong = async () => {
             try {
-                const track = await SongApi.getTrack(listTrack[nowSong].encodeId);
+                const track = await SongApi.getTrack(listTrack[nowSong]?.encodeId);
                 setSrc(track.data['128']);
             } catch (err) {
                 console.log(err);
@@ -25,12 +25,12 @@ function Playbar() {
 
     return (
         <div className={styles['wrapper']}>
-            <ControlLeft title={listTrack[nowSong].title || ''}
-                artistNames={listTrack[nowSong].artistsNames || ''}
-                thumbnail={listTrack[nowSong].thumbnail || ''}
+            <ControlLeft title={listTrack[nowSong]?.title || ''}
+                artistNames={listTrack[nowSong]?.artistsNames || ''}
+                thumbnail={listTrack[nowSong]?.thumbnail || ''}
             />
-            <Player src={src} duration={listTrack[nowSong].duration} />
-            <ControlRight songId={listTrack[nowSong].encodeId} />
+            <Player src={src} duration={listTrack[nowSong]?.duration} />
+            <ControlRight songId={listTrack[nowSong]?.encodeId} />
         </div>
     );
 }
