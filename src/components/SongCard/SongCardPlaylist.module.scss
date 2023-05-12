@@ -86,11 +86,19 @@
     }
     
     .duration {
-        width: 10%;
         display: flex;
         align-items: center;
+        width: 3%;
         margin-right: 20px;
         justify-content: flex-end;
+    }
+
+    .like-song {
+        width: 4%;
+
+        .form-like-song {
+            display: none;
+        }
     }
 
     .delete {
@@ -118,5 +126,9 @@
 }
 
 .wrapper:hover .btn-delete {
+    display: block;
+}
+
+.wrapper:hover .form-like-song {
     display: block;
 }

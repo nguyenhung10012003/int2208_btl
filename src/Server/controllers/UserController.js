@@ -7,7 +7,9 @@ class UserController {
                      {_id: 1, email: 1, name: 1, likeSong: 1})
             .then((data) => {
             res.send(data);
-        }).catch(res.status(500));
+        }).catch((err) => {
+            res.status(500);
+        });
     }
 
     isLikeSong(req, res) {
@@ -15,7 +17,7 @@ class UserController {
         const songId = req.query.id;
         User.findOne({_id: _id,likeSong: { $in: [songId] }}).then((data) => {
             res.send(data ? {err : false} : {err : true});
-        }).catch(() => res.status(500));
+        }).catch((err) => res.status(500));
     }
 
 
@@ -48,6 +50,7 @@ class UserController {
                                   {$addToSet: {likeSong: songId}},
                                   {new: true});
             res.send(data ? {err : false} : {err : true});
+            console.log('like song done');
         } catch(err) {
             res.status(500);
         }
@@ -61,6 +64,7 @@ class UserController {
                                   {$pull: {likeSong: songId}});
 
             res.send(data ? {err : false} : {err : true});
+            console.log('unlike song done');
         } catch(err) {
             console.log(err);
             res.status(500);

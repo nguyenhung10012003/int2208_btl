@@ -1,11 +1,21 @@
 import styles from './SongCardPlaylist.module.scss';
-// import styles from '../../pages/Playlist/Playlist.module.scss';
+import LikeSong from '../LikeSong/LikeSong';
 import DeleteSong from '../EditPlaylist/DeleteSong';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { usePlayer } from "../../hooks/PlayerContext";
 
 function SongCardPlaylist({data, index, id, title, img, artist, duration, album, idPlaylist, tracks }) {
+
+    const dataSubmit = {
+        id: id,
+        name: title,
+        img: img,
+        artistsNames: data?.artistsNames,
+        duration: duration,
+        artist: artist,
+        album: album,
+    }
 
     const {setIdListTrack, setNowSong, setPlay, setListTrack } = usePlayer();
     const {idListTrack, nowSong, isPlay } = usePlayer();
@@ -73,8 +83,13 @@ function SongCardPlaylist({data, index, id, title, img, artist, duration, album,
                     {album?.name}
                 </Link>
             </div>
+            <div className={styles['like-song']}>
+                <div className={styles['form-like-song']}>
+                    <LikeSong data={dataSubmit} />
+                </div>
+            </div>
             <div className={styles['duration']}>
-                <span>{Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây</span>
+                <span>{Math.floor(duration / 60)}:{Math.floor(duration % 60)}</span>
             </div>
             <div className={styles['delete']}>
                 <DeleteSong index={index} id={idPlaylist} tracks={tracks} />

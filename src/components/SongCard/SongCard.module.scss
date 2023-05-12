@@ -90,9 +90,17 @@
     .duration {
         display: flex;
         align-items: center;
-        width: 10%;
+        width: 3%;
         margin-right: 20px;
         justify-content: flex-end;
+    }
+
+    .like-song {
+        width: 4%;
+
+        .form-like-song {
+            display: none;
+        }
     }
 
     .add-song {
@@ -105,5 +113,9 @@
 }
 
 .wrapper:hover .wrapper-form-add-song {
+    display: block;
+}
+
+.wrapper:hover .form-like-song {
     display: block;
 }

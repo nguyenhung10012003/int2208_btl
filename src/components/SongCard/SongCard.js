@@ -1,6 +1,7 @@
 import styles from './SongCard.module.scss';
 import { Link } from "react-router-dom";
 import AddSongInCard from '../AddSong/AddSongInCard';
+import LikeSong from '../LikeSong/LikeSong';
 import { useEffect, useState } from 'react';
 import { usePlayer } from "../../hooks/PlayerContext";
 
@@ -82,8 +83,13 @@ function SongCard({ data, index, id, title, img, artist, duration, album }) {
                     {album?.name}
                 </Link>
             </div>
+            <div className={styles['like-song']}>
+                <div className={styles['form-like-song']}>
+                    <LikeSong data={dataSubmit} />
+                </div>
+            </div>
             <div className={styles['duration']}>
-                <span> {Math.floor(duration / 60)} phút {Math.floor(duration % 60)} giây </span>
+                <span> {Math.floor(duration / 60)}:{Math.floor(duration % 60)}</span>
             </div>
             <div className={styles['add-song']}>
                 <div className={styles['wrapper-form-add-song']}>
