@@ -31,7 +31,7 @@ function DefaultSearch({datas}) {
                 img: item.artists[0].thumbnailM
             }
             return (
-            <SongCard key={index} index={index} id={item.encodeId} title={item.title} img={item.thumbnail} artist={ars} duration={item.duration} album={alb}/>
+            <SongCard data={datas} key={index} index={index} id={item.encodeId} title={item.title} img={item.thumbnail} artist={ars} duration={item.duration} album={alb}/>
             )
         })}
     </div>

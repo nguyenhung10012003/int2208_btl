@@ -15,7 +15,6 @@ function Search() {
               if(searchquery) {
                 const response = await SearchApi.getResult(searchquery);
                 setDatas(response.data);
-                console.log(datas);
             }
               else {
                 const response = await SearchApi.getSearch();

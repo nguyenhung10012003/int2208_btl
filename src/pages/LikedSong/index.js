@@ -1,12 +1,60 @@
 import styles from "./LikedSong.module.scss";
-import React, { useContext, useState,useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import UserApi from "../../api/UserApi";
+import SongApi from "../../api/SongApi";
+import SongCard from "../../components/SongCard/SongCard";
+import ListSong from "../../components/SongCard/ListSongCard";
+import { useAuth } from "../../hooks/AuthContext";
 function LikedSong() {
-    const [data, setData] = useState([]);
-    const [datas, setDatas] = useState([]);
+    const {getUser} = useAuth();
+    const user = getUser();
+    const [songs,setSongs] = useState([]);
+    var userName;
+    useEffect(() => {
+        async function fetchData() {
+          try {
+            // Gọi API để lấy danh sách userIds
+            const response = await UserApi.getUserById(user.id);
+            const likeSongResponse = response.likeSong;
+            // Tạo mảng chứa các promise gọi API lấy dữ liệu bài hát
+            const songPromises = likeSongResponse.map(async songId => {
+              const songResponse = await SongApi.getInfoSong(songId);
+              return songResponse;
+            });
+    
+            // Chờ cho tất cả các promise hoàn thành và lấy kết quả
+            const songResults = await Promise.all(songPromises);
+            
+            // Cập nhật state với mảng dữ liệu bài hát
+            setSongs(songResults);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        fetchData();
+      }, []);
+    const datas = {
+        items:songs,
+    }
     return (
         <div>
-            hello
+            <div className={styles['wrapper']}>
+                <div className={styles['card']}>
+                  <img src={process.env.PUBLIC_URL + '/heart.png'} className={styles['card-img']}/>
+                </div>
+                <div className="text">
+                  <div className={styles['card-body']}>
+                    <h6 className={styles['card-body-playlist']}>Playlist</h6>
+                    <h4 className={styles['card-body-liked']}>
+                        Liked Song
+                    </h4>
+                    <p className={styles['card-body-name']}>{`${userName}:${songs.length}`}</p>
+                  </div>
+                </div>
+            </div>
+            <div>
+                <ListSong data={datas} params={songs} />
+            </div>
         </div>
     )
 }
