@@ -9,6 +9,7 @@ function Detail(props) {
     const {getUser} = useAuth();
     const [dataProfile, setDataProfile] = useState([]);
     const [confirmPass, setconfirmPass] = useState();
+    const [dataIMG, setdataIMG] = useState();
     const [checkPass, setCheckPass] = useState(false);
     const [isDivVisible, setIsDivVisible] = useState(false);
 
@@ -38,6 +39,19 @@ function Detail(props) {
         
         navigate(`/profile`);
         }
+    }
+    
+    const handleChangeImage = async (event) => {
+        const input = event.target;
+
+        const file2 = await resizeImage(input.files[0], 160, 160);
+
+        const base64 = await convertToBase64(file2);
+
+        if (input.files && input.files[0]) {
+            setDataProfile({ ...dataProfile, image: base64 });
+        }
+
     }
 
     const handleChange = (event) => {
@@ -73,7 +87,10 @@ function Detail(props) {
                 </div>
 
                 <div className={styles['list-hidden_content-profile']}>
-                    <img src={dataProfile.image} alt ="" className={styles['list-hidden_content-img']}></img>
+                    <div>
+                        <img src={dataProfile.image} alt ="" className={styles['list-hidden_content-img']}></img>
+                        <input type="file" accept=".jpeg, .png, .jpg" onChange={handleChangeImage} className={styles['profile-input-image']}></input>
+                    </div>
                     <form onSubmit={handleSubmit} className={styles['list-hidden_content-form']}>
                         <div className={styles['list-hidden_content-data']}>
                             <label className={styles['list-hidden_content-label']}>Tên</label>
@@ -95,3 +112,54 @@ function Detail(props) {
 }
 
 export default Detail;
+
+function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            resolve(fileReader.result)
+        };
+        fileReader.onerror = (error) => {
+            reject(error)
+        }
+    })
+}
+
+function resizeImage(file, maxWidth, maxHeight) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            let width = img.width;
+            let height = img.height;
+
+            // Tính toán kích thước mới của hình ảnh
+            if (width > maxWidth) {
+                height *= maxWidth / width;
+                width = maxWidth;
+            }
+            if (height > maxHeight) {
+                width *= maxHeight / height;
+                height = maxHeight;
+            }
+
+            // Thiết lập kích thước của canvas
+            canvas.width = width;
+            canvas.height = height;
+
+            // Vẽ hình ảnh mới lên canvas
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Chuyển canvas thành file và resolve
+            canvas.toBlob((blob) => {
+                resolve(blob);
+            }, file.type || 'image/jpeg');
+        };
+        img.onerror = (error) => {
+            reject(error);
+        };
+    });
+}
