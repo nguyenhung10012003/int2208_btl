@@ -46,9 +46,9 @@ function CreateNewPlaylist(props) {
     const handleChangeImage = async (event) => {
         const input = event.target;
 
-        const file2 = await resizeImage(input.files[0], 160, 160);
+        //const file2 = await resizeImage(input.files[0], 160, 160);
 
-        const base64 = await convertToBase64(file2);
+        const base64 = await convertToBase64(input.files[0]);
 
         if (input.files && input.files[0]) {
             setFormData({ ...formData, image: base64 });
