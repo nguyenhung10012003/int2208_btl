@@ -9,22 +9,23 @@ function LikedSong() {
     const {getUser} = useAuth();
     const user = getUser();
     const [songs,setSongs] = useState([]);
-    var userName;
+    const [name,setName] = useState([]);
     useEffect(() => {
-        async function fetchData() {
+        const fetchData = async () => {
           try {
             // Gọi API để lấy danh sách userIds
             const response = await UserApi.getUserById(user.id);
+            setName(response.name);
             const likeSongResponse = response.likeSong;
             // Tạo mảng chứa các promise gọi API lấy dữ liệu bài hát
             const songPromises = likeSongResponse.map(async songId => {
               const songResponse = await SongApi.getInfoSong(songId);
-              return songResponse;
+              return songResponse.data;
             });
-    
+            
             // Chờ cho tất cả các promise hoàn thành và lấy kết quả
             const songResults = await Promise.all(songPromises);
-            
+            console.log(songResults);
             // Cập nhật state với mảng dữ liệu bài hát
             setSongs(songResults);
           } catch (error) {
@@ -48,7 +49,7 @@ function LikedSong() {
                     <h4 className={styles['card-body-liked']}>
                         Liked Song
                     </h4>
-                    <p className={styles['card-body-name']}>{`${userName}:${songs.length}`}</p>
+                    <p className={styles['card-body-name']}>{`${name} : ${songs.length} songs`}</p>
                   </div>
                 </div>
             </div>
