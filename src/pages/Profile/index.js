@@ -89,7 +89,6 @@ function Profile() {
                 <div>
                     <div onClick={handleClick} className={styles['list-hidden_background']}></div>
                     <Detail onClick={handleClick}/>
-
                 </div>
             )}
 

@@ -185,7 +185,6 @@ function ProfileIcon() {
                         >
                             <ul className={styles['content']}>
                                 <li><Link to='/profile' className={styles['content-link']}>Tài khoản</Link></li>
-                                <li><Link to='/profile' className={styles['content-link']}>Hồ sơ</Link></li>
                                 {isLoggedIn && (
                                 <li><Link to='/' onClick={handleSubmit} className={styles['content-link']}>Đăng xuất</Link></li>
                                 )}
