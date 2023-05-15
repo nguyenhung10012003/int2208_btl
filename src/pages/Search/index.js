@@ -4,11 +4,13 @@ import { useLocation ,useNavigate } from 'react-router-dom';
 import ResultSearch from './ResultSearch';
 import DefaultSearch from './DefaultSearch';
 import React, { useContext, useState,useEffect } from 'react';
+import useDebounce from '../../hooks/useDebounce';
 function Search() {
     const location = useLocation();
     var searchParams = new URLSearchParams(window.location.search);
     var searchquery = searchParams.get('q');
     const [datas, setDatas] = useState('hello');
+    var debounded = useDebounce(searchquery,1000);
     useEffect(() => {
         const fetchSearch = async () => {
             try {
