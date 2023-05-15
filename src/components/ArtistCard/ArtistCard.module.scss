@@ -1,28 +1,29 @@
 .wrapper {
     max-width: 600px;
-    margin-left: 80px;
+    margin-left: 140px;
     display: flex;
-    background-color: rgb(23, 19, 22);
-    margin-top: 20px;
+    background: linear-gradient(to bottom,  rgb(0, 0, 0), #3b363b);
+    margin-top: 30px;
     margin-bottom: 10px;
 }   
 
 .card-img {
     width: 200px;
     height: 200px;
+    border-radius: 1%;
 }
 .card-body {
     color: whitesmoke;
     padding-left: 30px;
 }
 .card-body-title {
-    padding-top: 20px;
-    margin-left: 20px;
+    margin-top: 40px;
+    margin-left: 25px;
 }
 .card-body-text {
     color: grey;
-    padding-top: 20px;
-    margin-left: 30px;
+    padding-top: 25px;
+    margin-left: 25px;
 }
 .wrapper2 {
     display: flex;
